@@ -1,0 +1,51 @@
+/*-- scss:defaults --*/
+$body-bg: #15191E;
+$body-color: #E8E6E0;
+$link-color: #EF7A70;
+$border-color: #333B45;
+$text-muted: #A3ABB4;
+$card-bg: #1E242B;
+$code-bg: #1E242B;
+$headings-font-family: "Source Serif 4", "Georgia", "Times New Roman", serif;
+$font-family-sans-serif: "Source Sans 3", system-ui, "-apple-system", "Segoe UI", sans-serif;
+$font-family-monospace: "JetBrains Mono", ui-monospace, "SFMono-Regular", "Menlo", monospace;
+$border-radius: 4px;
+
+/*-- scss:rules --*/
+:root {
+  --bg: #15191E;
+  --surface: #1E242B;
+  --ink: #E8E6E0;
+  --muted: #A3ABB4;
+  --line: #333B45;
+  --accent: #EF7A70;
+  --accent-soft: #4A2320;
+  --zone: #7FA9D9;
+  --zone-soft: #22364D;
+  --decile-low: #3D5F80;
+  --decile-mid: #6E9FCB;
+  --decile-high: #A9C8E3;
+  --font-display: "Source Serif 4", "Georgia", "Times New Roman", serif;
+  --font-body: "Source Sans 3", system-ui, "-apple-system", "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", "Menlo", monospace;
+  --radius-md: 4px;
+  --space: 8px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+  --space-xl: 64px;
+  --measure: 68ch;
+  --type-xs: 0.8rem;
+  --type-sm: 0.9rem;
+  --type-md: 1rem;
+  --type-lg: 1.25rem;
+  --type-xl: 1.75rem;
+  --shadow-card: 0 1px 2px rgba(30, 41, 51, 0.08);
+  --motion-duration-fast: 120ms;
+  --motion-duration-base: 200ms;
+  --breakpoint-sm: 576px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1200px;
+}

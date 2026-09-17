@@ -1,0 +1,539 @@
+{
+  "$description": "One red pin on a paper map: the chosen school is the only emphasis colour; the zone is a quiet blue, the IMSE deciles a single-hue ramp, and everything else is the map's own paper, ink and hairlines.",
+  "color": {
+    "$type": "color",
+    "light": {
+      "bg": {
+        "$value": "#F6F3EC",
+        "$extensions": {
+          "design-derivation": {
+            "from": "content"
+          }
+        },
+        "$description": "the map paper: warm off-white by day, navy-black night map after dark"
+      },
+      "surface": {
+        "$value": "#FFFFFF",
+        "$extensions": {
+          "design-derivation": {
+            "from": "content"
+          }
+        },
+        "$description": "cards, code blocks, table headers: a sheet laid on the paper"
+      },
+      "ink": {
+        "$value": "#1E2933",
+        "$extensions": {
+          "design-derivation": {
+            "from": "audience"
+          }
+        },
+        "$description": "blue-black map lettering; calm, high contrast for long reading"
+      },
+      "muted": {
+        "$value": "#5B6670",
+        "$extensions": {
+          "design-derivation": {
+            "from": "goal"
+          }
+        },
+        "$description": "dates, categories, captions: readable but recessive"
+      },
+      "line": {
+        "$value": "#DAD4C6",
+        "$extensions": {
+          "design-derivation": {
+            "from": "goal"
+          }
+        },
+        "$description": "hairlines and borders, the paper's own grid"
+      },
+      "accent": {
+        "$value": "#B3261E",
+        "$extensions": {
+          "design-derivation": {
+            "from": "content"
+          }
+        },
+        "$description": "the pin: the one chosen school; links and the single emphasis colour"
+      },
+      "accent-soft": {
+        "$value": "#F6E0DE",
+        "$extensions": {
+          "design-derivation": {
+            "from": "content"
+          }
+        },
+        "$description": "tinted ground behind the pin colour for callouts"
+      },
+      "zone": {
+        "$value": "#3B6EA5",
+        "$extensions": {
+          "design-derivation": {
+            "from": "content"
+          }
+        },
+        "$description": "the catchment boundary: a quiet map blue, never the pin"
+      },
+      "zone-soft": {
+        "$value": "#DCE7F3",
+        "$extensions": {
+          "design-derivation": {
+            "from": "content"
+          }
+        },
+        "$description": "the catchment fill"
+      },
+      "decile-low": {
+        "$value": "#A9C8E3",
+        "$extensions": {
+          "design-derivation": {
+            "from": "content"
+          }
+        },
+        "$description": "IMSE deciles 1-3, most advantaged: the pale end of the single-hue ramp (a fill, not text)"
+      },
+      "decile-mid": {
+        "$value": "#4F86B0",
+        "$extensions": {
+          "design-derivation": {
+            "from": "content"
+          }
+        },
+        "$description": "IMSE deciles 4-7"
+      },
+      "decile-high": {
+        "$value": "#1F4E79",
+        "$extensions": {
+          "design-derivation": {
+            "from": "content"
+          }
+        },
+        "$description": "IMSE deciles 8-10, milieu defavorise: the intense end of the ramp"
+      }
+    },
+    "dark": {
+      "bg": {
+        "$value": "#15191E",
+        "$extensions": {
+          "design-derivation": {
+            "from": "content"
+          }
+        },
+        "$description": "the map paper: warm off-white by day, navy-black night map after dark"
+      },
+      "surface": {
+        "$value": "#1E242B",
+        "$extensions": {
+          "design-derivation": {
+            "from": "content"
+          }
+        },
+        "$description": "cards, code blocks, table headers: a sheet laid on the paper"
+      },
+      "ink": {
+        "$value": "#E8E6E0",
+        "$extensions": {
+          "design-derivation": {
+            "from": "audience"
+          }
+        },
+        "$description": "blue-black map lettering; calm, high contrast for long reading"
+      },
+      "muted": {
+        "$value": "#A3ABB4",
+        "$extensions": {
+          "design-derivation": {
+            "from": "goal"
+          }
+        },
+        "$description": "dates, categories, captions: readable but recessive"
+      },
+      "line": {
+        "$value": "#333B45",
+        "$extensions": {
+          "design-derivation": {
+            "from": "goal"
+          }
+        },
+        "$description": "hairlines and borders, the paper's own grid"
+      },
+      "accent": {
+        "$value": "#EF7A70",
+        "$extensions": {
+          "design-derivation": {
+            "from": "content"
+          }
+        },
+        "$description": "the pin: the one chosen school; links and the single emphasis colour"
+      },
+      "accent-soft": {
+        "$value": "#4A2320",
+        "$extensions": {
+          "design-derivation": {
+            "from": "content"
+          }
+        },
+        "$description": "tinted ground behind the pin colour for callouts"
+      },
+      "zone": {
+        "$value": "#7FA9D9",
+        "$extensions": {
+          "design-derivation": {
+            "from": "content"
+          }
+        },
+        "$description": "the catchment boundary: a quiet map blue, never the pin"
+      },
+      "zone-soft": {
+        "$value": "#22364D",
+        "$extensions": {
+          "design-derivation": {
+            "from": "content"
+          }
+        },
+        "$description": "the catchment fill"
+      },
+      "decile-low": {
+        "$value": "#3D5F80",
+        "$extensions": {
+          "design-derivation": {
+            "from": "content"
+          }
+        },
+        "$description": "IMSE deciles 1-3, most advantaged: the pale end of the single-hue ramp (a fill, not text)"
+      },
+      "decile-mid": {
+        "$value": "#6E9FCB",
+        "$extensions": {
+          "design-derivation": {
+            "from": "content"
+          }
+        },
+        "$description": "IMSE deciles 4-7"
+      },
+      "decile-high": {
+        "$value": "#A9C8E3",
+        "$extensions": {
+          "design-derivation": {
+            "from": "content"
+          }
+        },
+        "$description": "IMSE deciles 8-10, milieu defavorise: the intense end of the ramp"
+      }
+    }
+  },
+  "font": {
+    "$type": "fontFamily",
+    "display": {
+      "$value": [
+        "Source Serif 4",
+        "Georgia",
+        "Times New Roman",
+        "serif"
+      ],
+      "$extensions": {
+        "design-derivation": {
+          "from": "audience"
+        }
+      },
+      "$description": "serif headings: a well-edited city guide for parents, not a dashboard"
+    },
+    "body": {
+      "$value": [
+        "Source Sans 3",
+        "system-ui",
+        "-apple-system",
+        "Segoe UI",
+        "sans-serif"
+      ],
+      "$extensions": {
+        "design-derivation": {
+          "from": "audience"
+        }
+      },
+      "$description": "humanist sans for long prose; pairs with the serif from the same family"
+    },
+    "mono": {
+      "$value": [
+        "JetBrains Mono",
+        "ui-monospace",
+        "SFMono-Regular",
+        "Menlo",
+        "monospace"
+      ],
+      "$extensions": {
+        "design-derivation": {
+          "from": "content"
+        }
+      },
+      "$description": "data readouts, deciles, code cells and category pills"
+    }
+  },
+  "radius": {
+    "md": {
+      "$value": {
+        "value": 4,
+        "unit": "px"
+      },
+      "$extensions": {
+        "design-derivation": {
+          "from": "goal"
+        }
+      },
+      "$type": "dimension",
+      "$description": "tight corners: map furniture, not app chrome"
+    }
+  },
+  "space": {
+    "base": {
+      "$value": {
+        "value": 8,
+        "unit": "px"
+      },
+      "$extensions": {
+        "design-derivation": {
+          "from": "goal"
+        }
+      },
+      "$type": "dimension",
+      "$description": "the rhythm unit"
+    },
+    "xs": {
+      "$value": {
+        "value": 4,
+        "unit": "px"
+      },
+      "$extensions": {
+        "design-derivation": {
+          "from": "goal"
+        }
+      },
+      "$type": "dimension"
+    },
+    "sm": {
+      "$value": {
+        "value": 8,
+        "unit": "px"
+      },
+      "$extensions": {
+        "design-derivation": {
+          "from": "goal"
+        }
+      },
+      "$type": "dimension"
+    },
+    "md": {
+      "$value": {
+        "value": 16,
+        "unit": "px"
+      },
+      "$extensions": {
+        "design-derivation": {
+          "from": "goal"
+        }
+      },
+      "$type": "dimension"
+    },
+    "lg": {
+      "$value": {
+        "value": 32,
+        "unit": "px"
+      },
+      "$extensions": {
+        "design-derivation": {
+          "from": "goal"
+        }
+      },
+      "$type": "dimension"
+    },
+    "xl": {
+      "$value": {
+        "value": 64,
+        "unit": "px"
+      },
+      "$extensions": {
+        "design-derivation": {
+          "from": "goal"
+        }
+      },
+      "$type": "dimension",
+      "$description": "section breathing room; the goal is scanning, so sections separate clearly"
+    }
+  },
+  "measure": {
+    "body": {
+      "$value": {
+        "value": 68,
+        "unit": "ch"
+      },
+      "$extensions": {
+        "design-derivation": {
+          "from": "goal"
+        }
+      },
+      "$type": "dimension",
+      "$description": "prose measure; tables and maps run full width"
+    }
+  },
+  "type": {
+    "xs": {
+      "$value": {
+        "value": 0.8,
+        "unit": "rem"
+      },
+      "$extensions": {
+        "design-derivation": {
+          "from": "goal"
+        }
+      },
+      "$type": "dimension",
+      "$description": "captions, category pills"
+    },
+    "sm": {
+      "$value": {
+        "value": 0.9,
+        "unit": "rem"
+      },
+      "$extensions": {
+        "design-derivation": {
+          "from": "goal"
+        }
+      },
+      "$type": "dimension",
+      "$description": "table body, metadata"
+    },
+    "md": {
+      "$value": {
+        "value": 1,
+        "unit": "rem"
+      },
+      "$extensions": {
+        "design-derivation": {
+          "from": "goal"
+        }
+      },
+      "$type": "dimension",
+      "$description": "body"
+    },
+    "lg": {
+      "$value": {
+        "value": 1.25,
+        "unit": "rem"
+      },
+      "$extensions": {
+        "design-derivation": {
+          "from": "goal"
+        }
+      },
+      "$type": "dimension",
+      "$description": "h3, listing titles"
+    },
+    "xl": {
+      "$value": {
+        "value": 1.75,
+        "unit": "rem"
+      },
+      "$extensions": {
+        "design-derivation": {
+          "from": "goal"
+        }
+      },
+      "$type": "dimension",
+      "$description": "h1, h2"
+    }
+  },
+  "shadow": {
+    "card": {
+      "$value": "0 1px 2px rgba(30, 41, 51, 0.08)",
+      "$extensions": {
+        "design-derivation": {
+          "from": "constraint"
+        }
+      },
+      "$type": "shadow",
+      "$description": "barely-there lift for a surface on the paper; the map is flat"
+    }
+  },
+  "motion": {
+    "duration": {
+      "fast": {
+        "$value": {
+          "value": 120,
+          "unit": "ms"
+        },
+        "$extensions": {
+          "design-derivation": {
+            "from": "goal"
+          }
+        },
+        "$type": "duration",
+        "$description": "hover underline and colour changes"
+      },
+      "base": {
+        "$value": {
+          "value": 200,
+          "unit": "ms"
+        },
+        "$extensions": {
+          "design-derivation": {
+            "from": "goal"
+          }
+        },
+        "$type": "duration",
+        "$description": "theme toggle and reveals"
+      }
+    }
+  },
+  "breakpoint": {
+    "sm": {
+      "$value": {
+        "value": 576,
+        "unit": "px"
+      },
+      "$extensions": {
+        "design-derivation": {
+          "from": "constraint"
+        }
+      },
+      "$type": "dimension",
+      "$description": "Bootstrap/cosmo breakpoints, so site.scss and Quarto agree"
+    },
+    "md": {
+      "$value": {
+        "value": 768,
+        "unit": "px"
+      },
+      "$extensions": {
+        "design-derivation": {
+          "from": "constraint"
+        }
+      },
+      "$type": "dimension"
+    },
+    "lg": {
+      "$value": {
+        "value": 992,
+        "unit": "px"
+      },
+      "$extensions": {
+        "design-derivation": {
+          "from": "constraint"
+        }
+      },
+      "$type": "dimension"
+    },
+    "xl": {
+      "$value": {
+        "value": 1200,
+        "unit": "px"
+      },
+      "$extensions": {
+        "design-derivation": {
+          "from": "constraint"
+        }
+      },
+      "$type": "dimension"
+    }
+  }
+}

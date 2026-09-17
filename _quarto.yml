@@ -17,6 +17,8 @@ website:
         href: https://github.com/letsgada/mtl-101
 format:
   html:
+    # Themes are rendered from design.tokens.json; see design.md. Edit the JSON, not the theme-*.scss files.
     theme:
-      - cosmo
+      light: [cosmo, theme-light.scss, site.scss]
+      dark: [cosmo, theme-dark.scss, site.scss]
     css: styles.css
