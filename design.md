@@ -19,6 +19,10 @@ It forbids: a second accent (so the cosmo title banner is off and the navbar sit
 
 Proposed in round 2 and accepted as is: pin red `#B3261E` / `#EF7A70` as accent on warm paper `#F6F3EC` / night navy `#15191E`, blue-black ink, and five keystone extras (`zone`, `zone-soft`, `decile-low`, `decile-mid`, `decile-high`). The user supplied no brand or favourite colour. The pale end of the decile ramp is a fill colour and fails text contrast on purpose; `check` reports it as a warning, not an error.
 
+## System
+
+Full system, confirmed in round 3 on 2026-09-17 (after the fact: the first run wrote these values without asking, which is what prompted the round). Proposed and accepted unchanged: spacing scale 4 · 8 · 16 · 32 · 64 px doubling from the 8px base; type scale 0.8 · 0.9 · 1 · 1.25 · 1.75 rem, about a 1.25 ratio from category pills to h1; one barely-there `shadow.card` (`0 1px 2px rgba(30, 41, 51, 0.08)`, unused by `site.scss` so far because the map is flat); motion `fast` 120ms for link hover and `base` 200ms for the theme toggle; Bootstrap breakpoints 576 · 768 · 992 · 1200 px so `site.scss` and cosmo's grid agree. Alternatives offered and declined: tighter or looser spacing, minor-third or perfect-fourth type ratios, no motion, no shadow, Tailwind or no breakpoints.
+
 ## Tokens
 
 Full system (colour roles and extras, three font roles, radius, spacing scale, type scale, measure, one shadow, two durations, Bootstrap breakpoints). `check` passes with 0 errors in both themes; warnings are limited to the decile fills.
