@@ -1,0 +1,22 @@
+project:
+  type: website
+  render:
+    - "**/*.qmd"
+
+website:
+  title: "MTL-101"
+  site-url: https://letsgada.github.io/mtl-101
+  description: "Choosing a Montreal neighbourhood backwards from the school you want: francophone public elementary schools, school zones and socioeconomic indices on the island of Montreal."
+  llms-txt: true
+  navbar:
+    right:
+      - text: Posts
+        href: posts.qmd
+      - about.qmd
+      - icon: github
+        href: https://github.com/letsgada/mtl-101
+format:
+  html:
+    theme:
+      - cosmo
+    css: styles.css

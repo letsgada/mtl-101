@@ -1,0 +1,24 @@
+---
+title: "Why MTL-101"
+date: "2026-09-17"
+categories: [overview]
+description: "The question this project starts from, what already exists to answer it, and what is left to build."
+toc: false
+---
+
+Every school finder in Montreal answers the same question: type in an address, get the school
+that serves it. A parent who has not yet chosen where to live needs the opposite. They have a
+sense of the school they want, a francophone public elementary school with a particular program
+or a particular profile, and they need to know which neighbourhoods put that school within reach.
+MTL-101 starts from that reversed question, for the island of Montreal only: the CSSDM, the
+CSS Marguerite-Bourgeoys and the CSS Pointe-de-l'Île, with the West Island, the South Shore and
+Laval left out.
+
+Much of the raw material already exists. The CSSDM runs a searchable school finder, the Ministry
+publishes an interactive map of every school network, and its socioeconomic deprivation indices
+(the IMSE and SFR) are open data on Données Québec, refreshed annually, downloadable as CSV and
+GeoJSON. What none of these do is put the pieces together: reconcile a zone lookup with the
+deprivation decile, notice that a school has been relocated during a renovation, tell apart two
+schools with the same name under different boards, or say whether a program admits by lottery,
+by dossier, or by address. The posts here document that synthesis as it is built, starting with
+what the government data actually contains and where it falls short.

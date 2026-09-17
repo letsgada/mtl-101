@@ -1,0 +1,46 @@
+---
+title: "MTL-101"
+description: "Choosing a Montreal neighbourhood backwards from the school you want."
+toc: false
+---
+
+Most school finders answer "which school serves my address?". MTL-101 turns the question
+around: which school do I want, and therefore where should I live? It is a tool, and the notes
+around building it, for a parent choosing a neighbourhood on the island of Montreal by working
+backwards from francophone public elementary schools.
+
+The scope is deliberate. Three school service centres are in play: the CSSDM in the central
+boroughs, the CSS Marguerite-Bourgeoys in Verdun, Outremont, LaSalle and Lachine, and the
+CSS Pointe-de-l'Île in the east end. The West Island, the South Shore and Laval are out.
+
+:::{.callout-tip}
+## Start here
+
+[Why MTL-101](posts/why-mtl-101.qmd) explains the problem, what already exists, and what this
+project adds on top of it.
+:::
+
+## What is here
+
+- **[Posts](posts.qmd).** Notes from building the tool: what the government data actually
+  contains, how school zones and admission models differ, and what a neighbourhood's reputation
+  hides.
+- **[About](about.qmd).** Who is behind this.
+
+## How it works
+
+The deterministic part of the problem, looking up structured data, is mostly solved by existing
+government tools, so MTL-101 does not rebuild them. The CSSDM's own school finder handles
+address-to-school lookups, and the Ministry's open data on Données Québec provides the
+socioeconomic deprivation indices (IMSE and SFR) per school as CSV and GeoJSON.
+
+What is not solved is the synthesis: reconciling zone lookups against socioeconomic data,
+catching schools that have moved mid-renovation, telling apart same-named schools across
+different boards, and knowing which admission model applies to which program. That judgment
+work over messy, inconsistent sources is what this project encodes, calling out to small scripts
+only for the clean structured-data fetches.
+
+Two caveats apply throughout. The IMSE is a socioeconomic index built from parents' education
+and employment, not a measure of academic performance; Quebec publishes no academic ranking of
+elementary schools. And a borough's general reputation can mask wide variation between its
+schools, so every recommendation is made at the level of a specific school and its zone.

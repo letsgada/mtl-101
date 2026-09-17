@@ -1,0 +1,15 @@
+---
+title: "About"
+image: profile.jpg
+about:
+  template: jolla
+  links:
+    - icon: github
+      text: GitHub
+      href: https://github.com/letsgada/mtl-101
+---
+
+MTL-101 is built by John Ho, a Montreal parent working out where to live by starting from the
+school rather than the address. The tool and these notes grew out of a manual research session
+through three school boards' finders, the Ministry's open data and a long list of individual
+school sites; the aim is to spare the next parent that session.
