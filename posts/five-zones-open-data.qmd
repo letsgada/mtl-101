@@ -1,0 +1,340 @@
+---
+title: "Five School Zones in Thirty-Four Numbers"
+date: "2026-09-18"
+categories: [layer-2, open-data, neighbourhoods]
+description: "What Montreal's open data says about the kilometre around a school: who lives there, how safe the streets are, what a home costs to own, and how much of it is park."
+toc: true
+code-annotations: hover
+---
+
+Choosing the school is the first half of MTL-101. The second half asks whether the kilometre
+around that school is somewhere the family wants to live. This post runs the second half on
+five francophone public elementary schools: the four CSSDM schools the project brief uses as
+seed data, and one Outremont neighbourhood school under the CSS Marguerite-Bourgeoys as a
+contrast. Every number comes from open data published by the Ville de Montréal, the Quebec
+government or Statistics Canada, pulled and aggregated by the scripts in the repository.
+
+The zone is a circle of one kilometre around the school building, roughly a twelve-minute walk.
+That is a stand-in, not the real catchment: the Ministry's geospatial download contains school
+service centre boundaries and school points but no per-school zone polygons, so the true zones
+exist only in the service centres' finders and PDF maps. Everything with point, parcel or
+dissemination-area granularity is aggregated into the circle. Dissemination areas count when
+their centroid falls inside it.
+
+::: {.callout-important}
+## Not a ranking
+
+The tables report each metric with its decile among the 229 francophone public elementary
+schools on the island outside the West Island, marked [d1]{.decile-low} to [d3]{.decile-low}
+for the lowest three tenths, [d4]{.decile-mid} to [d7]{.decile-mid} for the middle, and
+[d8]{.decile-high} to [d10]{.decile-high} for the top three. A high decile means a high value,
+nothing more: d10 on income and d10 on break-ins are both "top tenth". The post computes no
+composite score, and the IMSE does not appear here on purpose. The IMSE is a socioeconomic
+index of the pupils a school actually enrols, not an academic ranking, and it can diverge from
+the census figures below, which describe the residents of the circle whether or not their
+children attend the school.
+:::
+
+# The sources
+
+| Source | Portal | What it contributes | Granularity | Vintage |
+|:---|:---|:---|:---|:---|
+| Census Profile 2021 (98-401-X) | Statistics Canada | population, children, households with children, income, low income, education, immigration, language at home, tenure, mobility | dissemination area | 2021 |
+| Indice de défavorisation matérielle et sociale | INSPQ, Données Québec | DA polygons, 2021 population, material and social deprivation quintiles | dissemination area | 2021 |
+| Indice d'équité des milieux de vie | Ville de Montréal | six-dimension equity index, 0 to 6 | dissemination area, city territory only | 2026 |
+| Actes criminels | Ville de Montréal (SPVM) | incidents by category, positions moved to the nearest intersection | point | 2015 to date |
+| Collisions routières | Ville de Montréal (SAAQ) | pedestrian and cyclist victims per collision | point | 2012 to 2021 |
+| Imposition annuelle de taxes municipales | Ville de Montréal | every tax line on every account: assessed value, rate, amount | account | 2021 to 2026 |
+| Unités d'évaluation foncière | Ville de Montréal | parcel geometry, dwelling count, year built, use code, condo flag | parcel | weekly |
+| Grands parcs et espaces publics | Ville de Montréal | park polygons | polygon | current |
+| Localisation des établissements d'enseignement | MEQ, Données Québec | school points, codes, service centre | point | 2026 |
+
+: Open datasets behind the tables, all under CC-BY 4.0 or the Statistics Canada Open Licence {#tbl-sources}
+
+# How the numbers are made
+
+Six commands take the portals' files to the tables below. The fetcher resolves download URLs
+through the portals' CKAN APIs, so a re-published file keeps working; the two `prep` steps
+collapse the heavy files once; `census_da` streams the 6.4 GB Quebec census file and keeps the
+island's 3,228 dissemination areas.
+
+```bash
+uv run scripts/fetch_open_data.py --core taxes                                  # <1>
+uv run scripts/prep_taxes.py                                                    # <2>
+uv run scripts/prep_uev.py                                                      # <3>
+uv run scripts/census_da.py                                                     # <4>
+uv run scripts/zone_stats.py --all                                              # <5>
+uv run scripts/zone_stats.py "Saint-Barthélemy" "La Vérendrye" "Charles-Lemoyne" \
+    "Saint-Nom-de-Jésus" "Saint-Germain-d'Outremont"                            # <6>
+```
+1. downloads about 3.5 GB into `data/raw/` and writes a manifest with fetch dates; `taxes` is the 19 borough tax-bill files
+2. one row per tax account: assessed value from the general-tax line, total bill, class (residential 5 dwellings or fewer, 6 or more, non-residential, vacant)
+3. one point per assessment unit with dwelling count, year built and condo flag, from the 780 MB GeoJSON
+4. the census variables per island dissemination area, cached as parquet
+5. every island school, which is what the deciles are measured against
+6. the five schools of this post, as a Markdown table
+
+The tax file is the least familiar of the sources and the one that replaces the commercial
+price and tax sites a parent would otherwise use. One residential account in 2026 is seven
+lines, each with the same assessed value and its own rate:
+
+```
+CODE  DESCR_LONGUE                                        VAL_IMPOSABLE  TAUX_IMPOSI  MONTANT_DETAIL
+B00   TAXE GÉNÉRALE : CAT. IMM. RÉSIDUELLE (5 LOG. OU -)      2500767.0  0.004631000        11581.05
+Q00   TAXE ARTM : CATEGORIE IMM. RESIDUELLE                    2500767.0  0.000070000          175.05
+Q00   DETTE ANC.VILLE : CATEGORIE IMM. RESIDUELLE              2500767.0  0.000052000          130.04
+J00   TAXE SPÉCIALE EAU : CAT. IMM. RÉSIDUELLE                 2500767.0  0.000831000         2078.14
+I00   TAXE SPÉCIALE VOIRIE : RÉSIDENTIEL                       2500767.0  0.000024000           60.02
+E00   TAXE RELATIVE AUX SERVICES                               2500767.0  0.000431000         1077.83
+P20   TAXE RELATIVE AUX INVESTISSEMENTS                        2500767.0  0.000298000          745.23
+```
+
+The sum of the last column is the bill. The last two lines are the borough's own taxes, which
+is where borough rates differ; the first is the city-wide general tax. Joining the account to
+its parcel on the assessment-unit id succeeds for 99.7% of accounts, and the parcel supplies
+the dwelling count that separates a single-family house from a plex.
+
+# The five zones
+
+- **Saint-Barthélemy** (Villeray). IB primary years programme, selective admission. The school
+  has two pavilions about 450 m apart; the circle is drawn around pavillon Sagard, where the
+  Ministry places the school point.
+- **La Vérendrye** (Tétreaultville, Mercier-Hochelaga-Maisonneuve). IB primary years programme
+  with non-selective admission, lottery only if oversubscribed. Façade and masonry work was
+  under way in autumn 2025 with pupils in place.[^lv]
+- **Charles-Lemoyne** (Pointe-Saint-Charles, Le Sud-Ouest). Freinet alternative pedagogy with an
+  environmental focus. Façade and window replacement was under way in autumn 2025 with pupils
+  in place.[^cl]
+- **Saint-Nom-de-Jésus** (Hochelaga-Maisonneuve). Freinet alternative pedagogy, admission by
+  lottery split 60/40 between the catchment and the rest of the CSSDM. The school site was not
+  reachable when this was written, so its renovation status is unverified.
+- **Saint-Germain-d'Outremont** (Outremont, CSS Marguerite-Bourgeoys). A neighbourhood school,
+  included as the contrast. A new Outremont primary school on the Campus MIL is due to open in
+  autumn 2026 and will redraw the borough's zones.[^sgo]
+
+[^lv]: [Info-travaux, août 2025](https://la-verendrye.cssdm.gouv.qc.ca/nouvelles/info-travaux-aout-2025/), École La Vérendrye.
+[^cl]: [Info-travaux, août 2025](https://charles-lemoyne.cssdm.gouv.qc.ca/nouvelles/info-travaux-aout-2025/), École Charles-Lemoyne.
+[^sgo]: [Une nouvelle école primaire à Outremont](https://journaloutremont.com/nouvelles/vie-scolaire/une-nouvelle-ecole-primaire-a-outremont), Journal d'Outremont.
+
+# Who lives there
+
+@tbl-people aggregates the 2021 census over the dissemination areas in each circle. Counts are
+summed before dividing; the household income is a household-weighted median of the areas'
+medians.
+
+::: {.column-page}
+| Metric | Unit | Saint-Barthélemy | La Vérendrye | Charles-Lemoyne | Saint-Nom-de-Jésus | Saint-Germain | Island median |
+|:---|:---|---:|---:|---:|---:|---:|---:|
+| Residents (2021 census) | people | 34,317 [d9]{.decile-high} | 22,944 [d6]{.decile-mid} | 20,373 [d5]{.decile-mid} | 26,107 [d7]{.decile-mid} | 17,120 [d3]{.decile-low} | 21,094 |
+| Children 0 to 14 | % of residents | 14.2 [d4]{.decile-mid} | 16.8 [d7]{.decile-mid} | 14.4 [d4]{.decile-mid} | 11.7 [d1]{.decile-low} | 16.4 [d6]{.decile-mid} | 15.8 |
+| Households with children | % of households | 26.9 [d4]{.decile-mid} | 31.8 [d6]{.decile-mid} | 24.9 [d3]{.decile-low} | 18.1 [d1]{.decile-low} | 32.8 [d6]{.decile-mid} | 31.4 |
+| Median household income (2020) | $ | 56,000 [d1]{.decile-low} | 62,400 [d5]{.decile-mid} | 69,000 [d8]{.decile-high} | 58,400 [d2]{.decile-low} | 88,000 [d10]{.decile-high} | 62,800 |
+| Low income (LIM-AT) | % of residents | 18.6 [d8]{.decile-high} | 14.9 [d3]{.decile-low} | 19.1 [d8]{.decile-high} | 17.9 [d7]{.decile-mid} | 14.8 [d3]{.decile-low} | 16.6 |
+| No diploma, ages 25 to 64 | % | 10.8 [d6]{.decile-mid} | 13.0 [d8]{.decile-high} | 10.7 [d6]{.decile-mid} | 10.8 [d6]{.decile-mid} | 1.2 [d1]{.decile-low} | 9.9 |
+| Immigrants | % of residents | 32.2 [d6]{.decile-mid} | 22.7 [d3]{.decile-low} | 23.7 [d4]{.decile-mid} | 15.4 [d1]{.decile-low} | 31.2 [d6]{.decile-mid} | 28.4 |
+| French most often at home | % of residents | 65.5 [d7]{.decile-mid} | 78.8 [d9]{.decile-high} | 51.2 [d5]{.decile-mid} | 86.1 [d10]{.decile-high} | 61.0 [d6]{.decile-mid} | 58.8 |
+| Renter households | % | 71.7 [d9]{.decile-high} | 59.6 [d3]{.decile-low} | 61.7 [d4]{.decile-mid} | 72.5 [d9]{.decile-high} | 54.5 [d2]{.decile-low} | 66.2 |
+| Moved in the last five years | % of residents | 45.3 [d6]{.decile-mid} | 43.4 [d5]{.decile-mid} | 51.2 [d9]{.decile-high} | 57.0 [d10]{.decile-high} | 46.7 [d7]{.decile-mid} | 43.9 |
+
+: Who lives within 1 km of the school (2021 census, aggregated over dissemination areas whose centroid falls in the circle) {#tbl-people}
+:::
+
+::: {.callout-tip}
+## Reading the table
+
+The two Hochelaga-Maisonneuve zones are not alike. Tétreaultville, around La Vérendrye, sits
+near the island median on almost every line. Hochelaga proper, around Saint-Nom-de-Jésus, has
+the fewest children and the fewest immigrants of the five, the most French at home, and the
+most residents who moved in the last five years, which reads as a young, mobile, francophone
+population. Pointe-Saint-Charles around Charles-Lemoyne is polarised: household income is in
+the top three deciles and so is the low-income rate, because the circle reaches both the
+condo towers along the canal and the social housing of the Pointe. Saint-Germain's zone stands
+apart on education far more than on income.
+:::
+
+Two composite indices computed by other institutions offer a cross-check (@tbl-indices). The
+INSPQ index has a material axis (income, education, employment) and a social axis (people
+living alone, lone-parent families, separated or widowed); the table shows the share of each
+zone's residents living in areas ranked in the two most deprived quintiles for Quebec. The
+city's equity index adds environment, access to services and safety, on the city's own
+territory only.
+
+::: {.column-page}
+| Metric | Unit | Saint-Barthélemy | La Vérendrye | Charles-Lemoyne | Saint-Nom-de-Jésus | Saint-Germain | Island median |
+|:---|:---|---:|---:|---:|---:|---:|---:|
+| In materially deprived DAs (INSPQ Q4-5) | % of residents | 54 [d6]{.decile-mid} | 49 [d6]{.decile-mid} | 44 [d5]{.decile-mid} | 54 [d7]{.decile-mid} | 4 [d1]{.decile-low} | 46 |
+| In socially deprived DAs (INSPQ Q4-5) | % of residents | 80 [d6]{.decile-mid} | 86 [d7]{.decile-mid} | 88 [d8]{.decile-high} | 94 [d9]{.decile-high} | 56 [d3]{.decile-low} | 76 |
+| Equity index IEMV 2026 (0 best, 6 worst) | score | 2.4 [d6]{.decile-mid} | 1.9 [d3]{.decile-low} | 1.7 [d2]{.decile-low} | 1.8 [d3]{.decile-low} | 1.3 [d1]{.decile-low} | 2.3 |
+
+: Two composite indices computed by others: INSPQ material and social deprivation (share of residents in the two most deprived quintiles) and the city's 2026 equity index (population-weighted mean, 0 least vulnerable to 6 most) {#tbl-indices}
+:::
+
+::: {.callout-note}
+## Social deprivation is high almost everywhere in central Montreal
+
+Three quarters of residents around the median island school live in areas the INSPQ ranks as
+socially deprived. The social axis counts people living alone and lone-parent families, and
+the dense central boroughs are full of both. It says something about the household mix, not
+about whether a neighbourhood is bad for a child, and it should be read alongside the
+households-with-children line of @tbl-people rather than on its own.
+:::
+
+# Safety
+
+@tbl-safety combines two datasets. SPVM incidents are counted inside the circle for the last
+three complete years and divided by the circle's residents; the SAAQ collision extract counts
+pedestrian and cyclist victims within 500 m of the school door, the distance a child walks.
+
+::: {.column-page}
+| Metric | Unit | Saint-Barthélemy | La Vérendrye | Charles-Lemoyne | Saint-Nom-de-Jésus | Saint-Germain | Island median |
+|:---|:---|---:|---:|---:|---:|---:|---:|
+| Crime incidents per 1 000 residents per year | /1000/yr | 13.0 [d7]{.decile-mid} | 11.6 [d6]{.decile-mid} | 14.6 [d8]{.decile-high} | 23.4 [d10]{.decile-high} | 8.3 [d2]{.decile-low} | 11.6 |
+| Violent (robbery, homicide) | /1000/yr | 0.77 [d6]{.decile-mid} | 0.48 [d3]{.decile-low} | 0.74 [d5]{.decile-mid} | 1.06 [d8]{.decile-high} | 0.27 [d1]{.decile-low} | 0.75 |
+| Break-ins | /1000/yr | 3.3 [d7]{.decile-mid} | 2.9 [d6]{.decile-mid} | 4.4 [d9]{.decile-high} | 7.4 [d10]{.decile-high} | 2.7 [d6]{.decile-mid} | 2.6 |
+| Vehicle theft and theft from vehicles | /1000/yr | 6.3 [d7]{.decile-mid} | 5.9 [d6]{.decile-mid} | 7.1 [d9]{.decile-high} | 9.5 [d10]{.decile-high} | 3.5 [d1]{.decile-low} | 5.6 |
+| Mischief | /1000/yr | 2.6 [d6]{.decile-mid} | 2.3 [d4]{.decile-mid} | 2.5 [d5]{.decile-mid} | 5.4 [d10]{.decile-high} | 1.8 [d2]{.decile-low} | 2.5 |
+| Pedestrian and cyclist victims within 500 m | /yr | 8.8 [d8]{.decile-high} | 3.0 [d4]{.decile-mid} | 4.2 [d5]{.decile-mid} | 12.2 [d9]{.decile-high} | 5.6 [d6]{.decile-mid} | 4.6 |
+
+: Safety: SPVM incidents 2023 to 2025 per 1 000 residents per year within 1 km, and SAAQ pedestrian and cyclist victims 2017 to 2021 within 500 m of the school, per year {#tbl-safety}
+:::
+
+::: {.callout-tip}
+## Reading the table
+
+The Saint-Nom-de-Jésus circle is in the top decile on every crime category, and its break-in
+rate is close to three times the island median. The SPVM file only says where and what, not
+why, but the circle covers the commercial strip of rue Ontario and its side streets. The
+pedestrian and cyclist line singles out two zones, Saint-Barthélemy and Saint-Nom-de-Jésus,
+whose 500 m circles include arterial streets. La Vérendrye and Saint-Germain are the quiet
+ones on both counts.
+:::
+
+::: {.callout-warning}
+## What these two datasets cannot say
+
+The city states that the incident file is not official SPVM statistics. Positions are moved to
+the nearest intersection, so nothing finer than a few hundred metres is meaningful, and 17% of
+incidents in the file have no coordinates at all and are absent from every rate above. The
+collision extract ends in 2021 on both the city and Données Québec portals, and the last two of
+its five years are pandemic years with fewer trips. Both are rates of reported events, not of
+risk.
+:::
+
+# Housing and what it costs to own
+
+The assessment roll describes the stock (@tbl-stock) and, joined to the tax bills, what a
+typical unit is assessed at and taxed (@tbl-cost). Values are from the 2026 to 2028 roll,
+which reflects the market as of July 2024.
+
+::: {.column-page}
+| Metric | Unit | Saint-Barthélemy | La Vérendrye | Charles-Lemoyne | Saint-Nom-de-Jésus | Saint-Germain | Island median |
+|:---|:---|---:|---:|---:|---:|---:|---:|
+| Dwellings | units | 18,520 [d9]{.decile-high} | 12,612 [d7]{.decile-mid} | 13,982 [d7]{.decile-mid} | 15,848 [d8]{.decile-high} | 8,413 [d4]{.decile-mid} | 10,684 |
+| Single-family houses | % of dwellings | 7 [d5]{.decile-mid} | 12 [d7]{.decile-mid} | 6 [d5]{.decile-mid} | 1 [d1]{.decile-low} | 16 [d8]{.decile-high} | 8 |
+| Plex units (2 to 5 per building) | % of dwellings | 56 [d9]{.decile-high} | 55 [d9]{.decile-high} | 15 [d1]{.decile-low} | 42 [d6]{.decile-mid} | 17 [d2]{.decile-low} | 41 |
+| Condominium units | % of dwellings | 3 [d2]{.decile-low} | 10 [d5]{.decile-mid} | 45 [d10]{.decile-high} | 19 [d8]{.decile-high} | 25 [d9]{.decile-high} | 11 |
+| Rental buildings, 6+ units | % of dwellings | 34 [d5]{.decile-mid} | 24 [d2]{.decile-low} | 34 [d5]{.decile-mid} | 38 [d7]{.decile-mid} | 42 [d8]{.decile-high} | 34 |
+| Median year built | year | 1953 [d3]{.decile-low} | 1963 [d7]{.decile-mid} | 1990 [d10]{.decile-high} | 1925 [d1]{.decile-low} | 1941 [d2]{.decile-low} | 1959 |
+
+: Housing stock within 1 km, from the assessment roll {#tbl-stock}
+:::
+
+::: {.column-page}
+| Metric | Unit | Saint-Barthélemy | La Vérendrye | Charles-Lemoyne | Saint-Nom-de-Jésus | Saint-Germain | Island median |
+|:---|:---|---:|---:|---:|---:|---:|---:|
+| Assessed value, single-family | $ | 688,833 [d5]{.decile-mid} | 488,000 [d2]{.decile-low} | 904,067 [d8]{.decile-high} | 746,300 [d6]{.decile-mid} | 2,020,267 [d10]{.decile-high} | 702,608 |
+| Assessed value, plex | $ | 786,833 [d5]{.decile-mid} | 649,767 [d2]{.decile-low} | 850,633 [d7]{.decile-mid} | 812,700 [d6]{.decile-mid} | 1,727,900 [d10]{.decile-high} | 811,892 |
+| Assessed value, condo | $ | 394,500 [d6]{.decile-mid} | 332,900 [d2]{.decile-low} | 505,900 [d9]{.decile-high} | 376,816 [d5]{.decile-mid} | 824,233 [d10]{.decile-high} | 392,416 |
+| 2026 tax bill, single-family | $ | 4,544 [d5]{.decile-mid} | 3,299 [d2]{.decile-low} | 5,938 [d8]{.decile-high} | 5,040 [d7]{.decile-mid} | 12,820 [d10]{.decile-high} | 4,665 |
+| 2026 tax bill, plex | $ | 5,195 [d5]{.decile-mid} | 4,405 [d2]{.decile-low} | 5,569 [d7]{.decile-mid} | 5,504 [d7]{.decile-mid} | 10,973 [d10]{.decile-high} | 5,341 |
+| 2026 tax bill, condo | $ | 2,603 [d6]{.decile-mid} | 2,249 [d2]{.decile-low} | 3,314 [d9]{.decile-high} | 2,558 [d5]{.decile-mid} | 5,250 [d10]{.decile-high} | 2,570 |
+| Effective tax rate (bill / value) | % | 0.66 [d7]{.decile-mid} | 0.68 [d8]{.decile-high} | 0.66 [d5]{.decile-mid} | 0.68 [d8]{.decile-high} | 0.64 [d1]{.decile-low} | 0.66 |
+
+: What it costs to own: median 2026 assessed value and median 2026 municipal tax bill per unit within 1 km, residential accounts with five dwellings or fewer {#tbl-cost}
+:::
+
+::: {.callout-tip}
+## Reading the tables
+
+Villeray and Tétreaultville are the plex belt: more than half of all dwellings are in two- to
+five-unit buildings, and Tétreaultville is the cheapest of the five to buy into on every
+housing type. Pointe-Saint-Charles is the outlier in stock, almost half condominiums with a
+median build year of 1990, because the circle reaches the redeveloped canal frontage. The
+Outremont zone is assessed at roughly two and a half times the island median on every type.
+The effective tax rate barely moves across the five, so the tax bill is the assessed value
+in disguise: the borough taxes on the last two lines of the account shown earlier are small
+next to the general tax.
+:::
+
+# Parks
+
+::: {.column-page}
+| Metric | Unit | Saint-Barthélemy | La Vérendrye | Charles-Lemoyne | Saint-Nom-de-Jésus | Saint-Germain | Island median |
+|:---|:---|---:|---:|---:|---:|---:|---:|
+| Park area | % of zone | 2.7 [d1]{.decile-low} | 10.6 [d8]{.decile-high} | 7.3 [d6]{.decile-mid} | 8.4 [d7]{.decile-mid} | 11.0 [d8]{.decile-high} | 6.6 |
+| Park area per 1 000 residents | ha | 0.24 [d1]{.decile-low} | 1.45 [d7]{.decile-mid} | 1.12 [d6]{.decile-mid} | 1.00 [d6]{.decile-mid} | 2.02 [d9]{.decile-high} | 0.96 |
+
+: Parks within 1 km (large parks and borough parks only) {#tbl-parks}
+:::
+
+The Saint-Barthélemy circle is in the bottom decile on both park lines: the most populous of
+the five zones has the least park space, in area and per resident. The circle holds only small
+borough parks, the largest under three hectares; the nearest large park, Parc Jarry, is about
+two kilometres west of the school. Whether that counts as the school's neighbourhood is exactly
+the kind of question a fixed circle cannot answer and a real catchment polygon would settle.
+
+# Quirks found along the way
+
+::: {.callout-note}
+## Five things the scripts had to absorb
+
+1. **The city's portal refuses plain downloads.** Requests without a browser-like User-Agent
+   get a 19-byte `RBAC: access denied` body with a 200 status. The fetcher sends a User-Agent
+   and rejects any tiny download that starts that way.
+2. **Non-residential tax lines are tiered.** A non-residential account carries its value split
+   across a "≤ 900 000" and a "> 900 000" line, so the value on the general-tax line is capped.
+   The collapse step takes the line value for residential classes only.
+3. **No 2016 population at dissemination-area level.** Boundaries changed between censuses, so
+   the "population change" metric planned in the brief is not computable and was dropped.
+4. **Pandas drops all-empty columns when pivoting.** The census extract silently lost the
+   2016 column before it was noticed; the extractor now reindexes to the full variable list.
+5. **The collision extract is older than advertised.** Both the city and Données Québec copies
+   end in 2021; the newer SAAQ years are not on either portal.
+:::
+
+# Conclusion
+
+Across five zones and 229 reference schools, the open data:
+
+- **Separates two zones in the same borough.** Tétreaultville and Hochelaga share a borough and
+  differ by two to four deciles on children, mobility, crime and housing type (@tbl-people,
+  @tbl-safety, @tbl-stock).
+- **Replaces the commercial price and tax sites.** The tax-bill file gives a per-unit assessed
+  value and bill by housing type for 99.7% of accounts, and shows that the effective tax rate
+  varies little between boroughs (@tbl-cost).
+- **Puts a number on things a borough average hides**, such as the bottom-decile park share
+  around Saint-Barthélemy (@tbl-parks) and the polarised income profile around Charles-Lemoyne
+  (@tbl-people).
+- **Runs fast enough to be interactive.** Once the data is cached, all 229 zones compute in
+  under ten seconds.
+
+Next steps, in order:
+
+1. **Real zone polygons.** Digitise or obtain the catchments from the three service centres'
+   finders, then replace the circle. Every metric above is written to take any polygon.
+2. **Childcare, transit and heat.** The Ministère de la Famille daycare list (places per child
+   under five, needs geocoding), STM morning departures, and the INSPQ heat-island raster are
+   the next three sources the brief ranks highest.
+3. **The secondary school each zone feeds.** A hand-built lookup from the service centres'
+   board resolutions; the single most useful fact this post cannot yet give.
+4. **A map of all 229 zones** for each metric, so a parent can start from the map rather than
+   from a school name.
+
+::: {.callout-important}
+## Bottom line
+
+Once the school is chosen, the kilometre around it can be described in thirty-four sourced,
+comparable numbers from open data in a few seconds, without a single scrape of a broker site.
+What the numbers cannot yet do is follow the real zone boundary, and that is the next thing to
+build.
+:::
