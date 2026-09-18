@@ -85,9 +85,16 @@ DATASETS: dict[str, dict] = {
                          file="98-401-X2021006_Quebec_eng_CSV.zip",
                          note="StatCan 2021 Census Profile, all Quebec dissemination areas (~540 MB zip)."),
     "gtfs": dict(url="http://www.stm.info/sites/default/files/gtfs/gtfs_stm.zip", file="gtfs_stm.zip",
-                 note="STM static GTFS."),
+                 note="STM static GTFS. The stm.info link serves a bot-check HTML page to non-browser clients (2026-09); "
+                      "the fetcher rejects it. Use metro_osm for stations."),
+    "metro_osm": dict(url="https://overpass-api.de/api/interpreter?data="
+                          "%5Bout%3Ajson%5D%5Btimeout%3A60%5D%3B%28node%5B%22railway%22%3D%22station%22%5D%5B%22station%22%3D%22subway%22%5D"
+                          "%2845.40%2C-73.99%2C45.72%2C-73.45%29%3Bnode%5B%22railway%22%3D%22station%22%5D%5B%22station%22%3D%22light_rail%22%5D"
+                          "%2845.40%2C-73.99%2C45.72%2C-73.45%29%3B%29%3Bout%20body%3B",
+                      file="metro_stations_osm.json", headers={"User-Agent": "mtl-101/0.1 (https://letsgada.github.io/mtl-101)"},
+                      note="Métro and REM stations from OpenStreetMap via Overpass (ODbL, credit OpenStreetMap contributors)."),
 }
-CORE = ["schools", "crimes", "pdq", "boroughs", "uev", "parks", "collisions", "pampalon", "iemv", "census_da_qc", "imse"]
+CORE = ["schools", "crimes", "pdq", "boroughs", "uev", "parks", "collisions", "pampalon", "iemv", "census_da_qc", "imse", "metro_osm"]
 
 app = typer.Typer(add_completion=False, help=__doc__, rich_markup_mode=None)
 
@@ -151,8 +158,8 @@ def resolve(key: str) -> list[tuple[str, str, str, dict]]:
                                                  name=res.get("name")))]
 
 
-def download(url: str, dest: Path) -> int:
-    req = urllib.request.Request(url, headers={"User-Agent": UA})
+def download(url: str, dest: Path, headers: dict | None = None) -> int:
+    req = urllib.request.Request(url, headers={"User-Agent": UA, **(headers or {})})
     with urllib.request.urlopen(req, timeout=120) as r, tempfile.NamedTemporaryFile(dir=dest.parent, delete=False) as tmp:
         shutil.copyfileobj(r, tmp, length=1 << 20)
         tmp_path = Path(tmp.name)
@@ -194,7 +201,7 @@ def main(
                 manifest.setdefault(k, {}).update(path=str(dest.relative_to(ROOT)), url=url, **meta)
                 continue
             logger.info("fetch {:40} {}", k, url)
-            size = download(url, dest)
+            size = download(url, dest, DATASETS.get(k.partition(":")[0], {}).get("headers"))
             logger.success("      {} MB -> {}", size >> 20, dest.relative_to(ROOT))
             manifest[k] = dict(path=str(dest.relative_to(ROOT)), url=url, bytes=size,
                                fetched_at=datetime.now(timezone.utc).isoformat(timespec="seconds"), **meta)

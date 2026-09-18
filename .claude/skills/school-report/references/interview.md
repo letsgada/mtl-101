@@ -17,7 +17,7 @@ numbers in tables; IMSE caveat; renovations flagged).
 
 Assumptions the skill states in the same message (from the writeup skill's step 3): categories
 `[school-report, <borough-slug>]` plus `layer-1`, `layer-2`; `toc: true`; `code-annotations: hover`;
-English prose with French names kept; one Leaflet map block; render after lint unless the user
+English prose with French names kept; one MapLibre map block; render after lint unless the user
 says otherwise; nothing committed without a yes.
 
 Slug rule: strip "École ", lowercase, replace accents and non-alphanumerics with hyphens,

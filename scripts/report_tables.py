@@ -9,7 +9,9 @@
 
 Each metric cell is the value followed by its island decile as a span in the site's helper
 classes ([d2]{.decile-low}, [d5]{.decile-mid}, [d9]{.decile-high}); the last column is the
-island median. Deciles and medians come from data/derived/zone_stats_all.parquet, the same
+island median. Metrics with a direction (zone_stats.METRICS: "up" = higher is favourable,
+"down" = lower is favourable) get a ▲/▼ glyph on the label and the most favourable compared
+zone in bold; descriptive metrics get neither. Deciles and medians come from data/derived/zone_stats_all.parquet, the same
 reference zone_stats.py uses. Tables carry the ids tbl-people, tbl-indices, tbl-safety,
 tbl-stock, tbl-cost and tbl-parks so prose can reference them. Column headers use the school's
 short name (the "École " prefix dropped) or the `label` column when present.
@@ -44,7 +46,8 @@ TABLES = [
     ("tbl-cost", ["value_single_median", "value_plex_median", "value_condo_median", "bill_single_median",
                   "bill_plex_median", "bill_condo_median", "tax_rate_pct"],
      "What it costs to own: median 2026 assessed value and median 2026 municipal tax bill per unit within {r}, residential accounts with five dwellings or fewer"),
-    ("tbl-parks", ["park_pct", "park_ha_per_1000"], "Parks within {r} (large parks and borough parks only)"),
+    ("tbl-parks", ["park_pct", "park_ha_per_1000", "metro_m", "metro_in_zone"],
+     "Parks and rapid transit within {r}: large parks and borough parks (Ville de Montréal), métro and REM stations (OpenStreetMap contributors)"),
 ]
 LABELS = {"crime_violent": "Violent (robbery, homicide)", "crime_breakins": "Break-ins",
           "crime_vehicle": "Vehicle theft and theft from vehicles", "crime_mischief": "Mischief"}
@@ -63,6 +66,17 @@ def cell(ref: pd.DataFrame, key: str, v) -> str:
     s = fmt(key, v)
     d = deciles(ref, key, v)
     return s if math.isnan(d) else f"{s} [d{int(d)}]{{.{cls(d)}}}"
+
+
+def best_indices(values: pd.Series, direction: str) -> set[int]:
+    """Positions of the most favourable value(s) among the compared zones; empty for descriptive rows."""
+    if not direction or len(values) < 2:
+        return set()
+    v = pd.to_numeric(values, errors="coerce")
+    if v.notna().sum() < 2:
+        return set()
+    target = v.max() if direction == "up" else v.min()
+    return {i for i, x in enumerate(v) if pd.notna(x) and x == target}
 
 
 def header_name(row: pd.Series) -> str:
@@ -91,17 +105,23 @@ def main(
     for tid, keys, caption in TABLES:
         L = ["::: {.column-page}", "| Metric | Unit | " + " | ".join(heads) + " | Island median |",
              "|:---|:---|" + "---:|" * len(heads) + "---:|"]
-        for key, label, unit, _ in METRICS:
+        for key, label, unit, _, direction in METRICS:
             if key not in keys:
                 continue
             label = LABELS.get(key, label.strip())
+            if direction:
+                label = ("▲ " if direction == "up" else "▼ ") + label
             cells = [cell(ref, key, df.loc[i, key]) for i in range(len(df))]
+            best = best_indices(df[key], direction)
+            cells = [f"**{c}**" if i in best else c for i, c in enumerate(cells)]
             L.append(f"| {label} | {unit} | " + " | ".join(cells) + f" | {fmt(key, ref[key].median())} |")
         L += ["", f": {caption.format(r=radius_label)} {{#{tid}}}", ":::", ""]
         blocks.append("\n".join(L))
     text = "\n".join(blocks)
     text += (f"\nDeciles are among {len(ref)} francophone public elementary schools on the island outside the "
-             "West Island (1 = lowest tenth, 10 = highest); the island median is over the same set.\n")
+             "West Island (1 = lowest tenth, 10 = highest); the island median is over the same set. "
+             "▲ marks a metric where a higher value is favourable for a family, ▼ one where lower is favourable; "
+             "on those rows the most favourable of the compared zones is in bold. Rows without a glyph are descriptive.\n")
     if out:
         out.write_text(text)
         logger.success("-> {}", out)

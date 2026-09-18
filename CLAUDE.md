@@ -86,15 +86,17 @@ uv run scripts/school_info.py "Laurier" --nearest 8 --same-program   # resolve a
 uv run scripts/imse.py 762103                                        # MEQ IMSE/SFR deciles (fetch key `imse`)
 uv run scripts/zone_stats.py 762103 762087 --anchor -73.6235 45.5405 --format csv --out data/derived/report_x.csv  # --anchor recentres the first school's zone (relocated school)
 uv run scripts/report_tables.py data/derived/report_x.csv            # the six captioned Quarto tables with decile spans
-uv run scripts/zone_map.py 762103 762087 --out map.html              # Leaflet map fragment for a ```{=html} block
+uv run scripts/zone_map.py 762103 762087 --out map.html              # MapLibre map fragment for a ```{=html} block (métro/REM stations from fetch key metro_osm)
 ```
 
 `zone_stats.py` is the entry point: a 1 km circle around the school point (no per-school
 catchment polygons exist as open data), DAs by centroid, everything else by location; `--point`
 evaluates an address; `--format csv|json`; deciles come from `data/derived/zone_stats_all.parquet`
 and exclude the West Island; `--age-warn` (default 90 days) logs a warning per stale cached dataset.
-Metric definitions live in its `METRICS` list; add a metric there and in `zone_stats()`, then re-run
-`--all`. `school_info.py`, `report_tables.py` and `zone_map.py` import from `zone_stats.py`, so keep its
+Metric definitions live in its `METRICS` list as (key, label, unit, format, direction), direction being
+`up` (higher is favourable for a family), `down` (lower is favourable: safety, deprivation, cost) or `""`
+(descriptive); add a metric there and in `zone_stats()`, then re-run `--all`. The STM GTFS link serves a
+bot-check page to non-browsers; métro and REM stations come from OpenStreetMap via Overpass (`metro_osm`). `school_info.py`, `report_tables.py` and `zone_map.py` import from `zone_stats.py`, so keep its
 module-level names (`Data`, `METRICS`, `find_schools`, `deciles`, `fmt`, `WEST_ISLAND`) stable. Downloads need a browser-like User-Agent or the city
 portal returns `RBAC: access denied` with a 200 status; the fetcher handles it.
 
@@ -112,9 +114,13 @@ Neighbourhood metrics are rates (per 1,000 residents or per 100 dwellings) shown
 deciles, never raw counts; assessed values are a lagging proxy for price; the tool computes no
 composite livability score of its own.
 
-A post may carry one map: the Leaflet fragment from `scripts/zone_map.py` pasted inside a ```` ```{=html} ````
-block (Leaflet from cdnjs, OpenStreetMap tiles with attribution, colours read from the `--accent`,
-`--zone` and `--zone-soft` CSS variables so it follows both themes). No Python runs at render time.
+A post may carry one map: the MapLibre GL fragment from `scripts/zone_map.py` pasted inside a
+```` ```{=html} ```` block (MapLibre from cdnjs over OpenFreeMap's Positron vector style: no key, no cap,
+OpenStreetMap data with OSM and OpenFreeMap attribution; marker colours read from the `--accent`, `--zone`
+and `--zone-soft` CSS variables). No Python runs at render time. Do not use raster tiles from
+`tile.openstreetmap.org` (its policy blocks third-party sites, HTTP 403) or CARTO (API key required since
+2025); both were verified failing in a headless browser on 2026-09-18. After editing the map code, render and
+screenshot the page with headless Chrome (see the skill's step 7): `quarto render` does not execute JavaScript.
 Listings quoted from Centris or other broker sites are a dated snapshot of at most a handful, each
 with its link; never scraped, never stored, never presented as a market statistic.
 

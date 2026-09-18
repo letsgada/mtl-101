@@ -23,9 +23,12 @@ neighbourhood.
 Each zone metric is shown with its decile among the <N> francophone public elementary schools on
 the island outside the West Island, marked [d1]{.decile-low} to [d3]{.decile-low} for the lowest
 three tenths, [d4]{.decile-mid} to [d7]{.decile-mid} for the middle, and [d8]{.decile-high} to
-[d10]{.decile-high} for the top three. A high decile means a high value, nothing more. The
-report computes no composite score, and the IMSE below is a socioeconomic index of the pupils
-enrolled, not a measure of academic performance.
+[d10]{.decile-high} for the top three. A high decile means a high value, nothing
+more, so the label says which way is favourable for a family: ▲ higher is favourable (children,
+parks, stations), ▼ lower is favourable (crime, collisions, deprivation, cost), and rows with no
+glyph are descriptive. On the ▲ and ▼ rows the most favourable of the compared zones is in **bold**.
+The report computes no composite score, and the IMSE is a socioeconomic index of the pupils enrolled,
+not a measure of academic performance.
 :::
 
 # The school
@@ -72,6 +75,10 @@ comparators:> The comparators are <list with distances>, chosen <by the reader /
 ```{=html}
 <!-- paste the output of zone_map.py here -->
 ```
+
+The red pin is the school and the solid circle its kilometre; grey pins are the comparators; M
+and R squares are métro and REM stations inside the circle or the nearest one<; the dashed pin is
+the temporary site>.
 
 ## Who lives there
 
@@ -123,11 +130,12 @@ reported events, not of risk.
 <Stock mix; where values sit against the island; effective tax rate; comparators.>
 :::
 
-## Parks
+## Parks and transit
 
-<!-- paste tbl-parks -->
+<!-- paste tbl-parks (parks + métro/REM distance and count) -->
 
-<One or two sentences; name the large park nearest the anchor and its distance if it lies outside the circle.>
+<One or two sentences: the large park nearest the anchor and its distance if it lies outside the
+circle; the nearest métro or REM station and the line.>
 
 # Living there now
 
@@ -158,9 +166,21 @@ in @tbl-cost, which lag the market by about eighteen months.
 
 # Conclusion
 
-- **<Finding about the school>** — <one clause>.
-- **<Finding about the zone, with the table reference>** — <one clause>.
-- **<Finding about cost>** — <one clause>.
+Four readings, in the order a parent weighs them. Each states what the tables show, not a verdict.
+
+**School.** <Program, admission model, IMSE/SFR deciles with the caveat, pupils, and the
+building situation: renovation, relocation, return date (@tbl-school).>
+
+**Safety.** <Crime rate and its categories against the island, the pedestrian and cyclist line
+for the 500 m walk, how the comparators differ, and the two datasets' limits (@tbl-safety).>
+
+**Livability.** <Who lives there: children and households with children, mobility, education,
+language at home; the two composite indices; parks and what lies just outside the circle;
+metro access (@tbl-people, @tbl-indices, @tbl-parks).>
+
+**Affordability.** <Housing stock mix, assessed values and tax bills by type against the island,
+and what the month's listings say about three-bedroom homes to buy and to rent (@tbl-stock,
+@tbl-cost, @tbl-for-sale, @tbl-for-rent).>
 
 Next steps for this school:
 

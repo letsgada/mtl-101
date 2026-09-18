@@ -66,42 +66,45 @@ WEST_ISLAND = {"Pierrefonds-Roxboro", "L'Île-Bizard-Sainte-Geneviève", "Dollar
                "Beaconsfield", "Kirkland", "Dorval", "L'Île-Dorval", "Baie-D'Urfé", "Sainte-Anne-de-Bellevue",
                "Senneville"}
 
-# key, label, unit, format. Order is the report order.
+# key, label, unit, format, direction. Direction: "up" = a higher value is favourable for a family,
+# "down" = lower is favourable (safety, deprivation, cost), "" = descriptive, no direction. Order is the report order.
 METRICS = [
-    ("pop_2021", "Residents (2021 census)", "people", "{:,.0f}"),
-    ("children_0_14_pct", "Children 0 to 14", "% of residents", "{:.1f}"),
-    ("hh_with_children_pct", "Households with children", "% of households", "{:.1f}"),
-    ("median_hh_income", "Median household income (2020)", "$", "{:,.0f}"),
-    ("lim_at_pct", "Low income (LIM-AT)", "% of residents", "{:.1f}"),
-    ("no_diploma_25_64_pct", "No diploma, ages 25 to 64", "%", "{:.1f}"),
-    ("immigrants_pct", "Immigrants", "% of residents", "{:.1f}"),
-    ("french_home_pct", "French most often at home", "% of residents", "{:.1f}"),
-    ("renter_pct", "Renter households", "%", "{:.1f}"),
-    ("movers5_pct", "Moved in the last five years", "% of residents", "{:.1f}"),
-    ("pampalon_material_q45_pct", "In materially deprived DAs (INSPQ Q4-5)", "% of residents", "{:.0f}"),
-    ("pampalon_social_q45_pct", "In socially deprived DAs (INSPQ Q4-5)", "% of residents", "{:.0f}"),
-    ("iemv_mean", "Equity index IEMV 2026 (0 best, 6 worst)", "score", "{:.1f}"),
-    ("crime_total", "Crime incidents per 1 000 residents per year", "/1000/yr", "{:.1f}"),
-    ("crime_violent", "  violent (robbery, homicide)", "/1000/yr", "{:.2f}"),
-    ("crime_breakins", "  break-ins", "/1000/yr", "{:.1f}"),
-    ("crime_vehicle", "  vehicle theft and theft from vehicles", "/1000/yr", "{:.1f}"),
-    ("crime_mischief", "  mischief", "/1000/yr", "{:.1f}"),
-    ("ped_cycl_victims_per_yr", "Pedestrian and cyclist victims within 500 m", "/yr", "{:.1f}"),
-    ("dwellings", "Dwellings", "units", "{:,.0f}"),
-    ("single_pct", "Single-family houses", "% of dwellings", "{:.0f}"),
-    ("plex_pct", "Plex units (2 to 5 per building)", "% of dwellings", "{:.0f}"),
-    ("condo_pct", "Condominium units", "% of dwellings", "{:.0f}"),
-    ("apt6_pct", "Rental buildings, 6+ units", "% of dwellings", "{:.0f}"),
-    ("median_year_built", "Median year built", "year", "{:.0f}"),
-    ("value_single_median", "Assessed value, single-family", "$", "{:,.0f}"),
-    ("value_plex_median", "Assessed value, plex", "$", "{:,.0f}"),
-    ("value_condo_median", "Assessed value, condo", "$", "{:,.0f}"),
-    ("bill_single_median", "2026 tax bill, single-family", "$", "{:,.0f}"),
-    ("bill_plex_median", "2026 tax bill, plex", "$", "{:,.0f}"),
-    ("bill_condo_median", "2026 tax bill, condo", "$", "{:,.0f}"),
-    ("tax_rate_pct", "Effective tax rate (bill / value)", "%", "{:.2f}"),
-    ("park_pct", "Park area", "% of zone", "{:.1f}"),
-    ("park_ha_per_1000", "Park area per 1 000 residents", "ha", "{:.2f}"),
+    ("pop_2021", "Residents (2021 census)", "people", "{:,.0f}", ""),
+    ("children_0_14_pct", "Children 0 to 14", "% of residents", "{:.1f}", "up"),
+    ("hh_with_children_pct", "Households with children", "% of households", "{:.1f}", "up"),
+    ("median_hh_income", "Median household income (2020)", "$", "{:,.0f}", ""),
+    ("lim_at_pct", "Low income (LIM-AT)", "% of residents", "{:.1f}", "down"),
+    ("no_diploma_25_64_pct", "No diploma, ages 25 to 64", "%", "{:.1f}", "down"),
+    ("immigrants_pct", "Immigrants", "% of residents", "{:.1f}", ""),
+    ("french_home_pct", "French most often at home", "% of residents", "{:.1f}", ""),
+    ("renter_pct", "Renter households", "%", "{:.1f}", ""),
+    ("movers5_pct", "Moved in the last five years", "% of residents", "{:.1f}", ""),
+    ("pampalon_material_q45_pct", "In materially deprived DAs (INSPQ Q4-5)", "% of residents", "{:.0f}", "down"),
+    ("pampalon_social_q45_pct", "In socially deprived DAs (INSPQ Q4-5)", "% of residents", "{:.0f}", "down"),
+    ("iemv_mean", "Equity index IEMV 2026 (0 best, 6 worst)", "score", "{:.1f}", "down"),
+    ("crime_total", "Crime incidents per 1 000 residents per year", "/1000/yr", "{:.1f}", "down"),
+    ("crime_violent", "  violent (robbery, homicide)", "/1000/yr", "{:.2f}", "down"),
+    ("crime_breakins", "  break-ins", "/1000/yr", "{:.1f}", "down"),
+    ("crime_vehicle", "  vehicle theft and theft from vehicles", "/1000/yr", "{:.1f}", "down"),
+    ("crime_mischief", "  mischief", "/1000/yr", "{:.1f}", "down"),
+    ("ped_cycl_victims_per_yr", "Pedestrian and cyclist victims within 500 m", "/yr", "{:.1f}", "down"),
+    ("dwellings", "Dwellings", "units", "{:,.0f}", ""),
+    ("single_pct", "Single-family houses", "% of dwellings", "{:.0f}", ""),
+    ("plex_pct", "Plex units (2 to 5 per building)", "% of dwellings", "{:.0f}", ""),
+    ("condo_pct", "Condominium units", "% of dwellings", "{:.0f}", ""),
+    ("apt6_pct", "Rental buildings, 6+ units", "% of dwellings", "{:.0f}", ""),
+    ("median_year_built", "Median year built", "year", "{:.0f}", ""),
+    ("value_single_median", "Assessed value, single-family", "$", "{:,.0f}", "down"),
+    ("value_plex_median", "Assessed value, plex", "$", "{:,.0f}", "down"),
+    ("value_condo_median", "Assessed value, condo", "$", "{:,.0f}", "down"),
+    ("bill_single_median", "2026 tax bill, single-family", "$", "{:,.0f}", "down"),
+    ("bill_plex_median", "2026 tax bill, plex", "$", "{:,.0f}", "down"),
+    ("bill_condo_median", "2026 tax bill, condo", "$", "{:,.0f}", "down"),
+    ("tax_rate_pct", "Effective tax rate (bill / value)", "%", "{:.2f}", "down"),
+    ("metro_m", "Distance to the nearest métro or REM station", "m", "{:,.0f}", "down"),
+    ("metro_in_zone", "Métro and REM stations inside the zone", "stations", "{:.0f}", "up"),
+    ("park_pct", "Park area", "% of zone", "{:.1f}", "up"),
+    ("park_ha_per_1000", "Park area per 1 000 residents", "ha", "{:.2f}", "up"),
 ]
 
 
@@ -213,6 +216,17 @@ class Data:
         return p[p.TYPO1.isin(PARK_TYPES)][["Nom", "TYPO1", "geometry"]]
 
     @cached_property
+    def metro(self) -> gpd.GeoDataFrame | None:
+        """Métro and REM stations from OpenStreetMap (fetch key metro_osm); None when not fetched."""
+        f = RAW / "metro_stations_osm.json"
+        if not f.exists():
+            return None
+        els = [e for e in json.loads(f.read_text())["elements"] if e.get("type") == "node"]
+        m = pd.DataFrame([dict(name=e["tags"].get("name"), kind=e["tags"].get("station"),
+                               network=e["tags"].get("network"), lon=e["lon"], lat=e["lat"]) for e in els])
+        return gpd.GeoDataFrame(m, geometry=gpd.points_from_xy(m.lon, m.lat), crs=4326).to_crs(CRS)
+
+    @cached_property
     def boroughs(self) -> gpd.GeoDataFrame:
         return gpd.read_file(RAW / "limites-administratives-agglomeration.geojson", engine="pyogrio").to_crs(CRS)
 
@@ -271,6 +285,16 @@ def zone_stats(d: Data, x: float, y: float, radius: float, collision_radius: flo
         out[f"bill_{k}_median"] = sub.bill.median() if len(sub) >= 10 else float("nan")
     out["tax_rate_pct"] = ratio(tx.bill.median(), tx.value.median()) if len(tx) >= 10 else float("nan")
     out["tax_coverage_pct"] = ratio(resu.cls.notna().sum(), len(resu))
+
+    if d.metro is not None:
+        dist = d.metro.geometry.distance(Point(x, y))
+        i = dist.idxmin()
+        out["metro_m"] = float(dist[i])
+        out["metro_name"] = d.metro.loc[i, "name"]
+        out["metro_kind"] = "REM" if d.metro.loc[i, "kind"] == "light_rail" else "métro"
+        out["metro_in_zone"] = int((dist <= radius).sum())
+    else:
+        out["metro_m"] = out["metro_in_zone"] = float("nan")
 
     pk = d.parks.iloc[d.parks.sindex.query(buf, predicate="intersects")]
     park_area = pk.geometry.intersection(buf).area.sum()
@@ -331,7 +355,7 @@ def deciles(ref: pd.DataFrame, key: str, value: float) -> float:
 def fmt(key: str, value) -> str:
     if value is None or (isinstance(value, float) and math.isnan(value)):
         return "n/a"
-    f = next(f for k, _, _, f in METRICS if k == key)
+    f = next(m[3] for m in METRICS if m[0] == key)
     return f.format(value)
 
 
@@ -339,7 +363,7 @@ def markdown(results: list[dict], ref: pd.DataFrame | None, radius: float, fetch
     heads = [r.get("label") or r["school"] for r in results]
     lines = ["| Metric | Unit | " + " | ".join(heads) + (" | Island median |" if ref is not None else "|"),
              "|---|---|" + "---:|" * len(results) + ("---:|" if ref is not None else "")]
-    for key, label, unit, _ in METRICS:
+    for key, label, unit, _, _ in METRICS:
         cells = []
         for r in results:
             v = r.get(key)

@@ -1,6 +1,6 @@
 ---
 name: school-report
-description: Produce an MTL-101 school report as a Quarto post for one francophone public elementary school on the island of Montreal — the school itself (service centre, buildings, program and admission model, MEQ IMSE/SFR deciles, renovation or relocation status), the kilometre around it (census, deprivation indices, crime, road safety, housing stock, assessed values and tax bills, parks, with island deciles and a Leaflet map), and a dated snapshot of 3+ bedroom listings for sale and for rent. Use it whenever the user says "school report", "/school-report", "report on école X", "évalue l'école X", "what is it like around école X", "should we live near school X", or names a Montreal elementary school and asks for the neighbourhood picture. It resolves the school with the repo's scripts, asks when a name is ambiguous or the school is relocated, lets the user pick comparator schools, hands the draft to the quarto-writeup skill with pre-filled interview answers, lints and renders, and never commits or pushes without a yes.
+description: Produce an MTL-101 school report as a Quarto post for one francophone public elementary school on the island of Montreal — the school itself (service centre, buildings, program and admission model, MEQ IMSE/SFR deciles, renovation or relocation status), the kilometre around it (census, deprivation indices, crime, road safety, housing stock, assessed values and tax bills, parks, métro access, with island deciles and an interactive map), and a dated snapshot of 3+ bedroom listings for sale and for rent. Use it whenever the user says "school report", "/school-report", "report on école X", "évalue l'école X", "what is it like around école X", "should we live near school X", or names a Montreal elementary school and asks for the neighbourhood picture. It resolves the school with the repo's scripts, asks when a name is ambiguous or the school is relocated, lets the user pick comparator schools, hands the draft to the quarto-writeup skill with pre-filled interview answers, lints and renders, and never commits or pushes without a yes.
 ---
 
 # School report
@@ -91,7 +91,7 @@ uv run scripts/zone_map.py <code> <comparator codes...> [--anchor LON LAT | --ma
 ```
 1. the artifact every number in the post is recomputed from; also run without `--format` to read the Markdown view yourself
 2. the six captioned tables with decile spans, ready to paste
-3. the Leaflet block; paste it into the post inside a ```` ```{=html} ```` fence, one map per post. `--anchor` moves the
+3. the MapLibre block; paste it into the post inside a ```` ```{=html} ```` fence, one map per post. `--anchor` moves the
    circle to a temporary site; `--mark` keeps the circle on the home building and adds a dashed marker for the temporary
    one (use it when the user chose "both"). For two zones, run `zone_stats.py` twice (`--point` for the temporary site with
    a `--label`) and concatenate the CSVs with the subject rows first; `report_tables.py` uses the `label` column as header.
@@ -122,7 +122,20 @@ python3 .claude/skills/quarto-writeup/scripts/check_post.py posts/<slug>.qmd   #
 quarto render                                                                  # <2>
 ```
 1. `author` and `abstract` warnings are expected on this site (see CLAUDE.md, Writing posts); everything else must be fixed
-2. only if the user said yes to rendering in the interview; then open `_site/posts/<slug>.html` and check the map draws and the decile spans are coloured
+2. only if the user said yes to rendering in the interview. `quarto render` does not run JavaScript, so check the map
+   in a headless browser and look at the screenshot:
+
+   ```bash
+   "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new --disable-gpu --hide-scrollbars \
+     --window-size=1200,3000 --virtual-time-budget=20000 --enable-logging=stderr --v=0 \
+     --user-agent="Mozilla/5.0 (Macintosh) AppleWebKit/537.36 Chrome/128.0 Safari/537.36" \
+     --screenshot=/tmp/post.png "file://$PWD/_site/posts/<slug>.html" 2>/tmp/console.log; grep -c Uncaught /tmp/console.log
+   ```
+
+   Zero `Uncaught` lines, basemap visible, the circle, pins and station squares drawn, decile spans coloured. Add
+   `--use-angle=swiftshader --enable-unsafe-swiftshader` if the basemap stays blank (MapLibre needs WebGL). The dry run
+   found three real problems this way: a Leaflet bounds call before the view was set, OSM tiles refusing the site, and
+   CARTO tiles watermarked "API KEY REQUIRED"; hence MapLibre over OpenFreeMap.
 
 ### 8. Hand off
 

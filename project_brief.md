@@ -142,7 +142,9 @@ MTL-101 does **not** invent a composite livability score. It shows a short dashb
 
 **The `school-report` skill** (`.claude/skills/school-report/`, repo content) chains these: resolve the school, research it (Layer 1), ask about relocation and comparators, run the zone scripts and map (Layer 2), take a dated snapshot of 3+ bedroom listings by web search (Layer 3), and draft the post through `quarto-writeup` with pre-filled interview answers.
 
-**Not yet built from the Tier B list:** childcare places (needs geocoding ~3,000 addresses), transit departures (GTFS), heat islands, bike network, CMHC rents, the secondary feeder lookup.
+**Not yet built from the Tier B list:** childcare places (needs geocoding ~3,000 addresses), transit *frequency* (the STM GTFS link at stm.info serves a bot-check page to non-browser clients, checked 2026-09-18; the fetcher rejects it), heat islands, bike network, CMHC rents, the secondary feeder lookup. Built instead for transit: distance to the nearest métro or REM station and the count inside the zone, from OpenStreetMap station nodes via Overpass (fetch key `metro_osm`, ODbL attribution).
+
+**Map tiles:** OpenStreetMap's own tile servers refuse third-party sites (HTTP 403 "Access blocked") and CARTO's free basemaps now watermark "API KEY REQUIRED"; both verified in a headless browser on 2026-09-18. The post map therefore uses MapLibre GL (cdnjs) over OpenFreeMap's Positron vector style: no key, no usage cap, OSM data, attribution to OpenStreetMap contributors and OpenFreeMap, and a paper-map look that matches the design brief. Alternatives considered: Leaflet with a keyed raster provider (Stadia, MapTiler; key embedded in a public repo), Esri's legacy grey canvas tiles (no key today, terms uncertain), a folium or plotly cell (Python at render time, needs `_freeze/`), a static matplotlib PNG, or an external map link.
 
 ## Open questions before building
 
