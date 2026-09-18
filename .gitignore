@@ -226,3 +226,12 @@ __marimo__/
 /data/derived/*
 !/data/schools_programs.csv
 !/data/derived/zone_stats_all.csv
+
+# Skills and commands symlinked from ../dotfiles (see CLAUDE.md); not repo content
+/.claude/commands/
+/.claude/skills/design-derivation
+/.claude/skills/goatcounter-tracking
+/.claude/skills/quarto-gh-publish-action
+/.claude/skills/quarto-site-setup
+/.claude/skills/quarto-writeup
+/.claude/skills/surge-artifacts

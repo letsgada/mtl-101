@@ -87,11 +87,14 @@ others. Comparators are always in-scope schools.
 ```bash
 uv run scripts/zone_stats.py <code> <comparator codes...> [--anchor LON LAT] --format csv --out data/derived/report_<slug>.csv  # <1>
 uv run scripts/report_tables.py data/derived/report_<slug>.csv --out data/derived/report_<slug>_tables.md            # <2>
-uv run scripts/zone_map.py <code> <comparator codes...> [--anchor LON LAT --anchor-label "..."] --out data/derived/report_<slug>_map.html  # <3>
+uv run scripts/zone_map.py <code> <comparator codes...> [--anchor LON LAT | --mark LON LAT --mark-label "..."] --out data/derived/report_<slug>_map.html  # <3>
 ```
 1. the artifact every number in the post is recomputed from; also run without `--format` to read the Markdown view yourself
 2. the six captioned tables with decile spans, ready to paste
-3. the Leaflet block; paste it into the post inside a ```` ```{=html} ```` fence, one map per post
+3. the Leaflet block; paste it into the post inside a ```` ```{=html} ```` fence, one map per post. `--anchor` moves the
+   circle to a temporary site; `--mark` keeps the circle on the home building and adds a dashed marker for the temporary
+   one (use it when the user chose "both"). For two zones, run `zone_stats.py` twice (`--point` for the temporary site with
+   a `--label`) and concatenate the CSVs with the subject rows first; `report_tables.py` uses the `label` column as header.
 
 Check the footer of the Markdown view: number of DAs, IEMV coverage (related cities have none)
 and tax-bill match rate, and quote them in the post's sources section.

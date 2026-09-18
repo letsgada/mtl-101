@@ -66,7 +66,13 @@ TEMPLATE = """<link rel="stylesheet" href="{leaflet}/leaflet.min.css">
     L.circleMarker([data.anchor.lat, data.anchor.lon], {{radius: 5, color: accent, weight: 2, fillColor: '#fff', fillOpacity: 1}})
       .bindPopup(data.anchor.label).addTo(map);
   }}
-  map.fitBounds(circle.getBounds().pad(0.15));
+  var bounds = circle.getBounds();
+  if (data.mark) {{
+    L.circleMarker([data.mark.lat, data.mark.lon], {{radius: 7, color: accent, weight: 2, dashArray: '3 3', fillColor: '#fff', fillOpacity: 1}})
+      .bindPopup(data.mark.label).addTo(map);
+    bounds.extend([data.mark.lat, data.mark.lon]);
+  }}
+  map.fitBounds(bounds.pad(0.15));
 }})();
 </script>
 """
@@ -79,6 +85,9 @@ def main(
     anchor: Annotated[Optional[tuple[float, float]], typer.Option("--anchor", metavar="LON LAT",
                                                                   help="centre the circle elsewhere (temporary site)")] = None,
     anchor_label: Annotated[Optional[str], typer.Option(help="popup text for the anchor point")] = None,
+    mark: Annotated[Optional[tuple[float, float]], typer.Option("--mark", metavar="LON LAT",
+                                                                help="an extra marker (e.g. a temporary site) without moving the circle")] = None,
+    mark_label: Annotated[Optional[str], typer.Option(help="popup text for --mark")] = None,
     height: Annotated[int, typer.Option(help="map height in pixels")] = 420,
     out: Annotated[Optional[Path], typer.Option(help="write the fragment here instead of stdout")] = None,
     verbose: Annotated[bool, typer.Option("--verbose", "-v")] = False,
@@ -96,7 +105,8 @@ def main(
     else:
         a = dict(lon=subject["lon"], lat=subject["lat"], label=None)
     data = dict(subject=subject, anchor=a, radius=radius,
-                comparators=[to_ll(r) for r in rows.iloc[1:].itertuples()])
+                comparators=[to_ll(r) for r in rows.iloc[1:].itertuples()],
+                mark=dict(lon=mark[0], lat=mark[1], label=mark_label or "marker") if mark else None)
     div_id = f"zone-map-{subj.CD_ORGNS}"
     html = TEMPLATE.format(leaflet=LEAFLET, div_id=div_id, height=height, data=json.dumps(data, ensure_ascii=False))
     if out:
