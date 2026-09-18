@@ -1,6 +1,6 @@
 # /// script
 # requires-python = ">=3.11"
-# dependencies = []
+# dependencies = ["typer>=0.12", "loguru>=0.7"]
 # ///
 """Download and cache the open datasets MTL-101 reads, by short key.
 
@@ -13,11 +13,9 @@
 Files land in data/raw/ (gitignored) and data/raw/manifest.json records the URL, size,
 fetch time and the portal's own last-modified stamp for each. Resource URLs are resolved
 live through the portals' CKAN APIs so a re-published file keeps working.
-Stdlib only: no dependencies to install.
 """
 from __future__ import annotations
 
-import argparse
 import json
 import re
 import shutil
@@ -26,6 +24,10 @@ import tempfile
 import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
+from typing import Annotated, Optional
+
+import typer
+from loguru import logger
 
 ROOT = Path(__file__).resolve().parents[1]
 RAW = ROOT / "data" / "raw"
@@ -78,15 +80,19 @@ DATASETS: dict[str, dict] = {
     "census_da_qc": dict(url="https://www12.statcan.gc.ca/census-recensement/2021/dp-pd/prof/details/"
                              "download-telecharger/comp/GetFile.cfm?Lang=E&FILETYPE=CSV&GEONO=006_Quebec",
                          file="98-401-X2021006_Quebec_eng_CSV.zip",
-                         note="StatCan 2021 Census Profile, all Quebec dissemination areas (~440 MB zip)."),
+                         note="StatCan 2021 Census Profile, all Quebec dissemination areas (~540 MB zip)."),
     "gtfs": dict(url="http://www.stm.info/sites/default/files/gtfs/gtfs_stm.zip", file="gtfs_stm.zip",
                  note="STM static GTFS."),
 }
 CORE = ["schools", "crimes", "pdq", "boroughs", "uev", "parks", "collisions", "pampalon", "iemv", "census_da_qc"]
 
+app = typer.Typer(add_completion=False, help=__doc__, rich_markup_mode=None)
 
-def log(msg: str) -> None:
-    print(msg, file=sys.stderr, flush=True)
+
+def setup_logging(verbose: bool) -> None:
+    logger.remove()
+    logger.add(sys.stderr, level="DEBUG" if verbose else "INFO",
+               format="<level>{level: <7}</level> {message}")
 
 
 def get_json(url: str) -> dict:
@@ -107,7 +113,8 @@ def ckan_resources(spec: dict) -> list[dict]:
             continue
         out.append(res)
     if not out:
-        raise SystemExit(f"no {spec['format']} resource matched in {spec['dataset']}")
+        logger.error("no {} resource matched in {}", spec["format"], spec["dataset"])
+        raise typer.Exit(1)
     return out
 
 
@@ -116,7 +123,8 @@ def resolve(key: str) -> list[tuple[str, str, str, dict]]:
     base, _, sub = key.partition(":")
     spec = DATASETS.get(base)
     if spec is None:
-        raise SystemExit(f"unknown key {key!r}; see --list")
+        logger.error("unknown key {!r}; see --list", key)
+        raise typer.Exit(1)
     if "url" in spec:
         return [(key, spec["url"], spec["file"], {})]
     resources = ckan_resources(spec)
@@ -132,7 +140,8 @@ def resolve(key: str) -> list[tuple[str, str, str, dict]]:
             out.append((f"{base}:{slug}", res["url"], Path(res["url"]).name,
                         dict(resource_id=res["id"], last_modified=res.get("last_modified"), name=res.get("name"))))
         if not out:
-            raise SystemExit(f"no borough matched {sub!r}; slugs are the file names on the portal")
+            logger.error("no borough matched {!r}; slugs are the file names on the portal", sub)
+            raise typer.Exit(1)
         return out
     res = resources[0]
     return [(key, res["url"], spec["file"], dict(resource_id=res["id"], last_modified=res.get("last_modified"),
@@ -152,34 +161,38 @@ def download(url: str, dest: Path) -> int:
     return dest.stat().st_size
 
 
-def main() -> None:
-    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("keys", nargs="*", help="dataset keys; `taxes` expands to all boroughs, `taxes:<slug>` to one")
-    ap.add_argument("--core", action="store_true", help=f"fetch the core set: {' '.join(CORE)}")
-    ap.add_argument("--force", action="store_true", help="re-download even if the file is present")
-    ap.add_argument("--list", action="store_true", help="list keys and exit")
-    args = ap.parse_args()
-
-    if args.list:
+@app.command()
+def main(
+    keys: Annotated[Optional[list[str]], typer.Argument(
+        help="dataset keys; `taxes` expands to all boroughs, `taxes:<slug>` to one")] = None,
+    core: Annotated[bool, typer.Option("--core", help=f"fetch the core set: {' '.join(CORE)}")] = False,
+    force: Annotated[bool, typer.Option("--force", help="re-download even if the file is present")] = False,
+    list_keys: Annotated[bool, typer.Option("--list", help="list keys and exit")] = False,
+    verbose: Annotated[bool, typer.Option("--verbose", "-v")] = False,
+) -> None:
+    """Download and cache open datasets by key into data/raw/."""
+    setup_logging(verbose)
+    if list_keys:
         for k, spec in DATASETS.items():
-            print(f"{k:14} {spec.get('note', '')}")
+            typer.echo(f"{k:14} {spec.get('note', '')}")
         return
-    keys = list(args.keys) + (CORE if args.core else [])
-    if not keys:
-        ap.error("give at least one key or --core")
+    wanted = list(keys or []) + (CORE if core else [])
+    if not wanted:
+        logger.error("give at least one key or --core")
+        raise typer.Exit(2)
 
     RAW.mkdir(parents=True, exist_ok=True)
     manifest = json.loads(MANIFEST.read_text()) if MANIFEST.exists() else {}
-    for key in keys:
+    for key in wanted:
         for k, url, filename, meta in resolve(key):
             dest = RAW / filename
-            if dest.exists() and not args.force:
-                log(f"skip  {k:40} {filename} ({dest.stat().st_size >> 20} MB cached)")
+            if dest.exists() and not force:
+                logger.info("skip  {:40} {} ({} MB cached)", k, filename, dest.stat().st_size >> 20)
                 manifest.setdefault(k, {}).update(path=str(dest.relative_to(ROOT)), url=url, **meta)
                 continue
-            log(f"fetch {k:40} {url}")
+            logger.info("fetch {:40} {}", k, url)
             size = download(url, dest)
-            log(f"      {size >> 20} MB -> {dest.relative_to(ROOT)}")
+            logger.success("      {} MB -> {}", size >> 20, dest.relative_to(ROOT))
             manifest[k] = dict(path=str(dest.relative_to(ROOT)), url=url, bytes=size,
                                fetched_at=datetime.now(timezone.utc).isoformat(timespec="seconds"), **meta)
             MANIFEST.write_text(json.dumps(manifest, indent=1, ensure_ascii=False, sort_keys=True) + "\n")
@@ -187,4 +200,4 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    app()

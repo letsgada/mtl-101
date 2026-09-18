@@ -1,6 +1,6 @@
 # /// script
 # requires-python = ">=3.11"
-# dependencies = ["pandas>=2.2", "pyarrow>=16"]
+# dependencies = ["pandas>=2.2", "pyarrow>=16", "typer>=0.12", "loguru>=0.7"]
 # ///
 """Collapse the borough tax-bill files (one line per tax per unit) to one row per account.
 
@@ -17,12 +17,14 @@ The city notes these are the bills as first issued; later corrections are absent
 """
 from __future__ import annotations
 
-import argparse
 import re
 import sys
 from pathlib import Path
+from typing import Annotated
 
 import pandas as pd
+import typer
+from loguru import logger
 
 ROOT = Path(__file__).resolve().parents[1]
 RAW = ROOT / "data" / "raw"
@@ -31,6 +33,14 @@ DERIVED = ROOT / "data" / "derived"
 GENERAL = {"B00": "res_le5", "C00": "res_6plus", "LNR": "nonres", "MNR": "nonres", "BRR": "nonres", "D00": "vacant"}
 USECOLS = ["ARRONDISSEMENT", "NOM_ARRONDISSEMENT", "ANNEE_EXERCICE", "ID_CUM", "NO_COMPTE",
            "CODE_DESCR_LONGUE", "VAL_IMPOSABLE", "MONTANT_DETAIL"]
+
+app = typer.Typer(add_completion=False, help=__doc__, rich_markup_mode=None)
+
+
+def setup_logging(verbose: bool) -> None:
+    logger.remove()
+    logger.add(sys.stderr, level="DEBUG" if verbose else "INFO",
+               format="<level>{level: <7}</level> {message}")
 
 
 def one_borough(path: Path, year: str) -> pd.DataFrame:
@@ -54,27 +64,31 @@ def one_borough(path: Path, year: str) -> pd.DataFrame:
     return total.drop(columns="val_any").reset_index()
 
 
-def main() -> None:
-    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--year", default="2026")
-    args = ap.parse_args()
+@app.command()
+def main(
+    year: Annotated[str, typer.Option(help="taxation year to keep")] = "2026",
+    verbose: Annotated[bool, typer.Option("--verbose", "-v")] = False,
+) -> None:
+    """Collapse borough tax-bill CSVs to one row per account."""
+    setup_logging(verbose)
     files = sorted(RAW.glob("taxes-municipales-*.csv"))
     if not files:
-        sys.exit("no tax files; run: uv run scripts/fetch_open_data.py taxes")
+        logger.error("no tax files; run: uv run scripts/fetch_open_data.py taxes")
+        raise typer.Exit(1)
     DERIVED.mkdir(parents=True, exist_ok=True)
     frames = []
     for f in files:
         slug = re.sub(r"^taxes-municipales-|\.csv$", "", f.name)
-        df = one_borough(f, args.year)
+        df = one_borough(f, year)
         df["borough_slug"] = slug
-        print(f"{slug:45} {len(df):7} accounts, median res_le5 value "
-              f"{df.loc[df.cls == 'res_le5', 'value'].median():>12,.0f}", file=sys.stderr)
+        logger.info("{:45} {:7} accounts, median res_le5 value {:>12,.0f}", slug, len(df),
+                    df.loc[df.cls == "res_le5", "value"].median())
         frames.append(df)
     out = pd.concat(frames, ignore_index=True)
-    dest = DERIVED / f"taxes_{args.year}.parquet"
+    dest = DERIVED / f"taxes_{year}.parquet"
     out.to_parquet(dest, index=False)
-    print(f"{len(out)} accounts -> {dest.relative_to(ROOT)}", file=sys.stderr)
+    logger.success("{} accounts -> {}", len(out), dest.relative_to(ROOT))
 
 
 if __name__ == "__main__":
-    main()
+    app()

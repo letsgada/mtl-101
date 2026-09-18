@@ -1,6 +1,6 @@
 # /// script
 # requires-python = ">=3.11"
-# dependencies = ["pandas>=2.2", "pyarrow>=16", "geopandas>=1.0", "pyogrio>=0.9", "shapely>=2.0"]
+# dependencies = ["pandas>=2.2", "pyarrow>=16", "geopandas>=1.0", "pyogrio>=0.9", "shapely>=2.0", "typer>=0.12", "loguru>=0.7"]
 # ///
 """Layer 2 of MTL-101: describe the neighbourhood around a school as a place to live.
 
@@ -33,17 +33,20 @@ Inputs (see fetch_open_data.py, prep_taxes.py, prep_uev.py, census_da.py):
 """
 from __future__ import annotations
 
-import argparse
 import json
 import math
 import sys
 import unicodedata
+from enum import Enum
 from functools import cached_property
 from pathlib import Path
+from typing import Annotated, Optional
 
 import geopandas as gpd
 import numpy as np
 import pandas as pd
+import typer
+from loguru import logger
 from shapely.geometry import Point
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -272,10 +275,12 @@ def find_schools(d: Data, queries: list[str]) -> gpd.GeoDataFrame:
             hit = s[s.NOM_OFFCL_ORGNS.map(strip_accents).str.contains(key, regex=False)
                     | s.NOM_COURT_ORGNS.map(strip_accents).str.contains(key, regex=False)]
         if len(hit) == 0:
-            sys.exit(f"no francophone public elementary school on the island matches {q!r}")
+            logger.error("no francophone public elementary school on the island matches {!r}", q)
+            raise typer.Exit(1)
         if len(hit) > 1:
             names = "; ".join(f"{r.NOM_OFFCL_ORGNS} [{r.CD_ORGNS}]" for r in hit.itertuples())
-            sys.exit(f"{q!r} is ambiguous: {names}. Use the code in brackets.")
+            logger.error("{!r} is ambiguous: {}. Use the code in brackets.", q, names)
+            raise typer.Exit(1)
         rows.append(hit)
     return pd.concat(rows)
 
@@ -292,7 +297,7 @@ def run_all(d: Data, radius: float, collision_radius: float) -> pd.DataFrame:
         row.update(zone_stats(d, s.geometry.x, s.geometry.y, radius, collision_radius))
         rows.append(row)
         if i % 25 == 0:
-            print(f"  {i}/{len(d.schools)}", file=sys.stderr, flush=True)
+            logger.info("  {}/{}", i, len(d.schools))
     df = pd.DataFrame(rows)
     df.attrs.update(radius=radius, collision_radius=collision_radius)
     DERIVED.mkdir(parents=True, exist_ok=True)
@@ -335,64 +340,89 @@ def markdown(results: list[dict], ref: pd.DataFrame | None, radius: float) -> st
              f"(dN) = decile among {len(ref)} island francophone public elementary schools, 1 = lowest tenth."
              if ref is not None else f"Zone = {radius:.0f} m circle around the school building."]
     for r in results:
-        if r.get("borough"):
-            notes.append(f"{r.get('label') or r['school']}: {r.get('building', '')}, {r.get('address', '')} "
-                         f"({r['borough']}); {r['n_da']} DAs; IEMV covers {fmt('park_pct', r['iemv_coverage_pct'])}% "
-                         f"of residents; tax bills matched for {fmt('park_pct', r['tax_coverage_pct'])}% of units.")
+        where = ", ".join(str(v) for v in (r.get("building"), r.get("address")) if v)
+        where = f"{where} " if where else ""
+        notes.append(f"{r.get('label') or r['school']}: {where}({r.get('borough') or 'outside borough limits'}); "
+                     f"{r['n_da']} DAs; IEMV covers {fmt('park_pct', r['iemv_coverage_pct'])}% of residents; "
+                     f"tax bills matched for {fmt('park_pct', r['tax_coverage_pct'])}% of units.")
     return "\n".join(lines) + "\n\n" + "\n".join(notes) + "\n"
 
 
-def main() -> None:
-    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("schools", nargs="*", help="school name fragments or MEQ organisation codes")
-    ap.add_argument("--point", nargs=2, type=float, metavar=("LON", "LAT"), help="evaluate an arbitrary point")
-    ap.add_argument("--label", help="label for --point")
-    ap.add_argument("--radius", type=float, default=1000.0, help="zone radius in metres (default 1000)")
-    ap.add_argument("--collision-radius", type=float, default=500.0)
-    ap.add_argument("--all", action="store_true", help="compute every island school and refresh the decile cache")
-    ap.add_argument("--no-deciles", action="store_true")
-    ap.add_argument("--format", choices=["md", "csv", "json"], default="md")
-    ap.add_argument("--out", type=Path)
-    args = ap.parse_args()
+class Format(str, Enum):
+    md = "md"
+    csv = "csv"
+    json = "json"
 
+
+app = typer.Typer(add_completion=False, help=__doc__, rich_markup_mode=None)
+
+
+def setup_logging(verbose: bool) -> None:
+    logger.remove()
+    logger.add(sys.stderr, level="DEBUG" if verbose else "INFO",
+               format="<level>{level: <7}</level> {message}")
+
+
+@app.command()
+def main(
+    schools: Annotated[Optional[list[str]], typer.Argument(
+        help="school name fragments or MEQ organisation codes")] = None,
+    point: Annotated[Optional[tuple[float, float]], typer.Option(
+        "--point", metavar="LON LAT", help="evaluate an arbitrary point")] = None,
+    label: Annotated[Optional[str], typer.Option(help="label for --point")] = None,
+    radius: Annotated[float, typer.Option(help="zone radius in metres")] = 1000.0,
+    collision_radius: Annotated[float, typer.Option(help="radius for pedestrian/cyclist victims, metres")] = 500.0,
+    all_schools: Annotated[bool, typer.Option(
+        "--all", help="compute every island school and refresh the decile cache")] = False,
+    no_deciles: Annotated[bool, typer.Option("--no-deciles", help="omit deciles even if the cache exists")] = False,
+    fmt_: Annotated[Format, typer.Option("--format", help="output format")] = Format.md,
+    out: Annotated[Optional[Path], typer.Option(help="write the output here instead of stdout")] = None,
+    verbose: Annotated[bool, typer.Option("--verbose", "-v")] = False,
+) -> None:
+    """Describe the neighbourhood around a school (or a point) from open data, with island deciles."""
+    setup_logging(verbose)
     d = Data()
-    if args.all:
-        print(f"computing {len(d.schools)} schools ...", file=sys.stderr)
-        ref = run_all(d, args.radius, args.collision_radius)
-        print(f"-> {ALL_CACHE.relative_to(ROOT)} and .csv", file=sys.stderr)
-        if not args.schools and not args.point:
+    if all_schools:
+        logger.info("computing {} schools ...", len(d.schools))
+        run_all(d, radius, collision_radius)
+        logger.success("-> {} and .csv", ALL_CACHE.relative_to(ROOT))
+        if not schools and not point:
             return
     ref = None
-    if not args.no_deciles and ALL_CACHE.exists():
+    if not no_deciles and ALL_CACHE.exists():
         ref = pd.read_parquet(ALL_CACHE)
+        logger.debug("deciles against {} schools", len(ref))
+    elif not no_deciles:
+        logger.warning("no decile cache; run with --all once to get deciles")
 
     results = []
-    if args.schools:
-        for s in find_schools(d, args.schools).itertuples():
+    if schools:
+        for s in find_schools(d, schools).itertuples():
             row = school_row(s)
-            row.update(zone_stats(d, s.geometry.x, s.geometry.y, args.radius, args.collision_radius))
+            row.update(zone_stats(d, s.geometry.x, s.geometry.y, radius, collision_radius))
             results.append(row)
-    if args.point:
-        lon, lat = args.point
+    if point:
+        lon, lat = point
         p = gpd.GeoSeries([Point(lon, lat)], crs=4326).to_crs(CRS).iloc[0]
-        row = dict(label=args.label or f"{lon:.4f}, {lat:.4f}", school=args.label or "point", lon=lon, lat=lat)
-        row.update(zone_stats(d, p.x, p.y, args.radius, args.collision_radius))
+        row = dict(label=label or f"{lon:.4f}, {lat:.4f}", school=label or "point", lon=lon, lat=lat)
+        row.update(zone_stats(d, p.x, p.y, radius, collision_radius))
         results.append(row)
     if not results:
-        ap.error("give school names, --point, or --all")
+        logger.error("give school names, --point, or --all")
+        raise typer.Exit(2)
 
-    if args.format == "md":
-        text = markdown(results, ref, args.radius)
-    elif args.format == "json":
+    if fmt_ is Format.md:
+        text = markdown(results, ref, radius)
+    elif fmt_ is Format.json:
         text = json.dumps(results, indent=1, ensure_ascii=False, default=lambda v: None if pd.isna(v) else v)
     else:
         text = pd.DataFrame(results).to_csv(index=False)
-    if args.out:
-        args.out.write_text(text)
-        print(f"-> {args.out}", file=sys.stderr)
+    if out:
+        out.write_text(text)
+        logger.success("-> {}", out)
     else:
-        print(text)
+        typer.echo(text)
 
 
 if __name__ == "__main__":
-    main()
+    app()

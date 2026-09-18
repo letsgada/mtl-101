@@ -1,6 +1,6 @@
 # /// script
 # requires-python = ">=3.11"
-# dependencies = ["pandas>=2.2", "pyarrow>=16", "geopandas>=1.0", "pyogrio>=0.9"]
+# dependencies = ["pandas>=2.2", "pyarrow>=16", "geopandas>=1.0", "pyogrio>=0.9", "typer>=0.12", "loguru>=0.7"]
 # ///
 """Extract the 2021 Census Profile variables MTL-101 uses, for every dissemination area (DA)
 on the island of Montreal, from the StatCan bulk file (all Quebec DAs, 6.4 GB uncompressed).
@@ -18,9 +18,12 @@ from __future__ import annotations
 import sys
 import zipfile
 from pathlib import Path
+from typing import Annotated
 
 import geopandas as gpd
 import pandas as pd
+import typer
+from loguru import logger
 
 ROOT = Path(__file__).resolve().parents[1]
 RAW = ROOT / "data" / "raw"
@@ -45,6 +48,14 @@ VARS = {
     2014: "educ_25_64_total", 2015: "no_diploma_25_64",
 }
 
+app = typer.Typer(add_completion=False, help=__doc__, rich_markup_mode=None)
+
+
+def setup_logging(verbose: bool) -> None:
+    logger.remove()
+    logger.add(sys.stderr, level="DEBUG" if verbose else "INFO",
+               format="<level>{level: <7}</level> {message}")
+
 
 def island_dguids() -> pd.Series:
     da = gpd.read_file(f"/vsizip/{DA_SHP}/Ad_2021_IndDef.shp", engine="pyogrio", read_geometry=False)
@@ -52,12 +63,16 @@ def island_dguids() -> pd.Series:
     return "2021S0512" + isl.ADIDU.astype(str)
 
 
-def main() -> None:
+@app.command()
+def main(verbose: Annotated[bool, typer.Option("--verbose", "-v")] = False) -> None:
+    """Stream the Quebec census bulk file and keep the island's DAs and selected variables."""
+    setup_logging(verbose)
     for p in (ZIP, DA_SHP):
         if not p.exists():
-            sys.exit(f"missing {p.name}; run: uv run scripts/fetch_open_data.py census_da_qc pampalon")
+            logger.error("missing {}; run: uv run scripts/fetch_open_data.py census_da_qc pampalon", p.name)
+            raise typer.Exit(1)
     dguids = set(island_dguids())
-    print(f"{len(dguids)} island DAs", file=sys.stderr)
+    logger.info("{} island DAs", len(dguids))
     inner = next(n for n in zipfile.ZipFile(ZIP).namelist() if n.endswith("_data_Quebec.csv"))
     # Column positions: 1 DGUID, 8 CHARACTERISTIC_ID, 11 C1_COUNT_TOTAL (the SYMBOL columns share a
     # name, so select by position and rename by position).
@@ -70,7 +85,7 @@ def main() -> None:
             hit = chunk[chunk.DGUID.isin(dguids)]
             hit = hit[hit.CHARACTERISTIC_ID.astype(int).isin(VARS)]
             keep.append(hit)
-            print(f"  chunk {i + 1}: {len(hit)} rows kept", file=sys.stderr, flush=True)
+            logger.debug("chunk {}: {} rows kept", i + 1, len(hit))
     rows = pd.concat(keep, ignore_index=True)
     rows["CHARACTERISTIC_ID"] = rows.CHARACTERISTIC_ID.astype(int)
     rows["value"] = pd.to_numeric(rows.C1_COUNT_TOTAL, errors="coerce")
@@ -83,10 +98,10 @@ def main() -> None:
     DERIVED.mkdir(parents=True, exist_ok=True)
     dest = DERIVED / "census_da_island.parquet"
     wide.to_parquet(dest, index=False)
-    print(f"{len(wide)} DAs x {len(VARS)} variables -> {dest.relative_to(ROOT)}", file=sys.stderr)
-    print(wide[["pop2021", "median_hh_income", "lim_at_pct", "no_diploma_25_64", "age_0_14"]].describe().round(1).to_string(),
-          file=sys.stderr)
+    logger.success("{} DAs x {} variables -> {}", len(wide), len(VARS), dest.relative_to(ROOT))
+    logger.info("\n{}", wide[["pop2021", "median_hh_income", "lim_at_pct", "no_diploma_25_64", "age_0_14"]]
+                .describe().round(1).to_string())
 
 
 if __name__ == "__main__":
-    main()
+    app()

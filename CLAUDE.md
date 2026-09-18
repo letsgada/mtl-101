@@ -60,6 +60,11 @@ no Python or R. There are no tests or linters; `quarto render` exiting 0 is the 
 ## Scripts (Layer 2)
 
 All scripts are PEP 723 single files run with `uv run scripts/<name>.py`; no environment to set up.
+House style for any new script: **Typer** for the CLI (`app = typer.Typer(add_completion=False)`, one
+`@app.command()`, `Annotated` options, `typer.Exit(1)` on errors, `--help` from the module docstring)
+and **Loguru** for logging (`logger.remove(); logger.add(sys.stderr, ...)` in a `setup_logging(verbose)`
+helper, `-v/--verbose` for DEBUG). Logs go to stderr through `logger`; only data output (tables, CSV,
+JSON) goes to stdout via `typer.echo`, so results pipe cleanly. No `argparse`, no bare `print`.
 Run them in this order the first time (about 3.5 GB of downloads, then a few minutes of prep):
 
 ```bash
