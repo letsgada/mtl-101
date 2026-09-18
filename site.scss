@@ -86,3 +86,6 @@ td.decile, .decile { font-family: var(--font-mono); }
 .decile-low { background-color: var(--decile-low); }
 .decile-mid { background-color: var(--decile-mid); color: var(--bg); }
 .decile-high { background-color: var(--decile-high); color: var(--bg); }
+// Most favourable value among the compared zones in a report table (report_tables.py):
+// a soft pill in the zone tint, no second accent.
+.best { display: inline-block; padding: 0.05em 0.45em; border-radius: 4px; background-color: var(--zone-soft); box-shadow: inset 0 0 0 1.5px var(--zone); font-weight: 600; }

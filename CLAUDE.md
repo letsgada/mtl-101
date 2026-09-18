@@ -140,7 +140,7 @@ uv run https://ohjho.github.io/dotfiles/scripts/design_tokens.py render scss des
 ```
 
 Posts use the helper classes in `site.scss` (`.pin`, `.zone`, `.zone-soft`, `.decile-low`,
-`.decile-mid`, `.decile-high`) rather than inline colours, never a title banner, and never a
+`.decile-mid`, `.decile-high`, `.best` for the most favourable compared value in a report table) rather than inline colours, never a title banner, and never a
 second accent. For charts, `decile-low → decile-mid → decile-high` is the sequential ramp, `zone`
 the boundary colour, `accent` the single highlighted school (see `dataviz`).
 

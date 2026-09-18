@@ -26,7 +26,7 @@ three tenths, [d4]{.decile-mid} to [d7]{.decile-mid} for the middle, and [d8]{.d
 [d10]{.decile-high} for the top three. A high decile means a high value, nothing
 more, so the label says which way is favourable for a family: ▲ higher is favourable (children,
 parks, stations), ▼ lower is favourable (crime, collisions, deprivation, cost), and rows with no
-glyph are descriptive. On the ▲ and ▼ rows the most favourable of the compared zones is in **bold**.
+glyph are descriptive. On the ▲ and ▼ rows the most favourable of the compared zones is [shaded]{.best}.
 The report computes no composite score, and the IMSE is a socioeconomic index of the pupils enrolled,
 not a measure of academic performance.
 :::
