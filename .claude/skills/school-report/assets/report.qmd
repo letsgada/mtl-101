@@ -1,0 +1,178 @@
+---
+title: "<École X>: the school and its kilometre"
+date: "<YYYY-MM-DD>"
+categories: [school-report, <borough-slug>, layer-1, layer-2]
+description: "<One sentence: what the school is, what its zone looks like, what a 3-bedroom costs there this month.>"
+toc: true
+code-annotations: hover
+---
+
+<!-- Template for the school-report skill. Replace every <placeholder>; delete comments and any
+     section the run could not fill (say so in Sources instead of leaving a stub). Every number
+     comes from data/derived/report_<slug>.csv, imse.py, or a listing opened in this run. -->
+
+<École X> is a francophone public elementary school of the <CSS full name> in <borough>. This
+report describes it in three layers: the school itself, the kilometre around <its building /
+the address the family would live near>, and what a three-bedroom home there costs to buy or
+rent this month. It is one output of MTL-101, which works backwards from the school to the
+neighbourhood.
+
+::: {.callout-important}
+## Not a ranking
+
+Each zone metric is shown with its decile among the <N> francophone public elementary schools on
+the island outside the West Island, marked [d1]{.decile-low} to [d3]{.decile-low} for the lowest
+three tenths, [d4]{.decile-mid} to [d7]{.decile-mid} for the middle, and [d8]{.decile-high} to
+[d10]{.decile-high} for the top three. A high decile means a high value, nothing more. The
+report computes no composite score, and the IMSE below is a socioeconomic index of the pupils
+enrolled, not a measure of academic performance.
+:::
+
+# The school
+
+<!-- If relocated or split: this callout first, with the notice date and the announced return. -->
+::: {.callout-important}
+## <Relocated during works / Two pavilions>
+
+<What is happening, where the pupils are now (address), since when, announced return date, and
+which address anchors the zone below and why.>[^travaux]
+:::
+
+| | |
+|:---|:---|
+| Service centre | <CSS full name> (<code>) |
+| MEQ code | <code> |
+| Building(s) | <name, address, postal code; one line per building> |
+| Program | <regular / IB PYP / Freinet alternative / arts …; whole school or one stream>[^prog] |
+| Admission | <neighbourhood / selective / catchment lottery / CSS-wide lottery, with the sentence the page uses>[^adm] |
+| Pupils (<year>) | <n> |
+| IMSE <year> | <value>, decile <d> <(milieu défavorisé)> |
+| SFR <year> | <value>, decile <d> |
+| Website | <url> |
+
+: The school in one table; facts marked *unverified* could not be confirmed on a page that loaded {#tbl-school}
+
+The MEQ's IMSE places the school in decile <d> for <year> (1 = most advantaged, 10 = most
+disadvantaged; 8 to 10 is the official *milieu défavorisé*). It is built from the enrolled
+pupils' parents' education and employment, not from test results, and it can differ from the
+census figures for the residents of the zone in @tbl-people: <one sentence on whether they
+agree here, and why they might not (choice program, private-school leakage)>.
+
+[^travaux]: <Source page title>, <site>, <date>: <url>.
+[^prog]: <Source>, <url>.
+[^adm]: <Source>, <url>.
+
+# The zone
+
+The zone is a circle of one kilometre around <the building / the anchor>, a stand-in for the
+catchment polygon that exists only in the service centre's finder and PDF maps. <If
+comparators:> The comparators are <list with distances>, chosen <by the reader / as the nearest
+/ as the other <program> schools>.
+
+```{=html}
+<!-- paste the output of zone_map.py here -->
+```
+
+## Who lives there
+
+<!-- paste tbl-people from report_tables.py -->
+
+::: {.callout-tip}
+## Reading the table
+
+<Two to four sentences: which lines sit far from the island median, how the comparators differ,
+what the household mix says. No verdicts.>
+:::
+
+<!-- paste tbl-indices -->
+
+::: {.callout-note}
+## Social deprivation is high across central Montreal
+
+The INSPQ social axis counts people living alone and lone-parent families, which the dense
+central boroughs are full of; read it with the households-with-children line of @tbl-people.
+:::
+
+## Safety
+
+<!-- paste tbl-safety -->
+
+::: {.callout-tip}
+## Reading the table
+
+<Which categories drive the total; what the 500 m circle contains (arterials, commercial strip);
+comparators. No verdicts.>
+:::
+
+::: {.callout-warning}
+## What these two datasets cannot say
+
+The city states the incident file is not official SPVM statistics; positions are moved to the
+nearest intersection and 17% of incidents have no coordinates and are absent from the rates.
+The collision extract ends in 2021; its last two years are pandemic years. Both are rates of
+reported events, not of risk.
+:::
+
+## Housing and what it costs to own
+
+<!-- paste tbl-stock and tbl-cost -->
+
+::: {.callout-tip}
+## Reading the tables
+
+<Stock mix; where values sit against the island; effective tax rate; comparators.>
+:::
+
+## Parks
+
+<!-- paste tbl-parks -->
+
+<One or two sentences; name the large park nearest the anchor and its distance if it lies outside the circle.>
+
+# Living there now
+
+<!-- Layer 3: see references/listings.md. Two tables, then the warning. -->
+
+<!-- paste tbl-for-sale and tbl-for-rent -->
+
+::: {.callout-warning}
+## Listings expire
+
+These are the 3+ bedroom listings found on <date> within about a kilometre of <the anchor>,
+chosen for variety of type rather than as a sample; prices are asking prices, and the section
+is not refreshed when the post is republished. For a durable benchmark use the assessed values
+in @tbl-cost, which lag the market by about eighteen months.
+:::
+
+# Sources and caveats
+
+- **School facts**: the school's site and the <CSS> pages linked in the footnotes, opened on
+  <date>; <which facts are unverified and why>.
+- **IMSE/SFR**: MEQ, *Indices de défavorisation*, Données Québec, school year <year>.
+- **Zone tables**: `scripts/zone_stats.py` on open data fetched between <oldest> and <newest>
+  (Ville de Montréal, Données Québec, INSPQ, Statistics Canada 2021 Census); <n> dissemination
+  areas by centroid; IEMV covers <x>% of residents; tax bills matched for <y>% of units. Census
+  2021 is five years old; assessed values reflect the July 2024 market.
+- **Listings**: as seen on <sites> on <date>.
+- **Deciles**: among <N> in-scope schools, from `data/derived/zone_stats_all.parquet`.
+
+# Conclusion
+
+- **<Finding about the school>** — <one clause>.
+- **<Finding about the zone, with the table reference>** — <one clause>.
+- **<Finding about cost>** — <one clause>.
+
+Next steps for this school:
+
+1. **Confirm the catchment** on the <CSS> finder for the family's candidate addresses; the
+   circle is a stand-in.
+2. **<Follow the relocation / admission calendar>** — <date to watch>.
+3. **What this report does not yet cover**: childcare places, transit frequency, heat islands,
+   rents by CMHC zone, and the secondary school the zone feeds.
+
+::: {.callout-important}
+## Bottom line
+
+<Two sentences: what a parent now knows about this school and its kilometre, and the one thing
+to verify before acting.>
+:::
