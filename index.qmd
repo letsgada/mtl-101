@@ -32,7 +32,10 @@ project adds on top of it.
 The deterministic part of the problem, looking up structured data, is mostly solved by existing
 government tools, so MTL-101 does not rebuild them. The CSSDM's own school finder handles
 address-to-school lookups, and the Ministry's open data on Données Québec provides the
-socioeconomic deprivation indices (IMSE and SFR) per school as CSV and GeoJSON.
+socioeconomic deprivation indices (IMSE and SFR) per school as CSV and GeoJSON. The city's
+open-data portal and the census add per-incident crime, per-unit assessed values and tax bills,
+childcare, parks and transit, so a chosen zone can be evaluated as a place to live and not only as
+a school district.
 
 What is not solved is the synthesis: reconciling zone lookups against socioeconomic data,
 catching schools that have moved mid-renovation, telling apart same-named schools across

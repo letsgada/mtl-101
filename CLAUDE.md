@@ -6,11 +6,14 @@ Guidance for Claude Code when working in this repository.
 
 MTL-101 helps a parent pick a Montreal neighbourhood by working backwards from school quality:
 "which francophone public elementary school do I want, and therefore where should I live?"
+Once a school is chosen, the tool evaluates its zone as a place to live (crime, income and family
+demographics, assessed values and tax bills, childcare, parks, transit, road safety) from open
+Ville de Montréal, Données Québec and census data; the brief calls this Layer 2.
 Scope is the island of Montreal only (CSSDM, CSS Marguerite-Bourgeoys, CSS Pointe-de-l'Île);
 the West Island, South Shore and Laval are excluded. `project_brief.md` is the domain source of
 truth: data sources (MEQ IMSE/SFR indices on Données Québec, CGTSIM PDFs, per-school program
 pages), admission models, known schools for seed data, and the open questions. Read it before
-touching anything that claims a fact about a school, zone or index.
+touching anything that claims a fact about a school, zone, index or neighbourhood indicator.
 
 The brief recommends building the tool as a skill plus a few narrow scripts (CSV/GeoJSON fetch,
 geocoding), not a standalone app, and reusing the government finders rather than rebuilding
@@ -61,6 +64,9 @@ skill to turn research into a post; it recomputes numbers from the data and lint
 
 Keep numbers in tables, not prose. The IMSE is a socioeconomic index, not an academic ranking;
 say so whenever it appears. Flag renovations and relocations for any school mentioned.
+Neighbourhood metrics are rates (per 1,000 residents or per 100 dwellings) shown as island
+deciles, never raw counts; assessed values are a lagging proxy for price; the tool computes no
+composite livability score of its own.
 
 ## Design tokens
 
