@@ -77,6 +77,9 @@ DATASETS: dict[str, dict] = {
                 note="Ministère de la Famille childcare installations with PLACE_TOTAL; no coordinates."),
     "bikes": dict(portal="mtl", dataset="pistes-cyclables", format="GeoJSON", file="pistes-cyclables.geojson"),
     "rev": dict(portal="mtl", dataset="reseau-express-velo", format="GeoJSON", file="reseau-express-velo.geojson"),
+    "imse": dict(portal="dq", dataset="indices-de-defavorisation", format="CSV",
+                 name=r"^Défavorisation - Écoles primaires", file="defav_ecole_prim_public.csv",
+                 note="MEQ IMSE and SFR deciles per public elementary school (Code_Org = MEQ school code), yearly."),
     "census_da_qc": dict(url="https://www12.statcan.gc.ca/census-recensement/2021/dp-pd/prof/details/"
                              "download-telecharger/comp/GetFile.cfm?Lang=E&FILETYPE=CSV&GEONO=006_Quebec",
                          file="98-401-X2021006_Quebec_eng_CSV.zip",
@@ -84,7 +87,7 @@ DATASETS: dict[str, dict] = {
     "gtfs": dict(url="http://www.stm.info/sites/default/files/gtfs/gtfs_stm.zip", file="gtfs_stm.zip",
                  note="STM static GTFS."),
 }
-CORE = ["schools", "crimes", "pdq", "boroughs", "uev", "parks", "collisions", "pampalon", "iemv", "census_da_qc"]
+CORE = ["schools", "crimes", "pdq", "boroughs", "uev", "parks", "collisions", "pampalon", "iemv", "census_da_qc", "imse"]
 
 app = typer.Typer(add_completion=False, help=__doc__, rich_markup_mode=None)
 

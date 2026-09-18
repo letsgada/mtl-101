@@ -123,6 +123,21 @@ def ratio(num: float, den: float, scale: float = 100.0) -> float:
     return float(num) / float(den) * scale if den and not math.isnan(den) and den > 0 else float("nan")
 
 
+def data_age(max_days: int) -> tuple[str | None, str | None, list[str]]:
+    """Oldest and newest fetch dates in data/raw/manifest.json and the keys older than max_days."""
+    manifest = RAW / "manifest.json"
+    if not manifest.exists():
+        return None, None, []
+    from datetime import datetime, timezone
+    entries = json.loads(manifest.read_text())
+    dates = {k: v["fetched_at"] for k, v in entries.items() if v.get("fetched_at")}
+    if not dates:
+        return None, None, []
+    now = datetime.now(timezone.utc)
+    stale = [k for k, d in dates.items() if (now - datetime.fromisoformat(d)).days > max_days]
+    return min(dates.values())[:10], max(dates.values())[:10], stale
+
+
 class Data:
     """Lazy loaders; each dataset is read once per process."""
 
@@ -320,7 +335,7 @@ def fmt(key: str, value) -> str:
     return f.format(value)
 
 
-def markdown(results: list[dict], ref: pd.DataFrame | None, radius: float) -> str:
+def markdown(results: list[dict], ref: pd.DataFrame | None, radius: float, fetched: str | None = None) -> str:
     heads = [r.get("label") or r["school"] for r in results]
     lines = ["| Metric | Unit | " + " | ".join(heads) + (" | Island median |" if ref is not None else "|"),
              "|---|---|" + "---:|" * len(results) + ("---:|" if ref is not None else "")]
@@ -345,6 +360,8 @@ def markdown(results: list[dict], ref: pd.DataFrame | None, radius: float) -> st
         notes.append(f"{r.get('label') or r['school']}: {where}({r.get('borough') or 'outside borough limits'}); "
                      f"{r['n_da']} DAs; IEMV covers {fmt('park_pct', r['iemv_coverage_pct'])}% of residents; "
                      f"tax bills matched for {fmt('park_pct', r['tax_coverage_pct'])}% of units.")
+    if fetched:
+        notes.append(fetched)
     return "\n".join(lines) + "\n\n" + "\n".join(notes) + "\n"
 
 
@@ -375,12 +392,19 @@ def main(
     all_schools: Annotated[bool, typer.Option(
         "--all", help="compute every island school and refresh the decile cache")] = False,
     no_deciles: Annotated[bool, typer.Option("--no-deciles", help="omit deciles even if the cache exists")] = False,
+    anchor: Annotated[Optional[tuple[float, float]], typer.Option(
+        "--anchor", metavar="LON LAT", help="centre the FIRST school's zone on this point (temporary site)")] = None,
+    age_warn: Annotated[int, typer.Option(help="warn when a cached dataset is older than this many days")] = 90,
     fmt_: Annotated[Format, typer.Option("--format", help="output format")] = Format.md,
     out: Annotated[Optional[Path], typer.Option(help="write the output here instead of stdout")] = None,
     verbose: Annotated[bool, typer.Option("--verbose", "-v")] = False,
 ) -> None:
     """Describe the neighbourhood around a school (or a point) from open data, with island deciles."""
     setup_logging(verbose)
+    oldest, newest, stale = data_age(age_warn)
+    for k in stale:
+        logger.warning("cached dataset {} is older than {} days; refresh with fetch_open_data.py --force {}", k, age_warn, k)
+    fetched = f"Open data fetched between {oldest} and {newest}." if oldest else None
     d = Data()
     if all_schools:
         logger.info("computing {} schools ...", len(d.schools))
@@ -397,9 +421,15 @@ def main(
 
     results = []
     if schools:
-        for s in find_schools(d, schools).itertuples():
+        for i, s in enumerate(find_schools(d, schools).itertuples()):
             row = school_row(s)
-            row.update(zone_stats(d, s.geometry.x, s.geometry.y, radius, collision_radius))
+            x, y = s.geometry.x, s.geometry.y
+            if anchor and i == 0:
+                p = gpd.GeoSeries([Point(*anchor)], crs=4326).to_crs(CRS).iloc[0]
+                x, y = p.x, p.y
+                row["anchor"] = dict(lon=anchor[0], lat=anchor[1])
+                row["building"] = f"{s.NOM_IMM} (zone centred on the anchor {anchor[0]:.5f}, {anchor[1]:.5f}, not on the building)"
+            row.update(zone_stats(d, x, y, radius, collision_radius))
             results.append(row)
     if point:
         lon, lat = point
@@ -412,7 +442,7 @@ def main(
         raise typer.Exit(2)
 
     if fmt_ is Format.md:
-        text = markdown(results, ref, radius)
+        text = markdown(results, ref, radius, fetched)
     elif fmt_ is Format.json:
         text = json.dumps(results, indent=1, ensure_ascii=False, default=lambda v: None if pd.isna(v) else v)
     else:

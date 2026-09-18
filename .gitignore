@@ -224,4 +224,5 @@ __marimo__/
 # MTL-101 downloaded open data (regenerate with scripts/fetch_open_data.py)
 /data/raw/
 /data/derived/*
+!/data/schools_programs.csv
 !/data/derived/zone_stats_all.csv
