@@ -35,7 +35,9 @@ theme-dark.scss        generated from the tokens: do not edit
 site.scss              hand-maintained: applies tokens to Quarto components
 styles.css             empty scaffold stub, still wired; put styling in site.scss instead
 project_brief.md       domain brief (renders nowhere: only *.qmd render)
-scripts/               Layer 2 pipeline, `uv run` scripts with inline deps (see Scripts)
+scripts/               Layer 2 pipeline and report helpers, `uv run` scripts with inline deps (see Scripts)
+data/schools_programs.csv  hand-checked program and admission model per school, grown by /school-report
+.claude/skills/school-report/  the project's own skill (repo content, not a symlink): one school in, one post out
 data/raw/              downloaded open data, gitignored; data/raw/manifest.json records URLs and dates
 data/derived/          parquet caches built by the prep scripts, gitignored
 .github/workflows/publish.yml   renders and deploys to GitHub Pages on push to main
@@ -77,11 +79,23 @@ uv run scripts/zone_stats.py "Saint-Barthélemy" "La Vérendrye"   # a Markdown 
 uv run scripts/geocode.py "2001 rue Mullins, Montréal"           # Nominatim, 1 req/s, cached
 ```
 
+Report helpers used by the `school-report` skill (same conventions):
+
+```bash
+uv run scripts/school_info.py "Laurier" --nearest 8 --same-program   # resolve a school: buildings, borough, IMSE, program, comparator candidates
+uv run scripts/imse.py 762103                                        # MEQ IMSE/SFR deciles (fetch key `imse`)
+uv run scripts/zone_stats.py 762103 762087 --anchor -73.6235 45.5405 --format csv --out data/derived/report_x.csv  # --anchor recentres the first school's zone (relocated school)
+uv run scripts/report_tables.py data/derived/report_x.csv            # the six captioned Quarto tables with decile spans
+uv run scripts/zone_map.py 762103 762087 --out map.html              # Leaflet map fragment for a ```{=html} block
+```
+
 `zone_stats.py` is the entry point: a 1 km circle around the school point (no per-school
 catchment polygons exist as open data), DAs by centroid, everything else by location; `--point`
 evaluates an address; `--format csv|json`; deciles come from `data/derived/zone_stats_all.parquet`
-and exclude the West Island. Metric definitions live in its `METRICS` list; add a metric there
-and in `zone_stats()`, then re-run `--all`. Downloads need a browser-like User-Agent or the city
+and exclude the West Island; `--age-warn` (default 90 days) logs a warning per stale cached dataset.
+Metric definitions live in its `METRICS` list; add a metric there and in `zone_stats()`, then re-run
+`--all`. `school_info.py`, `report_tables.py` and `zone_map.py` import from `zone_stats.py`, so keep its
+module-level names (`Data`, `METRICS`, `find_schools`, `deciles`, `fmt`, `WEST_ISLAND`) stable. Downloads need a browser-like User-Agent or the city
 portal returns `RBAC: access denied` with a 200 status; the fetcher handles it.
 
 ## Writing posts
@@ -97,6 +111,12 @@ say so whenever it appears. Flag renovations and relocations for any school ment
 Neighbourhood metrics are rates (per 1,000 residents or per 100 dwellings) shown as island
 deciles, never raw counts; assessed values are a lagging proxy for price; the tool computes no
 composite livability score of its own.
+
+A post may carry one map: the Leaflet fragment from `scripts/zone_map.py` pasted inside a ```` ```{=html} ````
+block (Leaflet from cdnjs, OpenStreetMap tiles with attribution, colours read from the `--accent`,
+`--zone` and `--zone-soft` CSS variables so it follows both themes). No Python runs at render time.
+Listings quoted from Centris or other broker sites are a dated snapshot of at most a handful, each
+with its link; never scraped, never stored, never presented as a market statistic.
 
 ## Design tokens
 
@@ -136,6 +156,11 @@ and deployment → Source: "GitHub Actions". Regenerate the workflow with the
 `quarto-writeup` and `surge-artifacts` under `.claude/skills/`, and `commit-changes` under
 `.claude/commands/`, are symlinks into `../dotfiles/.claude/` on the author's machine, not repo
 content; they resolve only there. `/quarto-site-setup` step 0 recreates them.
+
+`school-report` under `.claude/skills/` is repo content and is committed: `/school-report "École X"`
+resolves the school, researches it, runs the zone scripts, asks for comparators, drafts a post through
+`quarto-writeup`, lints and renders, and offers a commit. Its procedure is in its `SKILL.md`; the
+scripts it calls live in `scripts/`.
 
 ## Conventions
 
