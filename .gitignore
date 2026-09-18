@@ -220,3 +220,8 @@ __marimo__/
 # Streamlit
 .streamlit/secrets.toml
 **/*.quarto_ipynb
+
+# MTL-101 downloaded open data (regenerate with scripts/fetch_open_data.py)
+/data/raw/
+/data/derived/*
+!/data/derived/zone_stats_all.csv
