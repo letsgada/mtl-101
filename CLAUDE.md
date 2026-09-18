@@ -17,8 +17,8 @@ touching anything that claims a fact about a school, zone, index or neighbourhoo
 
 The brief recommends building the tool as a skill plus a few narrow scripts (CSV/GeoJSON fetch,
 geocoding), not a standalone app, and reusing the government finders rather than rebuilding
-zone-boundary lookups. Nothing of that tool exists yet; the repo currently holds the Quarto site
-that will document it.
+zone-boundary lookups. Layer 2 exists as the scripts under `scripts/` (see Scripts below); Layer 1
+(school lookup and admission models) is still only documented. The Quarto site documents both.
 
 ## Repo layout
 
@@ -35,6 +35,9 @@ theme-dark.scss        generated from the tokens: do not edit
 site.scss              hand-maintained: applies tokens to Quarto components
 styles.css             empty scaffold stub, still wired; put styling in site.scss instead
 project_brief.md       domain brief (renders nowhere: only *.qmd render)
+scripts/               Layer 2 pipeline, `uv run` scripts with inline deps (see Scripts)
+data/raw/              downloaded open data, gitignored; data/raw/manifest.json records URLs and dates
+data/derived/          parquet caches built by the prep scripts, gitignored
 .github/workflows/publish.yml   renders and deploys to GitHub Pages on push to main
 ```
 
@@ -53,6 +56,28 @@ Posts freeze computational output (`posts/_metadata.yml`), so a changed code cel
 `quarto render posts/<name>.qmd` to refresh its cache. If a post gains executable cells, render
 locally and commit `_freeze/` (it is deliberately not gitignored): the publish workflow installs
 no Python or R. There are no tests or linters; `quarto render` exiting 0 is the check.
+
+## Scripts (Layer 2)
+
+All scripts are PEP 723 single files run with `uv run scripts/<name>.py`; no environment to set up.
+Run them in this order the first time (about 3.5 GB of downloads, then a few minutes of prep):
+
+```bash
+uv run scripts/fetch_open_data.py --core taxes   # Ville de Montréal, Données Québec, StatCan files -> data/raw/
+uv run scripts/prep_taxes.py                      # 19 borough tax-bill CSVs -> one row per account (assessed value, bill, class)
+uv run scripts/prep_uev.py                        # 780 MB assessment-unit GeoJSON -> one point per unit
+uv run scripts/census_da.py                       # 6.4 GB census file -> island DAs x selected variables
+uv run scripts/zone_stats.py --all                # every island franco public elementary school; the decile reference
+uv run scripts/zone_stats.py "Saint-Barthélemy" "La Vérendrye"   # a Markdown table with deciles
+uv run scripts/geocode.py "2001 rue Mullins, Montréal"           # Nominatim, 1 req/s, cached
+```
+
+`zone_stats.py` is the entry point: a 1 km circle around the school point (no per-school
+catchment polygons exist as open data), DAs by centroid, everything else by location; `--point`
+evaluates an address; `--format csv|json`; deciles come from `data/derived/zone_stats_all.parquet`
+and exclude the West Island. Metric definitions live in its `METRICS` list; add a metric there
+and in `zone_stats()`, then re-run `--all`. Downloads need a browser-like User-Agent or the city
+portal returns `RBAC: access denied` with a 200 status; the fetcher handles it.
 
 ## Writing posts
 

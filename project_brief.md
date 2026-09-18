@@ -126,12 +126,15 @@ MTL-101 does **not** invent a composite livability score. It shows a short dashb
 - **Do not double count residence income against IMSE.** IMSE encodes parental education and employment of the school's *enrolled* population; census income and Pampalon describe the zone's *residents*. They diverge where choice programs draw from outside the zone or where families leave for the private system. Report both and say why they differ.
 - Collisions and 311 requests are small-count and behaviour-dependent: pool years, normalise, and label them as proxies.
 
-### Scripts implied (still not built)
+### Scripts (built 2026-09-18; see CLAUDE.md for the run order)
 
-- `fetch_open_data`: download and cache the datasets above by slug (Ville CKAN, Données Québec CKAN, StatCan zips), with a manifest of dates fetched.
-- `census_da`: filter the StatCan DA profile to the Montréal CSD and the selected variables.
-- `geocode`: the address helper already suggested above, now also needed for the CPE list.
-- `zone_stats`: given a zone polygon or a school point plus buffer, return every Tier B metric as value plus island decile, and the IEMV / Pampalon values for the intersecting tracts and DAs.
+- `scripts/fetch_open_data.py`: downloads and caches the datasets above by key (Ville and Données Québec CKAN, StatCan bulk zip, STM GTFS) with a manifest of URLs and fetch dates.
+- `scripts/prep_taxes.py`, `scripts/prep_uev.py`: collapse the 19 borough tax-bill files to one row per account (assessed value from the general-tax line, total bill, class) and the 780 MB assessment-unit GeoJSON to one point per unit.
+- `scripts/census_da.py`: streams the 6.4 GB Quebec census file once and keeps the island's 3,228 DAs × 32 variables. 2016 population is not published at DA level, so there is no population-change metric.
+- `scripts/geocode.py`: Nominatim wrapper for a handful of candidate addresses (1 request/s, cached). Not for bulk work such as the CPE list.
+- `scripts/zone_stats.py`: given school names, codes or a point, returns 34 metrics for a 1 km circle (census, INSPQ and IEMV indices, SPVM crime rates 2023–2025, SAAQ pedestrian/cyclist victims 2017–2021 within 500 m, housing stock, assessed values and 2026 tax bills by type, parks), each with its decile among the 229 island schools outside the West Island. Computes no composite. First results: `posts/five-zones-open-data.qmd`.
+
+**Not yet built from the Tier B list:** childcare places (needs geocoding ~3,000 addresses), transit departures (GTFS), heat islands, bike network, CMHC rents, the secondary feeder lookup.
 
 ## Open questions before building
 
@@ -139,7 +142,7 @@ MTL-101 does **not** invent a composite livability score. It shows a short dashb
 2. Do CSSMB and CSSPI have finder tools equivalent to CSSDM's?
 3. Is CGTSIM data worth the PDF-parsing effort, or should v1 skip it entirely and rely on MEQ IMSE alone?
 4. How to keep per-school program/admission details from going stale — scheduled re-scrape? User-triggered refresh only?
-5. When no zone polygon is available, which fallback: a network buffer (what radius?) or the set of DAs whose centroids fall in the zone?
-6. Fetch the 20 tax-bill CSVs (up to 254 MB each) on demand, or pre-aggregate them once a year into a zone-ready table?
+5. ~~Which fallback geometry?~~ **Decided 2026-09-18 for v1:** a 1 km circle around the MEQ school point, DAs by centroid. Revisit when real zone polygons exist; `zone_stats()` takes any polygon.
+6. ~~Fetch tax bills on demand or pre-aggregate?~~ **Decided:** fetch all 19 once (`fetch_open_data.py taxes`), collapse with `prep_taxes.py`; the derived parquet is ~430k rows and rebuilds in two minutes.
 7. Centris terms of use: is a manual borough-median quote with attribution acceptable, and is any automated fetch off the table?
 8. Who maintains the elementary → secondary feeder lookup (CSSDM board resolution each November; CSSMB and CSSPI sources unverified)?
