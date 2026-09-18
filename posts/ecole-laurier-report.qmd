@@ -1,0 +1,417 @@
+---
+title: "École Laurier: the school and its kilometre"
+date: "2026-09-18"
+categories: [school-report, plateau-mont-royal, layer-1, layer-2]
+description: "A Plateau neighbourhood school in the last year of a four-year relocation to Villeray: its deprivation deciles, the kilometre around both addresses compared with three neighbours, and what a three-bedroom home costs there this month."
+toc: true
+code-annotations: hover
+---
+
+École Laurier is a francophone public elementary school of the Centre de services scolaire de
+Montréal (CSSDM) in Le Plateau-Mont-Royal. This report describes it in three layers: the school
+itself, the kilometre around it, and what a three-bedroom home there costs to buy or rent this
+month. It is the first output of MTL-101's `school-report` skill, run as a dry run, and the
+school was picked because it is not a simple case: its pupils have spent four school years in a
+temporary building three kilometres away in Villeray, so the report shows both kilometres.
+
+::: {.callout-important}
+## Not a ranking
+
+Each zone metric is shown with its decile among the 229 francophone public elementary schools on
+the island outside the West Island, marked [d1]{.decile-low} to [d3]{.decile-low} for the lowest
+three tenths, [d4]{.decile-mid} to [d7]{.decile-mid} for the middle, and [d8]{.decile-high} to
+[d10]{.decile-high} for the top three. A high decile means a high value, nothing
+more, so the label says which way is favourable for a family: ▲ higher is favourable (children,
+parks, stations), ▼ lower is favourable (crime, collisions, deprivation, cost), and rows with no
+glyph are descriptive. On the ▲ and ▼ rows the most favourable of the compared zones is [shaded]{.best}.
+The report computes no composite score, and the IMSE is a socioeconomic index of the pupils enrolled,
+not a measure of academic performance.
+:::
+
+# The school
+
+::: {.callout-important}
+## Relocated to Villeray since 2022, return announced for the 2026-2027 rentrée
+
+The home building at 505 avenue Laurier Est has been under a $28M renovation (façades and
+masonry, interior finishes, a new ventilation system, a rebuilt daycare space and library)
+since 2022, and the school community has been housed at 7378 rue Lajeunesse in Villeray,
+about 3 km north.[^cssdm-laurier] The move was planned for two school years and was extended
+twice; in May 2025 parents learned the pupils would not return for 2025-2026 either.[^mp-2025]
+In December 2025 the school's governing board wrote 505 avenue Laurier Est into the 2026-2027
+establishment act with 85% of interior work complete, the principal warning that a project of
+this size "always involves its share of unforeseen circumstances".[^mp-dec] The school's own
+news page reports that the CSSDM board confirmed the return at its meeting of 18 February
+2026, subject to the remaining works; that page could not be opened directly and the fact is
+*unverified* here.[^retour] The tables below therefore show two zones for Laurier: the Plateau
+kilometre a family would live in once the school is back, and the Villeray kilometre pupils
+commute to today.
+:::
+
+| | |
+|:---|:---|
+| Service centre | Centre de services scolaire de Montréal (762000) |
+| MEQ code | 762103 |
+| Home building | Laurier, 505 avenue Laurier Est, H2J 1E9 (préscolaire and primaire) |
+| Temporary building | 7378 rue Lajeunesse, H2R 2H8, Villeray (since 2022) |
+| Program | Regular program of a neighbourhood school; the school describes an approach built on youth literature, music, visual arts and sport (*unverified*: school site returned 403, wording from its indexed pages)[^prog] |
+| Admission | Neighbourhood school, by address; registration files are currently received at the temporary building (*unverified*, same source)[^prog] |
+| Pupils (2025-2026) | 278 in the MEQ index file; the CSSDM project page describes a school of about 530 pupils, which reads as the renovated building's capacity[^cssdm-laurier] |
+| IMSE 2025-2026 | 3.24, decile 2 |
+| SFR 2025-2026 | 5.62, decile 7 |
+| Website | <https://laurier.cssdm.gouv.qc.ca/> |
+
+: The school in one table; facts marked *unverified* could not be confirmed on a page that loaded {#tbl-school}
+
+The MEQ's IMSE places the school in decile 2 for 2025-2026 (1 = most advantaged, 10 = most
+disadvantaged; 8 to 10 is the official *milieu défavorisé*). It is built from the enrolled
+pupils' parents' education and employment, not from test results. Here it agrees with the
+census picture of the Plateau kilometre in @tbl-people, where the no-diploma share is in the
+lowest decile and household income in the eighth; the SFR, which tracks low-income families,
+sits higher at decile 7, and the zone's low-income rate is likewise near the island median.
+The 278 pupils are counted in Villeray, where they currently attend, but their addresses are
+still the Plateau's.
+
+[^cssdm-laurier]: [École Laurier](https://www.cssdm.gouv.qc.ca/nouvelles/ecole-laurier/), Centre de services scolaire de Montréal, project page, opened 2026-09-18.
+[^mp-2025]: [Les travaux à l'école Laurier s'étirent encore une fois](https://www.monplateau.info/le-retour-des-eleves-a-lecole-laurier-est-reporte-de-nouveau/), monplateau.info, 15 May 2025.
+[^mp-dec]: [L'école Laurier pourrait rouvrir dans Le Plateau à la rentrée 2026-2027](https://www.monplateau.info/lecole-laurier-pourrait-rouvrir-dans-le-plateau-a-la-rentree-2026-2027/), monplateau.info, 22 December 2025.
+[^retour]: [Retour de la communauté scolaire à l'école Laurier dès la rentrée 2026-2027](https://laurier.cssdm.gouv.qc.ca/nouvelles/travaux/retour-de-la-communaute-scolaire-a-lecole-laurier-des-la-rentree-2026-2027/), École Laurier; the site returns HTTP 403 to automated requests, so the content is quoted from its search-index extract.
+[^prog]: [École primaire Laurier](https://laurier.cssdm.gouv.qc.ca/) and its [Notre projet éducatif](https://laurier.cssdm.gouv.qc.ca/ecole/projet-educatif/) page; same 403, same caveat.
+
+# The zone
+
+The zone is a circle of one kilometre around the school building, a stand-in for the catchment
+polygon that exists only in the CSSDM's finder and PDF maps. Laurier gets two columns, one per
+address. The comparators, chosen by the reader, are the two nearest Plateau neighbourhood
+schools, Paul-Bruchési (675 m) and Lanaudière (1.1 km), and École FACE (470 m), the closest
+school of all but an arts school with CSSDM-wide lottery admission rather than a neighbourhood
+school. The four Plateau circles overlap heavily, which is why their columns move together.
+
+```{=html}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/maplibre-gl/4.7.1/maplibre-gl.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/maplibre-gl/4.7.1/maplibre-gl.min.js"></script>
+<div id="zone-map-762103" class="zone-map" style="height:420px;border:1px solid var(--zone-soft);border-radius:4px"></div>
+<script>
+(function () {
+  var css = getComputedStyle(document.documentElement);
+  var accent = css.getPropertyValue('--accent').trim() || '#c1272d';
+  var zone = css.getPropertyValue('--zone').trim() || '#5b6b7a';
+  var soft = css.getPropertyValue('--zone-soft').trim() || '#dfe4ea';
+  var data = {"subject": {"lon": -73.588674, "lat": 45.528418, "name": "École Laurier", "address": "Laurier, 505, avenue Laurier Est"}, "anchor": {"lon": -73.588674, "lat": 45.528418, "label": null}, "radius": 1000.0, "circle": {"type": "Feature", "properties": {}, "geometry": {"type": "Polygon", "coordinates": [[[-73.57587170560159, 45.52842722045292], [-73.57588653281485, 45.527985680505715], [-73.57593216545513, 45.52754518373448], [-73.57600849287367, 45.527106791298586], [-73.576115330489, 45.52667155926353], [-73.57625242023835, 45.526240536057514], [-73.57641943120588, 45.52581475994647], [-73.57661596042625, 45.52539525653383], [-73.57684153386134, 45.52498303629084], [-73.57709560754788, 45.52457909212397], [-73.57737756891304, 45.52418439698428], [-73.57768673825483, 45.52379990152543], [-73.5780223703838, 45.52342653181532], [-73.57838365642182, 45.52306518710728], [-73.57876972575372, 45.52271673767581], [-73.57917964812701, 45.522382022722304], [-73.5796124358947, 45.5220618483557], [-73.58006704639565, 45.52175698565287], [-73.58054238446675, 45.52146816880348], [-73.58103730508101, 45.52119609334361], [-73.58155061610493, 45.52094141448265], [-73.58208108116888, 45.52070474552707], [-73.58262742264323, 45.520486656405296], [-73.58318832471329, 45.52028767229688], [-73.5837624365458, 45.52010827236928], [-73.58434837553887, 45.5199488886256], [-73.5849447306483, 45.51980990486554], [-73.58555006578172, 45.51969165576247], [-73.58616292325263, 45.51959442605862], [-73.58678182728619, 45.51951844988037], [-73.5874052875682, 45.519463910175254], [-73.5880318028289, 45.519430938272016], [-73.58865986445282, 45.519419613564914], [-73.58928796010638, 45.519429963322686], [-73.58991457737423, 45.51946196262312], [-73.59053820739587, 45.519515534412896], [-73.59115734849374, 45.519590549692914], [-73.59177050978414, 45.51968682782847], [-73.59237621476234, 45.51980413698363], [-73.5929730048533, 45.51994219467867], [-73.59355944291953, 45.52010066846943], [-73.5941341167177, 45.52027917674673], [-73.59469564229563, 45.520477289654096], [-73.59524266732176, 45.52069453012151], [-73.5957738743387, 45.52093037501281], [-73.59628798393372, 45.52118425638385], [-73.59678375781782, 45.521455562848644], [-73.59726000180646, 45.52174364104988], [-73.59771556869492, 45.52204779723055], [-73.5981493610208, 45.52236729890302], [-73.59856033370762, 45.52270137661107], [-73.59894749658278, 45.52304922578128], [-73.59930991676396, 45.52341000865887], [-73.59964672090817, 45.523782856323564], [-73.5999570973181, 45.52416687078065], [-73.6002402979004, 45.524561127122105], [-73.60049563997157, 45.52496467575269], [-73.6007225079066, 45.52537654467567], [-73.60092035462684, 45.52579574183266], [-73.60108870292304, 45.52622125749187], [-73.60122714661053, 45.52665206667922], [-73.60133535151377, 45.527087131646425], [-73.60141305627769, 45.52752540436977], [-73.60146007300379, 45.527965829074276], [-73.60147628770964, 45.528407344776426], [-73.6014616606103, 45.5288488878398], [-73.60141622622113, 45.52928939453741], [-73.60134009328164, 45.52972780361434], [-73.60123344450037, 45.53016305884481], [-73.60109653612153, 45.530594111577194], [-73.60092969731423, 45.53101992326125], [-73.60073332938582, 45.53143946795098], [-73.6005079048211, 45.53185173477753], [-73.60025396614964, 45.53225573038589], [-73.599972124644, 45.532650481329576], [-73.59966305885183, 45.53303503641748], [-73.59932751296537, 45.53340846900743], [-73.59896629503217, 45.53376987924055], [-73.59858027501154, 45.53411839621131], [-73.59817038268105, 45.53445318006785], [-73.59773760539835, 45.53477342403769], [-73.59728298572365, 45.535078356373596], [-73.59680761890837, 45.535367242215344], [-73.59631265025634, 45.53563938536239], [-73.59579927236366, 45.53589412995349], [-73.59526872224399, 45.536130862049156], [-73.59472227834607, 45.536349011112875], [-73.59416125747094, 45.536548051387854], [-73.59358701159611, 45.53672750316567], [-73.59300092461429, 45.53688693394393], [-73.59240440899491, 45.537025959469936], [-73.59179890237618, 45.53714424466809], [-73.59118586409608, 45.537241504448545], [-73.59056677167071, 45.53731750439527], [-73.5899431172286, 45.53737206133183], [-73.58931640390938, 45.53740504376351], [-73.58868814223597, 45.537416372194706], [-73.58805984646848, 45.537406019320784], [-73.5874330309495, 45.53737401009394], [-73.58680920644878, 45.53732042166314], [-73.58618987651683, 45.53724538318771], [-73.58557653385591, 45.537149075525754], [-73.58497065671747, 45.53703173079757], [-73.58437370533454, 45.53689363182547], [-73.58378711839794, 45.53673511145111], [-73.58321230958471, 45.53655655173232], [-73.58265066414725, 45.536358383020975], [-73.58210353557153, 45.536141082924516], [-73.58157224231206, 45.53590517515336], [-73.58105806461224, 45.53565122825722], [-73.5805622414169, 45.53537985425315], [-73.58008596738547, 45.53509170714887], [-73.57963039001203, 45.53478748136497], [-73.57919660685991, 45.53446791005941], [-73.5787856629173, 45.53413376335901], [-73.57839854807993, 45.53378584650161], [-73.57803619476752, 45.53342499789391], [-73.57769947567905, 45.533052087089125], [-73.57738920169271, 45.53266801269009], [-73.57710611991544, 45.532273700182074], [-73.57685091188665, 45.531870099701266], [-73.57662419194034, 45.53145818374371], [-73.57642650573003, 45.531038944820786], [-73.57625832891915, 45.53061339306652], [-73.57612006604086, 45.530182553802554], [-73.5760120495294, 45.5297474650669], [-73.57593453892555, 45.529309175112104], [-73.57588772025794, 45.52886873987915], [-73.57587170560159, 45.52842722045292]]]}}, "bounds": [[-73.617475, 45.519419613564914], [-73.57587170560159, 45.540351]], "comparators": [{"lon": -73.581843, "lat": 45.532144, "name": "École Paul-Bruchési", "address": "Paul-Bruchési, 1310, boulevard St-Joseph Est"}, {"lon": -73.574504, "lat": 45.528733, "name": "École Lanaudière", "address": "Lanaudière, 4300, rue de Lanaudière"}, {"lon": -73.583171, "lat": 45.530137, "name": "École FACE", "address": "FACE, primaire, 4835, avenue Christophe-Colomb"}], "mark": {"lon": -73.617475, "lat": 45.540351, "label": "Temporary site since 2022: 7378 rue Lajeunesse (return to 505 Laurier Est announced for 2026-2027)"}, "stations": [{"lon": -73.6134236, "lat": 45.5391835, "name": "Jean-Talon", "kind": "subway"}, {"lon": -73.6201056, "lat": 45.5352621, "name": "De Castelnau", "kind": "subway"}, {"lon": -73.5816468, "lat": 45.5245985, "name": "Mont-Royal", "kind": "subway"}, {"lon": -73.5883784, "lat": 45.5280804, "name": "Laurier", "kind": "subway"}, {"lon": -73.5973383, "lat": 45.5314962, "name": "Rosemont", "kind": "subway"}, {"lon": -73.6286029, "lat": 45.5432233, "name": "Jarry", "kind": "subway"}]};
+  var map = new maplibregl.Map({
+    container: 'zone-map-762103', style: 'https://tiles.openfreemap.org/styles/positron', bounds: data.bounds,
+    fitBoundsOptions: {padding: 24}, scrollZoom: false, attributionControl: false
+  });
+  map.addControl(new maplibregl.NavigationControl({showCompass: false}), 'top-left');
+  map.addControl(new maplibregl.AttributionControl({compact: true,
+    customAttribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &middot; <a href="https://openfreemap.org">OpenFreeMap</a>'}));
+  function pin(lonlat, style, html, text) {
+    var el = document.createElement('div');
+    el.style.cssText = style;
+    if (text) { el.textContent = text; }
+    var m = new maplibregl.Marker({element: el}).setLngLat(lonlat).addTo(map);
+    if (html) { m.setPopup(new maplibregl.Popup({offset: 12, closeButton: false}).setHTML(html)); }
+    return m;
+  }
+  map.on('load', function () {
+    map.addSource('zone', {type: 'geojson', data: data.circle});
+    map.addLayer({id: 'zone-fill', type: 'fill', source: 'zone', paint: {'fill-color': soft, 'fill-opacity': 0.35}});
+    map.addLayer({id: 'zone-line', type: 'line', source: 'zone', paint: {'line-color': zone, 'line-width': 2}});
+    data.stations.forEach(function (st) {
+      pin([st.lon, st.lat], 'width:18px;height:18px;border-radius:3px;background:#fff;border:2px solid ' + zone +
+          ';color:' + zone + ';font:bold 11px/14px sans-serif;text-align:center;cursor:pointer',
+          '<b>' + st.name + '</b><br>' + (st.kind === 'light_rail' ? 'REM' : 'Métro') + ' station',
+          st.kind === 'light_rail' ? 'R' : 'M');
+    });
+    data.comparators.forEach(function (s) {
+      pin([s.lon, s.lat], 'width:12px;height:12px;border-radius:50%;background:' + soft + ';border:2px solid ' + zone + ';cursor:pointer',
+          '<b>' + s.name + '</b><br>' + s.address);
+    });
+    if (data.mark) {
+      pin([data.mark.lon, data.mark.lat], 'width:14px;height:14px;border-radius:50%;background:#fff;border:2px dashed ' + accent + ';cursor:pointer',
+          data.mark.label);
+    }
+    if (data.anchor.label) {
+      pin([data.anchor.lon, data.anchor.lat], 'width:10px;height:10px;border-radius:50%;background:#fff;border:2px solid ' + accent, data.anchor.label);
+    }
+    pin([data.subject.lon, data.subject.lat], 'width:16px;height:16px;border-radius:50%;background:' + accent + ';border:3px solid ' + accent + ';cursor:pointer',
+        '<b>' + data.subject.name + '</b><br>' + data.subject.address);
+  });
+})();
+</script>
+```
+
+The red pin is the home building and the solid circle its kilometre; the dashed pin is the
+temporary building in Villeray; the grey pins are the comparators; the M squares are métro
+stations inside either kilometre.
+
+## Who lives there
+
+::: {.column-page}
+| Metric | Unit | Laurier (505 Laurier Est) | Laurier, temporary site (Lajeunesse) | Paul-Bruchési | Lanaudière | FACE | Island median |
+|:---|:---|---:|---:|---:|---:|---:|---:|
+| Residents (2021 census) | people | 39,787 [d10]{.decile-high} | 38,295 [d10]{.decile-high} | 38,646 [d10]{.decile-high} | 38,086 [d10]{.decile-high} | 42,355 [d10]{.decile-high} | 21,094 |
+| ▲ Children 0 to 14 | % of residents | 11.5 [d1]{.decile-low} | [12.4 [d2]{.decile-low}]{.best} | 11.9 [d2]{.decile-low} | 12.1 [d2]{.decile-low} | 11.8 [d2]{.decile-low} | 15.8 |
+| ▲ Households with children | % of households | 18.3 [d1]{.decile-low} | [20.7 [d2]{.decile-low}]{.best} | 18.0 [d1]{.decile-low} | 18.7 [d2]{.decile-low} | 18.1 [d1]{.decile-low} | 31.4 |
+| Median household income (2020) | $ | 70,000 [d8]{.decile-high} | 67,000 [d7]{.decile-mid} | 70,000 [d8]{.decile-high} | 71,000 [d9]{.decile-high} | 69,500 [d8]{.decile-high} | 62,800 |
+| ▼ Low income (LIM-AT) | % of residents | 17.0 [d6]{.decile-mid} | [14.4 [d3]{.decile-low}]{.best} | 15.5 [d4]{.decile-mid} | 16.7 [d6]{.decile-mid} | 16.4 [d5]{.decile-mid} | 16.6 |
+| ▼ No diploma, ages 25 to 64 | % | 3.3 [d1]{.decile-low} | 4.7 [d2]{.decile-low} | [2.5 [d1]{.decile-low}]{.best} | 2.6 [d1]{.decile-low} | 2.6 [d1]{.decile-low} | 9.9 |
+| Immigrants | % of residents | 23.3 [d4]{.decile-mid} | 21.9 [d3]{.decile-low} | 21.4 [d3]{.decile-low} | 21.7 [d3]{.decile-low} | 22.2 [d3]{.decile-low} | 28.4 |
+| French most often at home | % of residents | 70.8 [d7]{.decile-mid} | 74.3 [d8]{.decile-high} | 78.0 [d9]{.decile-high} | 75.5 [d8]{.decile-high} | 75.3 [d8]{.decile-high} | 58.8 |
+| Renter households | % | 65.8 [d5]{.decile-mid} | 68.9 [d7]{.decile-mid} | 67.1 [d6]{.decile-mid} | 67.4 [d6]{.decile-mid} | 66.3 [d6]{.decile-mid} | 66.2 |
+| Moved in the last five years | % of residents | 56.8 [d10]{.decile-high} | 51.8 [d9]{.decile-high} | 57.9 [d10]{.decile-high} | 57.3 [d10]{.decile-high} | 57.7 [d10]{.decile-high} | 43.9 |
+
+: Who lives within 1 km of the school (2021 census, aggregated over dissemination areas whose centroid falls in the circle) {#tbl-people}
+:::
+
+::: {.callout-tip}
+## Reading the table
+
+The four Plateau circles are among the most populous zones on the island and describe the same
+population: few children and few households with children (bottom two deciles), high incomes,
+almost nobody without a diploma, and more than half the residents arrived within five years,
+the most mobile tenth of the island. The Villeray kilometre around the temporary building is
+close to the Plateau on income and education, has slightly more children and fewer low-income
+residents, and sits a little lower on mobility. On this table the temporary site is not a
+different world, only a slightly more settled one.
+:::
+
+::: {.column-page}
+| Metric | Unit | Laurier (505 Laurier Est) | Laurier, temporary site (Lajeunesse) | Paul-Bruchési | Lanaudière | FACE | Island median |
+|:---|:---|---:|---:|---:|---:|---:|---:|
+| ▼ In materially deprived DAs (INSPQ Q4-5) | % of residents | 6 [d1]{.decile-low} | 15 [d2]{.decile-low} | [2 [d1]{.decile-low}]{.best} | 5 [d1]{.decile-low} | 3 [d1]{.decile-low} | 46 |
+| ▼ In socially deprived DAs (INSPQ Q4-5) | % of residents | 91 [d9]{.decile-high} | [86 [d7]{.decile-mid}]{.best} | 95 [d10]{.decile-high} | 89 [d8]{.decile-high} | 96 [d10]{.decile-high} | 76 |
+| ▼ Equity index IEMV 2026 (0 best, 6 worst) | score | 2.0 [d4]{.decile-mid} | 2.0 [d4]{.decile-mid} | 1.7 [d2]{.decile-low} | [1.6 [d2]{.decile-low}]{.best} | 1.9 [d3]{.decile-low} | 2.3 |
+
+: Two composite indices computed by others: INSPQ material and social deprivation (share of residents in the two most deprived quintiles) and the city's 2026 equity index (population-weighted mean, 0 least vulnerable to 6 most) {#tbl-indices}
+:::
+
+::: {.callout-note}
+## Social deprivation is high across central Montreal
+
+Nine in ten Plateau residents live in areas the INSPQ ranks socially deprived while almost none
+live in materially deprived ones. The social axis counts people living alone and lone-parent
+families, which the Plateau is full of; read it with the households-with-children line of
+@tbl-people rather than as a warning.
+:::
+
+## Safety
+
+::: {.column-page}
+| Metric | Unit | Laurier (505 Laurier Est) | Laurier, temporary site (Lajeunesse) | Paul-Bruchési | Lanaudière | FACE | Island median |
+|:---|:---|---:|---:|---:|---:|---:|---:|
+| ▼ Crime incidents per 1 000 residents per year | /1000/yr | 18.3 [d10]{.decile-high} | [14.8 [d8]{.decile-high}]{.best} | 15.9 [d9]{.decile-high} | 20.2 [d10]{.decile-high} | 16.4 [d9]{.decile-high} | 11.6 |
+| ▼ Violent (robbery, homicide) | /1000/yr | 1.22 [d9]{.decile-high} | 1.30 [d9]{.decile-high} | 1.05 [d8]{.decile-high} | 1.30 [d9]{.decile-high} | [1.02 [d8]{.decile-high}]{.best} | 0.75 |
+| ▼ Break-ins | /1000/yr | 4.7 [d9]{.decile-high} | 4.1 [d9]{.decile-high} | 4.4 [d9]{.decile-high} | 4.8 [d9]{.decile-high} | [4.1 [d9]{.decile-high}]{.best} | 2.6 |
+| ▼ Vehicle theft and theft from vehicles | /1000/yr | 8.5 [d9]{.decile-high} | [6.1 [d7]{.decile-mid}]{.best} | 7.0 [d8]{.decile-high} | 9.9 [d10]{.decile-high} | 7.8 [d9]{.decile-high} | 5.6 |
+| ▼ Mischief | /1000/yr | 3.9 [d10]{.decile-high} | [3.3 [d9]{.decile-high}]{.best} | 3.4 [d9]{.decile-high} | 4.1 [d10]{.decile-high} | 3.5 [d9]{.decile-high} | 2.5 |
+| ▼ Pedestrian and cyclist victims within 500 m | /yr | 15.0 [d10]{.decile-high} | 12.6 [d10]{.decile-high} | [7.4 [d7]{.decile-mid}]{.best} | 13.0 [d10]{.decile-high} | 8.2 [d8]{.decile-high} | 4.6 |
+
+: Safety: SPVM incidents 2023 to 2025 per 1 000 residents per year within 1 km, and SAAQ pedestrian and cyclist victims 2017 to 2021 within 500 m of the school, per year {#tbl-safety}
+:::
+
+::: {.callout-tip}
+## Reading the table
+
+All five zones are in the top three deciles on nearly every line, which is what the central
+boroughs look like once incidents are divided by residents: dense, commercial and
+visited by people who do not live there. The Plateau circle around Laurier and the one around
+Lanaudière are top-decile on the total; the temporary Villeray site is lower on vehicle crime
+and the total but not on violence. The pedestrian and cyclist line is the one that concerns a
+school run: both Laurier circles are in the top decile, and 500 m from 505 Laurier Est takes in
+avenue Laurier Est around métro Laurier, while the Villeray site sits on rue Lajeunesse
+between rue Jean-Talon and rue Jarry.
+:::
+
+::: {.callout-warning}
+## What these two datasets cannot say
+
+The city states the incident file is not official SPVM statistics; positions are moved to the
+nearest intersection and 17% of incidents have no coordinates and are absent from the rates.
+The collision extract ends in 2021; its last two years are pandemic years. Both are rates of
+reported events, not of risk.
+:::
+
+## Housing and what it costs to own
+
+::: {.column-page}
+| Metric | Unit | Laurier (505 Laurier Est) | Laurier, temporary site (Lajeunesse) | Paul-Bruchési | Lanaudière | FACE | Island median |
+|:---|:---|---:|---:|---:|---:|---:|---:|
+| Dwellings | units | 24,527 [d10]{.decile-high} | 22,849 [d10]{.decile-high} | 24,392 [d10]{.decile-high} | 24,199 [d10]{.decile-high} | 25,780 [d10]{.decile-high} | 10,684 |
+| Single-family houses | % of dwellings | 4 [d3]{.decile-low} | 3 [d2]{.decile-low} | 4 [d3]{.decile-low} | 4 [d3]{.decile-low} | 4 [d3]{.decile-low} | 8 |
+| Plex units (2 to 5 per building) | % of dwellings | 33 [d4]{.decile-mid} | 49 [d7]{.decile-mid} | 39 [d5]{.decile-mid} | 42 [d6]{.decile-mid} | 35 [d4]{.decile-mid} | 41 |
+| Condominium units | % of dwellings | 25 [d9]{.decile-high} | 17 [d7]{.decile-mid} | 22 [d9]{.decile-high} | 19 [d8]{.decile-high} | 25 [d9]{.decile-high} | 11 |
+| Rental buildings, 6+ units | % of dwellings | 38 [d7]{.decile-mid} | 31 [d5]{.decile-mid} | 36 [d6]{.decile-mid} | 35 [d6]{.decile-mid} | 36 [d6]{.decile-mid} | 34 |
+| Median year built | year | 1928 [d1]{.decile-low} | 1941 [d2]{.decile-low} | 1925 [d1]{.decile-low} | 1915 [d1]{.decile-low} | 1926 [d1]{.decile-low} | 1959 |
+
+: Housing stock within 1 km, from the assessment roll {#tbl-stock}
+:::
+
+::: {.column-page}
+| Metric | Unit | Laurier (505 Laurier Est) | Laurier, temporary site (Lajeunesse) | Paul-Bruchési | Lanaudière | FACE | Island median |
+|:---|:---|---:|---:|---:|---:|---:|---:|
+| ▼ Assessed value, single-family | $ | 1,197,067 [d10]{.decile-high} | [981,667 [d9]{.decile-high}]{.best} | 1,210,984 [d10]{.decile-high} | 1,177,184 [d9]{.decile-high} | 1,184,500 [d9]{.decile-high} | 702,608 |
+| ▼ Assessed value, plex | $ | 1,138,800 [d10]{.decile-high} | [951,950 [d9]{.decile-high}]{.best} | 1,123,200 [d10]{.decile-high} | 1,131,933 [d10]{.decile-high} | 1,117,100 [d10]{.decile-high} | 811,892 |
+| ▼ Assessed value, condo | $ | 506,900 [d9]{.decile-high} | [479,100 [d9]{.decile-high}]{.best} | 509,567 [d9]{.decile-high} | 525,183 [d10]{.decile-high} | 511,034 [d10]{.decile-high} | 392,416 |
+| ▼ 2026 tax bill, single-family | $ | 7,795 [d10]{.decile-high} | [6,476 [d9]{.decile-high}]{.best} | 7,891 [d10]{.decile-high} | 7,668 [d9]{.decile-high} | 7,716 [d9]{.decile-high} | 4,665 |
+| ▼ 2026 tax bill, plex | $ | 7,430 [d10]{.decile-high} | [6,287 [d9]{.decile-high}]{.best} | 7,321 [d10]{.decile-high} | 7,379 [d10]{.decile-high} | 7,277 [d10]{.decile-high} | 5,341 |
+| ▼ 2026 tax bill, condo | $ | 3,314 [d9]{.decile-high} | [3,164 [d9]{.decile-high}]{.best} | 3,326 [d9]{.decile-high} | 3,418 [d10]{.decile-high} | 3,341 [d10]{.decile-high} | 2,570 |
+| ▼ Effective tax rate (bill / value) | % | 0.65 [d5]{.decile-mid} | 0.66 [d7]{.decile-mid} | 0.65 [d4]{.decile-mid} | [0.65 [d3]{.decile-low}]{.best} | 0.65 [d4]{.decile-mid} | 0.66 |
+
+: What it costs to own: median 2026 assessed value and median 2026 municipal tax bill per unit within 1 km, residential accounts with five dwellings or fewer {#tbl-cost}
+:::
+
+::: {.callout-tip}
+## Reading the tables
+
+The Plateau kilometre is among the oldest stock on the island (median year built in the 1920s),
+with a quarter of its dwellings condominiums, in the top two deciles, and a third in plexes. The
+Villeray kilometre is more of a plex belt, half its dwellings in two- to five-unit buildings,
+and is assessed lower on every type, by about a sixth for houses and plexes and by less for
+condos. Every value and tax line for the Plateau is in the
+top two deciles; the effective tax rate is the island's, so the bills are the values in
+disguise.
+:::
+
+## Parks and transit
+
+::: {.column-page}
+| Metric | Unit | Laurier (505 Laurier Est) | Laurier, temporary site (Lajeunesse) | Paul-Bruchési | Lanaudière | FACE | Island median |
+|:---|:---|---:|---:|---:|---:|---:|---:|
+| ▼ Distance to the nearest métro or REM station | m | [44 [d1]{.decile-low}]{.best} | 342 [d2]{.decile-low} | 682 [d4]{.decile-mid} | 723 [d4]{.decile-mid} | 467 [d3]{.decile-low} | 1,085 |
+| ▲ Métro and REM stations inside the zone | stations | [3 [d9]{.decile-high}]{.best} | [3 [d9]{.decile-high}]{.best} | 2 [d8]{.decile-high} | 1 [d6]{.decile-mid} | 2 [d8]{.decile-high} | 0 |
+| ▲ Park area | % of zone | 6.5 [d5]{.decile-mid} | 9.0 [d7]{.decile-mid} | 8.4 [d7]{.decile-mid} | [14.5 [d10]{.decile-high}]{.best} | 7.8 [d6]{.decile-mid} | 6.6 |
+| ▲ Park area per 1 000 residents | ha | 0.51 [d3]{.decile-low} | 0.73 [d4]{.decile-mid} | 0.68 [d4]{.decile-mid} | [1.20 [d6]{.decile-mid}]{.best} | 0.57 [d3]{.decile-low} | 0.96 |
+
+: Parks and rapid transit within 1 km: large parks and borough parks (Ville de Montréal), métro and REM stations (OpenStreetMap contributors) {#tbl-parks}
+:::
+
+The Plateau circle around Laurier holds less park per resident than the island median, in the
+third decile: parc Sir-Wilfrid-Laurier lies inside it, but parc La Fontaine begins about two
+hundred metres beyond its southern edge. The Lanaudière circle, 1.1 km east, contains the whole
+of parc La Fontaine and is top-decile on park share. Almost half of parc Jarry falls inside the
+Villeray circle. On transit the two Laurier addresses are the best served of the five: métro
+Laurier's entrance is across the street from the home building, and the temporary site is a
+few minutes' walk from Jean-Talon and De Castelnau, each kilometre holding three stations of
+the orange line.
+
+# Living there now
+
+Listings found on Centris.ca on 18 September 2026 for homes with three or more bedrooms within
+about a kilometre of each address, chosen for variety of type rather than as a sample. A
+listing with its own page was opened once to confirm the figures; the others were read on the
+neighbourhood search page linked in the source column and were not opened individually.
+
+::: {.column-page}
+| Zone | Type | Bedrooms | Street or sector | Asking price | Source, date seen |
+|:---|:---|---:|:---|---:|:---|
+| Plateau | Triplex, ground-floor unit vacant | 3 (+2, +3 in the rented units) | rue Boyer, Plateau east | $1,249,000 | [Centris listing](https://www.centris.ca/en/triplexes~for-sale~montreal-le-plateau-mont-royal/14249370), 2026-09-18 |
+| Plateau | Condo | 3 | avenue Papineau near Laurier | $604,562 + taxes | [Centris search page](https://www.centris.ca/fr/condo~a-vendre~montreal-le-plateau-mont-royal), 2026-09-18 |
+| Plateau | Condo | 3 | rue de Bordeaux | $575,000 | [Centris search page](https://www.centris.ca/fr/condo~a-vendre~montreal-le-plateau-mont-royal), 2026-09-18 |
+| Plateau | Condo | 3 | rue Saint-Dominique, Plateau west | $499,000 | [Centris search page](https://www.centris.ca/fr/condo~a-vendre~montreal-le-plateau-mont-royal), 2026-09-18 |
+| Villeray | Condo | 3 | rue Lajeunesse, a block from the temporary school | $539,000 | [Centris search page](https://www.centris.ca/fr/condo~a-vendre~montreal-villeray-saint-michel-parc-extension), 2026-09-18 |
+| Villeray | Condo, new | 3 | avenue Henri-Julien | $825,000 + taxes | [Centris search page](https://www.centris.ca/fr/condo~a-vendre~montreal-villeray-saint-michel-parc-extension), 2026-09-18 |
+| Villeray | Condo, new | 3 | avenue De Chateaubriand | $729,724 + taxes | [Centris search page](https://www.centris.ca/fr/condo~a-vendre~montreal-villeray-saint-michel-parc-extension), 2026-09-18 |
+| Villeray | Condo | 3 | rue Saint-Élie | $899,000 | [Centris search page](https://www.centris.ca/fr/condo~a-vendre~montreal-villeray-saint-michel-parc-extension), 2026-09-18 |
+
+: For sale, 3+ bedrooms, within about 1 km of each address {#tbl-for-sale}
+:::
+
+::: {.column-page}
+| Zone | Type | Bedrooms | Street or sector | Monthly rent | Source, date seen |
+|:---|:---|---:|:---|---:|:---|
+| Plateau | Apartment | 5 | rue Gauthier, near parc La Fontaine | $2,700 | [Centris search page](https://www.centris.ca/fr/condo-appartement~a-louer~montreal-le-plateau-mont-royal), 2026-09-18 |
+| Plateau | Apartment | 4 | rue Saint-Urbain, Mile End | $2,750 | [Centris search page](https://www.centris.ca/fr/condo-appartement~a-louer~montreal-le-plateau-mont-royal), 2026-09-18 |
+| Plateau | Apartment | 3 | avenue Coloniale, Plateau west | $1,725 | [Centris search page](https://www.centris.ca/fr/condo-appartement~a-louer~montreal-le-plateau-mont-royal), 2026-09-18 |
+| Plateau | Apartment (*unverified*: page redirected to the search list) | 3 | rue Saint-Dominique | $2,650 | [Centris](https://www.centris.ca/fr/condo-appartement~a-louer~montreal-le-plateau-mont-royal/19606888), 2026-09-18 |
+| Villeray | Apartment with yard | 3 | rue Drolet, two blocks from the temporary school | $2,350 | [Centris listing](https://www.centris.ca/fr/condo-appartement~a-louer~montreal-villeray-saint-michel-parc-extension/23857701), 2026-09-18 |
+| Villeray | Condo, penthouse (*unverified*: search snippet only) | 3 | rue Lajeunesse | $2,300 | [Centris search page](https://www.centris.ca/fr/condo-appartement~a-louer~montreal-villeray-saint-michel-parc-extension), 2026-09-18 |
+
+: For rent, 3+ bedrooms, within about 1 km of each address; only two were found for Villeray {#tbl-for-rent}
+:::
+
+::: {.callout-warning}
+## Listings expire
+
+These are the listings found on 18 September 2026, chosen for variety of type rather than as a
+sample; prices are asking prices, two entries could not be confirmed on their own page, and the
+section is not refreshed when the post is republished. Only two three-bedroom rentals turned up
+near the Villeray site. For a durable benchmark use the assessed values in @tbl-cost, which
+reflect the July 2024 market.
+:::
+
+# Sources and caveats
+
+- **School facts**: the CSSDM project page and two monplateau.info articles were opened on
+  2026-09-18; the school's own pages return HTTP 403 to automated requests, so its program
+  description, its admission wording and the 18 February 2026 board confirmation are quoted
+  from search-index extracts and marked *unverified*.
+- **IMSE/SFR**: MEQ, *Indices de défavorisation*, Données Québec, school year 2025-2026.
+- **Zone tables**: `scripts/zone_stats.py` on open data fetched on 2026-09-18 (Ville de
+  Montréal, Données Québec, INSPQ, Statistics Canada 2021 Census; métro and REM stations from
+  OpenStreetMap contributors). Dissemination areas by
+  centroid: 64 for the Plateau circle, 72 for the Villeray circle, 66, 72 and 70 for the
+  comparators; the city's equity index covers all residents of every zone; tax bills matched
+  99.9% of assessment units. Census 2021 is five years old; assessed values are from the
+  2026-2028 roll and reflect the July 2024 market.
+- **Listings**: as seen on Centris.ca on 2026-09-18, see the source column of each table.
+- **Deciles**: among 229 in-scope schools, from `data/derived/zone_stats_all.parquet`;
+  reproduced by the commands in the Scripts section of the repository's CLAUDE.md.
+
+# Conclusion
+
+Four readings, in the order a parent weighs them. Each states what the tables show, not a
+verdict.
+
+**School.** A regular-program neighbourhood school of the CSSDM whose pupils sit in IMSE
+decile 2, the second most advantaged tenth of Quebec's schools, with the SFR at decile 7 the
+one line pointing the other way. Its building has been under renovation since 2022 and the
+pupils are three kilometres away in Villeray; the return to 505 avenue Laurier Est is announced
+for the 2026-2027 rentrée, subject to the remaining works (@tbl-school).
+
+**Safety.** Both Laurier kilometres are in the top deciles on every crime category, as are the
+three comparators: dense central boroughs divided by their resident count look like this. The
+line that concerns a school run is the pedestrian and cyclist victims within 500 m, top decile
+for both Laurier addresses and for Lanaudière, seventh for Paul-Bruchési (@tbl-safety). Both
+datasets are rates of reported events, one obfuscated and one ending in 2021.
+
+**Livability.** The Plateau kilometre has few children and few households with children
+(bottom deciles), almost no adults without a diploma, and the island's most mobile population;
+the Villeray kilometre is slightly more settled and reads like the Plateau on education and
+income. Materially deprived areas are rare in both, socially deprived ones common, which is the
+household mix of the centre rather than a warning. Park space per resident is below the island
+median around 505 Laurier Est, with parc La Fontaine just beyond the circle; métro Laurier is
+at the door, and three orange-line stations fall inside each Laurier kilometre (@tbl-people,
+@tbl-indices, @tbl-parks).
+
+**Affordability.** Old stock, a quarter condominiums; assessed values and tax bills in the top
+two deciles on every type for the Plateau and slightly lower for Villeray, at the island's
+effective tax rate. This month's three-bedroom listings start around half a million dollars to
+buy and in the low two thousands a month to rent, with a Plateau triplex above a million
+(@tbl-stock, @tbl-cost, @tbl-for-sale, @tbl-for-rent).
+
+Next steps for this school:
+
+1. **Confirm the catchment** for the family's candidate addresses on the CSSDM finder; the
+   circle is a stand-in, and the Plateau's neighbourhood schools sit within a kilometre of each
+   other.
+2. **Watch the return.** The 2026-2027 rentrée at 505 avenue Laurier Est is announced subject
+   to the remaining works; a family enrolling for 2026-2027 should ask the school which
+   building the year starts in.
+3. **Registration calendar.** The CSSDM's registration window for a neighbourhood school runs
+   each January (7 to 27 January 2026 for the 2026-2027 year), by appointment at the school,
+   with two proofs of address and the birth certificate; Laurier's files are received at the
+   temporary building while the relocation lasts.[^inscr]
+4. **What this report does not yet cover**: childcare places, transit frequency, heat islands,
+   rents by CMHC zone, and the secondary school the zone feeds.
+
+[^inscr]: [Étapes, conditions et formulaires : inscription dans les écoles](https://www.cssdm.gouv.qc.ca/admission-inscription/procedure-inscription/), CSSDM, read through its search-index extract on 2026-09-18.
+
+::: {.callout-important}
+## Bottom line
+
+École Laurier is a neighbourhood school whose pupils and kilometre are among the most
+advantaged on the island by education and income, in a zone that is dense, old, expensive and
+busy on the street. The one fact to verify before acting is which building the school opens
+in for 2026-2027.
+:::
