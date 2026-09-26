@@ -1,0 +1,473 @@
+---
+title: "Sainte-Cécile and La Petite-Patrie: two schools, one kilometre apart"
+date: "2026-09-26"
+categories: [school-report, villeray-saint-michel-parc-extension, rosemont-la-petite-patrie, layer-1, layer-2]
+description: "Two CSSDM neighbourhood schools 537 m apart on the Villeray / Petite-Patrie line: their deprivation deciles, the overlapping kilometres around them compared with two nearby schools, and what a three-bedroom home costs there this month."
+toc: true
+code-annotations: hover
+---
+
+École Sainte-Cécile and École La Petite-Patrie are francophone public elementary schools of the
+Centre de services scolaire de Montréal (CSSDM), on either side of the boundary between
+Villeray–Saint-Michel–Parc-Extension and Rosemont–La Petite-Patrie. They sit 537 m apart, so a
+family house-hunting between Jean-Talon and Beaubien is plausibly in reach of both. This report
+takes them together and describes them in three layers: the schools themselves, the kilometre
+around each, and what a three-bedroom home there costs to buy or rent this month.
+
+Because the two circles overlap heavily, the interesting differences are small and local: which
+park falls inside, how far the métro is, and which side of the borough line a tax bill lands on.
+Two nearby schools are carried through the tables as comparators — **École La Mennais**, 444 m
+from La Petite-Patrie on Saint-Denis, and **École Louis-Hippolyte-Lafontaine**, about 2.5 km
+south on rue Berri in Le Plateau-Mont-Royal, included as a contrast rather than as a neighbour.
+
+::: {.callout-important}
+## Not a ranking
+
+Each zone metric is shown with its decile among the 229 francophone public elementary schools on
+the island outside the West Island, marked [d1]{.decile-low} to [d3]{.decile-low} for the lowest
+three tenths, [d4]{.decile-mid} to [d7]{.decile-mid} for the middle, and [d8]{.decile-high} to
+[d10]{.decile-high} for the top three. A high decile means a high value, nothing
+more, so the label says which way is favourable for a family: ▲ higher is favourable (children,
+parks, stations), ▼ lower is favourable (crime, collisions, deprivation, cost), and rows with no
+glyph are descriptive. On the ▲ and ▼ rows the most favourable of the compared zones is [shaded]{.best}.
+The report computes no composite score, and the IMSE is a socioeconomic index of the pupils enrolled,
+not a measure of academic performance.
+:::
+
+# The schools
+
+Neither school is on the CSSDM's list of programmes et volets particuliers, and neither site
+describes a selective stream: both are ordinary neighbourhood schools that take pupils by
+address, with the CSSDM's *libre choix* applying if places remain after territory residents and
+siblings.[^sc-adm][^lpp-adm] That makes them a different proposition from the IB, arts and
+alternative schools catalogued elsewhere in this project — there is no application gate to plan
+for, only an address.
+
+Both school websites return HTTP 403 to anything that is not a browser, as several
+`cssdm.gouv.qc.ca` school sites do. Facts drawn from their indexed pages rather than from a page
+that loaded are marked *unverified* below.
+
+## École Sainte-Cécile
+
+| | |
+|:---|:---|
+| Service centre | Centre de services scolaire de Montréal (762000) |
+| MEQ code | 762107 |
+| Building | Sainte-Cécile, 7230 avenue de Gaspé, H2R 1Z6 (préscolaire and primaire)[^meq] |
+| Program | Regular program of a neighbourhood school; the projet éducatif is oriented to raising pupils' literacy (*unverified*: site returned 403, wording from its indexed pages)[^sc-ecole] |
+| Admission | Neighbourhood school, by address; registration at the school secretariat in January, CSSDM *libre choix* if places remain (*unverified*, same source)[^sc-adm] |
+| Pupils (2025-2026) | 388 in the MEQ index file; the school's own pages and a 2022 CSSDM communiqué describe about 470 pupils, a figure that predates the current index[^yard] |
+| IMSE 2025-2026 | 4.27, decile 3 |
+| SFR 2025-2026 | 8.78, decile 8 |
+| Website | <https://ste-cecile.cssdm.gouv.qc.ca/> |
+
+: École Sainte-Cécile; facts marked *unverified* could not be confirmed on a page that loaded {#tbl-school-sc}
+
+The schoolyard was rebuilt for $5M and inaugurated on 27 September 2022: a running track, soccer
+and basketball surfaces, an outdoor classroom, rainwater management and soil rehabilitation, with
+44 trees and 73 shrubs planted against the heat island.[^yard] The school also has a small
+municipal park carrying its name immediately adjacent, which is why @tbl-parks treats its
+kilometre generously.
+
+## École La Petite-Patrie
+
+| | |
+|:---|:---|
+| Service centre | Centre de services scolaire de Montréal (762000) |
+| MEQ code | 762110 |
+| Building | La Petite-Patrie, pavillon Notre-Dame-de-la-Défense, 6841 avenue Henri-Julien, H2S 2V3 (préscolaire and primaire)[^meq] |
+| Second MEQ address | 35 rue Saint-Zotique Est, H2S 1K5, recorded as "Félix-Leclerc – Transitoire" — the former pavillon Saint-Jean-de-la-Croix, now a CSSDM transition building occupied by another school (see below)[^deloc] |
+| Program | Regular program of a neighbourhood school; the school is the CSSDM réseau Centre point of service for AMPLI classes, where speech-language staff work alongside teachers (*unverified*: site returned 403)[^ampli] |
+| Admission | Neighbourhood school, by address, priority to territory residents and siblings, then CSSDM *libre choix* if places remain (*unverified*, same source)[^lpp-adm] |
+| Pupils (2025-2026) | 259 |
+| IMSE 2025-2026 | 5.28, decile 4 |
+| SFR 2025-2026 | 9.54, decile 8 |
+| Website | <https://la-petite-patrie.cssdm.gouv.qc.ca/> |
+
+: École La Petite-Patrie; facts marked *unverified* could not be confirmed on a page that loaded {#tbl-school-lpp}
+
+::: {.callout-important}
+## The second address is a transition school, not a relocation
+
+École La Petite-Patrie was created in 2006 by merging two neighbourhood schools, the pavillons
+Notre-Dame-de-la-Défense and Saint-Jean-de-la-Croix.[^lpp-ecole] In 2012 the
+Saint-Jean-de-la-Croix building at 35 rue Saint-Zotique Est was converted into a CSSDM
+*école de transition*, a building kept available to house schools whose own premises are being
+repaired; about 150 pupils were moved at the time, the second-cycle classes into the
+Notre-Dame-de-la-Défense pavilion.[^metro2012] It is still in that role today: the CSSDM's
+register of relocated schools lists **École Félix-Leclerc**, whose home is 6055 avenue Darlington
+in Côte-des-Neiges, as partially relocated to 35 rue Saint-Zotique Est.[^deloc]
+
+So La Petite-Patrie is the host, not a relocated school. Its own pupils are at 6841 avenue
+Henri-Julien, and that address anchors its zone throughout this report. No temporary-site column
+is needed.
+:::
+
+::: {.callout-warning}
+## Why École Félix-Leclerc is not used as a comparator
+
+Félix-Leclerc [762134] looks like the closest school to La Petite-Patrie — 345 m — but only
+because the MEQ file currently gives its principal point as the transition building on rue
+Saint-Zotique. Its home building is 6055 avenue Darlington, 2.9 km southwest in Côte-des-Neiges.
+Profiling the kilometre around its MEQ point would describe the neighbourhood its pupils commute
+to during works, not the one a family would move to. It is left out for that reason.
+:::
+
+## What the indices say
+
+The MEQ's IMSE places Sainte-Cécile in decile 3 and La Petite-Patrie in decile 4 for 2025-2026
+(1 = most advantaged, 10 = most disadvantaged; 8 to 10 is the official *milieu défavorisé*). It
+is built from the enrolled pupils' parents' education and employment, not from test results, and
+Quebec publishes no academic ranking of elementary schools. Both schools sit in decile 8 on the
+SFR, the low-income-threshold index, which is the more volatile of the two.
+
+The two indices disagree in the usual direction here: the IMSE deciles are mid-to-low while the
+SFR deciles are high, and the census figures for the residents of the kilometre (@tbl-people)
+show median household income slightly above the island median. An index of the families who
+actually enrol is not an index of the households who live nearby, and in central boroughs with
+many renters, small households and private-school options the two routinely part company.
+
+[^meq]: Building list from the MEQ *organismes et établissements* file via `scripts/school_info.py`, fetched 2026-09-18.
+[^sc-ecole]: "École" and "Projet éducatif", École Sainte-Cécile: <https://ste-cecile.cssdm.gouv.qc.ca/ecole/>. The site returns HTTP 403; wording from search-index extracts, seen 2026-09-26.
+[^sc-adm]: "Admission et inscription 2026-2027", École Sainte-Cécile: <https://ste-cecile.cssdm.gouv.qc.ca/ecole/admission-inscription/>. Site returns 403; extracts seen 2026-09-26.
+[^yard]: "Une nouvelle cour pour l'école Sainte-Cécile", CSSDM communiqué, inauguration of 27 September 2022: <https://www.cssdm.gouv.qc.ca/communique/nouvelle-cour-ecole-sainte-cecile/>, opened 2026-09-26.
+[^lpp-ecole]: "École", École La Petite-Patrie: <https://la-petite-patrie.cssdm.gouv.qc.ca/ecole/>. Site returns 403; extracts seen 2026-09-26.
+[^lpp-adm]: "Admission et inscription", École La Petite-Patrie: <https://la-petite-patrie.cssdm.gouv.qc.ca/ecole/admission-inscription/>. Site returns 403; extracts seen 2026-09-26.
+[^ampli]: "Les classes AMPLI au primaire", École La Petite-Patrie: <https://la-petite-patrie.cssdm.gouv.qc.ca/services/classes-ampli-primaire/>. Site returns 403; extracts seen 2026-09-26.
+[^deloc]: "Lieux d'accueil des écoles délocalisées", CSSDM: <https://www.cssdm.gouv.qc.ca/batiments-scolaires/lieux-accueil-ecoles-delocalisees/>, opened 2026-09-26.
+[^metro2012]: "Saint-Jean-de-la-Croix devient une école de transition", *Journal Métro*, Rosemont–La Petite-Patrie: <https://journalmetro.com/local/rosemont-la-petite-patrie/642335/saint-jean-de-la-croix-devient-une-ecole-de-transition/>, opened 2026-09-26.
+
+# The zone
+
+Each zone is a circle of one kilometre around the school building, a stand-in for the catchment
+polygon that exists only in the service centre's finder and PDF maps. At 537 m apart, the
+Sainte-Cécile and La Petite-Patrie circles share most of their area; La Mennais, 444 m east of La
+Petite-Patrie, overlaps both. Louis-Hippolyte-Lafontaine is the one genuinely separate zone in
+the tables.
+
+```{=html}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/maplibre-gl/4.7.1/maplibre-gl.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/maplibre-gl/4.7.1/maplibre-gl.min.js"></script>
+<div id="zone-map-762107" class="zone-map" style="height:420px;border:1px solid var(--zone-soft);border-radius:4px"></div>
+<script>
+(function () {
+  var css = getComputedStyle(document.documentElement);
+  var accent = css.getPropertyValue('--accent').trim() || '#c1272d';
+  var zone = css.getPropertyValue('--zone').trim() || '#5b6b7a';
+  var soft = css.getPropertyValue('--zone-soft').trim() || '#dfe4ea';
+  var data = {"subject": {"lon": -73.61782, "lat": 45.536806, "name": "École Sainte-Cécile", "address": "Sainte-Cécile, 7230, avenue de Gaspé"}, "anchor": {"lon": -73.61782, "lat": 45.536806, "label": null}, "radius": 1000.0, "circle": {"type": "Feature", "properties": {}, "geometry": {"type": "Polygon", "coordinates": [[[-73.60501581300349, 45.53681848855956], [-73.6050304142442, 45.53637694568259], [-73.60507582602335, 45.5359364381164], [-73.60515193822383, 45.53549802704662], [-73.60525856678214, 45.53506276858401], [-73.60539545413856, 45.534631711220776], [-73.60556226986428, 45.5342058933054], [-73.60575861146359, 45.533786340542264], [-73.60598400534967, 45.53337406352183], [-73.60623790799102, 45.532970055287535], [-73.60651970722608, 45.532575288944955], [-73.60682872374267, 45.53219071531943], [-73.60716421271864, 45.53181726066734], [-73.6075253656199, 45.53145582444672], [-73.60791131215119, 45.531107277152564], [-73.608321122355, 45.53077245822205], [-73.60875380885376, 45.5304521740146], [-73.6092083292295, 45.530147195871656], [-73.60968358853547, 45.529858258260845], [-73.6101784419337, 45.52958605700909], [-73.61069169745197, 45.529331247628676], [-73.61122211885368, 45.52909444374029], [-73.61176842861384, 45.52887621559723], [-73.61232931099372, 45.52867708871367], [-73.61290341520697, 45.52849754260079], [-73.61348935866974, 45.528338009613556], [-73.61408573032676, 45.528198873910895], [-73.61469109404558, 45.52808047053188], [-73.61530399207071, 45.52798308459008], [-73.61592294852956, 45.527906950587884], [-73.61654647298168, 45.527852251852686], [-73.61717306400281, 45.52781912009597], [-73.61780121279521, 45.52780763509673], [-73.61842940681554, 45.5278178245095], [-73.61905613341183, 45.527849663797994], [-73.61967988346065, 45.52790307629404], [-73.62029915499578, 45.52797793338195], [-73.62091245681984, 45.528074054807796], [-73.62151831209013, 45.52819120911287], [-73.62211526187026, 45.52832911419024], [-73.62270186863873, 45.52848743796317], [-73.62327671974654, 45.52866579918367], [-73.62383843081517, 45.52886376834932], [-73.624385649067, 45.529080868736244], [-73.62491705657999, 45.52931657754564], [-73.62543137345921, 45.5295703271611], [-73.6259273609171, 45.529841506514], [-73.62640382425555, 45.5301294625532], [-73.62685961574213, 45.530433501816056], [-73.62729363737418, 45.53075289209663], [-73.62770484352356, 45.53108686420716], [-73.628092243456, 45.531434613828715], [-73.6284549037187, 45.53179530344651], [-73.628791950391, 45.53216806436516], [-73.62910257119185, 45.5325519987991], [-73.62938601743963, 45.53294618203338], [-73.62964160585946, 45.53334966464913], [-73.62986872023325, 45.53376147480897], [-73.63006681288893, 45.534180620596366], [-73.63023540602494, 45.534606092403635], [-73.63037409286697, 45.535036865362706], [-73.63048253865371, 45.53547190181288], [-73.63056048144973, 45.535910153799556], [-73.63060773278302, 45.536350565598056], [-73.63062417810572, 45.53679207625631], [-73.63060977707704, 45.53723362215045], [-73.63056456366739, 45.53767413954701], [-73.63048864608348, 45.53811256716563], [-73.63038220651455, 45.53854784873619], [-73.63024550070023, 45.53897893554396], [-73.63007885732101, 45.53940478895689], [-73.62988267721278, 45.5398243829287], [-73.62965743240711, 45.54023670647209], [-73.6294036649998, 45.54064076609561], [-73.62912198585002, 45.54103558819875], [-73.62881307311346, 45.541420221419145], [-73.6284776706128, 45.54179373892653], [-73.62811658604934, 45.54215524065752], [-73.62773068906024, 45.54250385548621], [-73.62732090912584, 45.54283874332501], [-73.62688823333222, 45.54315909715093], [-73.62643370399425, 45.543464144952026], [-73.625958416145, 45.54375315158981], [-73.62546351489732, 45.54402542057262], [-73.62495019268427, 45.54428029573589], [-73.6244196863847, 45.544517162825386], [-73.62387327434124, 45.54473545097915], [-73.62331227327769, 45.544934634105076], [-73.62273803512338, 45.54511423215035], [-73.62215194375204, 45.545273812259865], [-73.62155541164343, 45.545412989820875], [-73.62094987647524, 45.54553142939116], [-73.62033679765408, 45.54562884550868], [-73.61971765279371, 45.54570500338037], [-73.619093934149, 45.545759719449], [-73.61846714501438, 45.54579286183613], [-73.61783879609555, 45.545804350660404], [-73.61721040186319, 45.54579415823045], [-73.61658347689736, 45.545762309111595], [-73.61595953223195, 45.54570888006672], [-73.61534007170744, 45.54563399987085], [-73.61472658834127, 45.54553784900046], [-73.61412056072447, 45.545420659197845], [-73.61352344945327, 45.54528271291178], [-73.61293669360437, 45.545124342615864], [-73.61236170726252, 45.54494593000616], [-73.6117998761086, 45.54474790507995], [-73.61125255407678, 45.54453074509813], [-73.61072106008848, 45.54429497343344], [-73.61020667487145, 45.54404115830762], [-73.60971063787139, 45.5437699114202], [-73.60923414426357, 45.54348188647268], [-73.60877834207187, 45.54317777759137], [-73.60834432940206, 45.54285831765265], [-73.60793315179596, 45.542524276515145], [-73.60754579971301, 45.542176459162526], [-73.60718320614511, 45.541815703761884], [-73.60684624437067, 45.54144287964214], [-73.60653572585313, 45.54105888519748], [-73.60625239828902, 45.540664645720845], [-73.60599694381027, 45.540261111172704], [-73.60576997734503, 45.5398492538906], [-73.60557204514093, 45.539430066244854], [-73.6054036234543, 45.5390045582463], [-73.6052651174083, 45.53857375511152], [-73.60515686002304, 45.53813869479186], [-73.6050791114196, 45.53770042547176], [-73.60503205819977, 45.53726000304284], [-73.60501581300349, 45.53681848855956]]]}}, "bounds": [[-73.63062417810572, 45.52780763509673], [-73.60501581300349, 45.545804350660404]], "comparators": [{"lon": -73.611219, "lat": 45.535447, "name": "École La Petite-Patrie", "address": "La Petite-Patrie, pav. Notre-Dame-de-la-Défense, 6841, avenue Henri-Julien"}, {"lon": -73.605612, "lat": 45.534808, "name": "École La Mennais", "address": "La Mennais, 6521, rue Saint-Denis"}, {"lon": -73.577915, "lat": 45.52336, "name": "École Louis-Hippolyte-Lafontaine", "address": "Louis-Hippolyte-Lafontaine, 4245, rue Berri"}], "mark": null, "stations": [{"lon": -73.6134236, "lat": 45.5391835, "name": "Jean-Talon", "kind": "subway"}, {"lon": -73.6201056, "lat": 45.5352621, "name": "De Castelnau", "kind": "subway"}, {"lon": -73.6245212, "lat": 45.530416, "name": "Parc", "kind": "subway"}]};
+  var map = new maplibregl.Map({
+    container: 'zone-map-762107', style: 'https://tiles.openfreemap.org/styles/positron', bounds: data.bounds,
+    fitBoundsOptions: {padding: 24}, scrollZoom: false, attributionControl: false
+  });
+  map.addControl(new maplibregl.NavigationControl({showCompass: false}), 'top-left');
+  map.addControl(new maplibregl.AttributionControl({compact: true,
+    customAttribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &middot; <a href="https://openfreemap.org">OpenFreeMap</a>'}));
+  function pin(lonlat, style, html, text) {
+    var el = document.createElement('div');
+    el.style.cssText = style;
+    if (text) { el.textContent = text; }
+    var m = new maplibregl.Marker({element: el}).setLngLat(lonlat).addTo(map);
+    if (html) { m.setPopup(new maplibregl.Popup({offset: 12, closeButton: false}).setHTML(html)); }
+    return m;
+  }
+  map.on('load', function () {
+    map.addSource('zone', {type: 'geojson', data: data.circle});
+    map.addLayer({id: 'zone-fill', type: 'fill', source: 'zone', paint: {'fill-color': soft, 'fill-opacity': 0.35}});
+    map.addLayer({id: 'zone-line', type: 'line', source: 'zone', paint: {'line-color': zone, 'line-width': 2}});
+    data.stations.forEach(function (st) {
+      pin([st.lon, st.lat], 'width:18px;height:18px;border-radius:3px;background:#fff;border:2px solid ' + zone +
+          ';color:' + zone + ';font:bold 11px/14px sans-serif;text-align:center;cursor:pointer',
+          '<b>' + st.name + '</b><br>' + (st.kind === 'light_rail' ? 'REM' : 'Métro') + ' station',
+          st.kind === 'light_rail' ? 'R' : 'M');
+    });
+    data.comparators.forEach(function (s) {
+      pin([s.lon, s.lat], 'width:12px;height:12px;border-radius:50%;background:' + soft + ';border:2px solid ' + zone + ';cursor:pointer',
+          '<b>' + s.name + '</b><br>' + s.address);
+    });
+    if (data.mark) {
+      pin([data.mark.lon, data.mark.lat], 'width:14px;height:14px;border-radius:50%;background:#fff;border:2px dashed ' + accent + ';cursor:pointer',
+          data.mark.label);
+    }
+    if (data.anchor.label) {
+      pin([data.anchor.lon, data.anchor.lat], 'width:10px;height:10px;border-radius:50%;background:#fff;border:2px solid ' + accent, data.anchor.label);
+    }
+    pin([data.subject.lon, data.subject.lat], 'width:16px;height:16px;border-radius:50%;background:' + accent + ';border:3px solid ' + accent + ';cursor:pointer',
+        '<b>' + data.subject.name + '</b><br>' + data.subject.address);
+  });
+})();
+</script>
+```
+
+The red pin is École Sainte-Cécile and the solid circle its kilometre; the grey pins are the
+other three schools, including the co-subject La Petite-Patrie, which the map does not circle.
+M squares are métro stations inside the circle.
+
+## Who lives there
+
+::: {.column-page}
+| Metric | Unit | Sainte-Cécile | La Petite-Patrie | La Mennais | Louis-Hippolyte-Lafontaine | Island median |
+|:---|:---|---:|---:|---:|---:|---:|
+| Residents (2021 census) | people | 35,960 [d10]{.decile-high} | 34,519 [d9]{.decile-high} | 31,888 [d8]{.decile-high} | 41,833 [d10]{.decile-high} | 21,094 |
+| ▲ Children 0 to 14 | % of residents | 11.7 [d1]{.decile-low} | 11.4 [d1]{.decile-low} | [11.7 [d2]{.decile-low}]{.best} | 10.4 [d1]{.decile-low} | 15.8 |
+| ▲ Households with children | % of households | [19.7 [d2]{.decile-low}]{.best} | 18.4 [d1]{.decile-low} | 18.6 [d1]{.decile-low} | 16.9 [d1]{.decile-low} | 31.4 |
+| Median household income (2020) | $ | 66,500 [d7]{.decile-mid} | 66,500 [d7]{.decile-mid} | 64,000 [d6]{.decile-mid} | 62,800 [d5]{.decile-mid} | 62,800 |
+| ▼ Low income (LIM-AT) | % of residents | 16.3 [d5]{.decile-mid} | [15.1 [d4]{.decile-mid}]{.best} | 16.0 [d5]{.decile-mid} | 20.3 [d9]{.decile-high} | 16.6 |
+| ▼ No diploma, ages 25 to 64 | % | 5.8 [d3]{.decile-low} | 4.9 [d2]{.decile-low} | 4.6 [d2]{.decile-low} | [3.1 [d1]{.decile-low}]{.best} | 9.9 |
+| Immigrants | % of residents | 23.1 [d4]{.decile-mid} | 21.7 [d3]{.decile-low} | 21.0 [d2]{.decile-low} | 24.3 [d4]{.decile-mid} | 28.4 |
+| French most often at home | % of residents | 69.5 [d7]{.decile-mid} | 72.3 [d8]{.decile-high} | 74.1 [d8]{.decile-high} | 65.4 [d7]{.decile-mid} | 58.8 |
+| Renter households | % | 68.4 [d7]{.decile-mid} | 68.8 [d7]{.decile-mid} | 72.6 [d9]{.decile-high} | 68.8 [d7]{.decile-mid} | 66.2 |
+| Moved in the last five years | % of residents | 52.4 [d9]{.decile-high} | 54.6 [d9]{.decile-high} | 53.5 [d9]{.decile-high} | 57.8 [d10]{.decile-high} | 43.9 |
+
+: Who lives within 1 km of the school (2021 census, aggregated over dissemination areas whose centroid falls in the circle) {#tbl-people}
+:::
+
+::: {.callout-tip}
+## Reading the table
+
+All four zones are dense and short of children: the 0-to-14 share and the share of households
+with children sit in the bottom two deciles everywhere, against an island median near a third of
+households. That is the central-Montreal pattern rather than anything about these schools, and it
+is the line a family moving from a suburb will notice first. Household income is at or a little
+above the island median in the two subject zones and drifts down towards the Plateau comparator,
+where the low-income share is markedly higher. French spoken most often at home is well above the
+island median in all four, highest around La Petite-Patrie and La Mennais. Residential turnover
+is high everywhere — more than half of residents moved within five years — which is what a rental
+stock of this size produces.
+:::
+
+::: {.column-page}
+| Metric | Unit | Sainte-Cécile | La Petite-Patrie | La Mennais | Louis-Hippolyte-Lafontaine | Island median |
+|:---|:---|---:|---:|---:|---:|---:|
+| ▼ In materially deprived DAs (INSPQ Q4-5) | % of residents | 17 [d3]{.decile-low} | 9 [d2]{.decile-low} | [7 [d1]{.decile-low}]{.best} | 8 [d1]{.decile-low} | 46 |
+| ▼ In socially deprived DAs (INSPQ Q4-5) | % of residents | 88 [d8]{.decile-high} | 90 [d9]{.decile-high} | 89 [d8]{.decile-high} | [87 [d8]{.decile-high}]{.best} | 76 |
+| ▼ Equity index IEMV 2026 (0 best, 6 worst) | score | 2.2 [d5]{.decile-mid} | 2.2 [d5]{.decile-mid} | [2.1 [d4]{.decile-mid}]{.best} | 2.2 [d5]{.decile-mid} | 2.3 |
+
+: Two composite indices computed by others: INSPQ material and social deprivation (share of residents in the two most deprived quintiles) and the city's 2026 equity index (population-weighted mean, 0 least vulnerable to 6 most) {#tbl-indices}
+:::
+
+::: {.callout-note}
+## Social deprivation is high across central Montreal
+
+The INSPQ social axis counts people living alone and lone-parent families, which the dense
+central boroughs are full of; read it with the households-with-children line of @tbl-people.
+All four zones sit far above the island median on the social axis and far below it on the
+material axis, and the city's own equity index separates them barely at all.
+:::
+
+## Safety
+
+::: {.column-page}
+| Metric | Unit | Sainte-Cécile | La Petite-Patrie | La Mennais | Louis-Hippolyte-Lafontaine | Island median |
+|:---|:---|---:|---:|---:|---:|---:|
+| ▼ Crime incidents per 1 000 residents per year | /1000/yr | [14.6 [d8]{.decile-high}]{.best} | 15.9 [d9]{.decile-high} | 16.7 [d9]{.decile-high} | 24.4 [d10]{.decile-high} | 11.6 |
+| ▼ Violent (robbery, homicide) | /1000/yr | 1.45 [d10]{.decile-high} | 1.46 [d10]{.decile-high} | 1.59 [d10]{.decile-high} | [1.21 [d9]{.decile-high}]{.best} | 0.75 |
+| ▼ Break-ins | /1000/yr | [4.2 [d9]{.decile-high}]{.best} | 4.8 [d9]{.decile-high} | 5.1 [d10]{.decile-high} | 5.3 [d10]{.decile-high} | 2.6 |
+| ▼ Vehicle theft and theft from vehicles | /1000/yr | [5.7 [d6]{.decile-mid}]{.best} | 6.3 [d7]{.decile-mid} | 6.4 [d7]{.decile-mid} | 12.8 [d10]{.decile-high} | 5.6 |
+| ▼ Mischief | /1000/yr | [3.2 [d8]{.decile-high}]{.best} | 3.3 [d9]{.decile-high} | 3.7 [d9]{.decile-high} | 5.1 [d10]{.decile-high} | 2.5 |
+| ▼ Pedestrian and cyclist victims within 500 m | /yr | 17.8 [d10]{.decile-high} | 16.8 [d10]{.decile-high} | [11.2 [d9]{.decile-high}]{.best} | 21.6 [d10]{.decile-high} | 4.6 |
+
+: Safety: SPVM incidents 2023 to 2025 per 1 000 residents per year within 1 km, and SAAQ pedestrian and cyclist victims 2017 to 2021 within 500 m of the school, per year {#tbl-safety}
+:::
+
+::: {.callout-tip}
+## Reading the table
+
+All four zones report more incidents per resident than the island median, which is normal for
+zones containing commercial strips and métro stations — Jean-Talon, De Castelnau and Parc for
+Sainte-Cécile, Beaubien for La Mennais. The two subject zones are close to each other on every
+line; the Plateau comparator is higher on the total and much higher on theft from vehicles. The
+violent-crime line is in the top decile for the two subjects and their close neighbour, at a
+rate roughly double the island median, and it is worth reading against the low absolute counts
+such rates come from. The pedestrian and cyclist line is the one a parent walking a child to
+school should weigh: all four are in the top decile, and Sainte-Cécile's 500 m circle takes in
+the Jean-Talon and Saint-Laurent arterials.
+:::
+
+::: {.callout-warning}
+## What these two datasets cannot say
+
+The city states the incident file is not official SPVM statistics; positions are moved to the
+nearest intersection and 17% of incidents have no coordinates and are absent from the rates.
+The collision extract ends in 2021; its last two years are pandemic years. Both are rates of
+reported events, not of risk.
+:::
+
+## Housing and what it costs to own
+
+::: {.column-page}
+| Metric | Unit | Sainte-Cécile | La Petite-Patrie | La Mennais | Louis-Hippolyte-Lafontaine | Island median |
+|:---|:---|---:|---:|---:|---:|---:|
+| Dwellings | units | 20,718 [d10]{.decile-high} | 20,678 [d9]{.decile-high} | 20,583 [d9]{.decile-high} | 24,568 [d10]{.decile-high} | 10,684 |
+| Single-family houses | % of dwellings | 3 [d2]{.decile-low} | 3 [d2]{.decile-low} | 3 [d2]{.decile-low} | 5 [d4]{.decile-mid} | 8 |
+| Plex units (2 to 5 per building) | % of dwellings | 47 [d7]{.decile-mid} | 47 [d7]{.decile-mid} | 47 [d7]{.decile-mid} | 37 [d5]{.decile-mid} | 41 |
+| Condominium units | % of dwellings | 20 [d8]{.decile-high} | 20 [d8]{.decile-high} | 15 [d7]{.decile-mid} | 20 [d8]{.decile-high} | 11 |
+| Rental buildings, 6+ units | % of dwellings | 29 [d4]{.decile-mid} | 30 [d4]{.decile-mid} | 35 [d6]{.decile-mid} | 39 [d7]{.decile-mid} | 34 |
+| Median year built | year | 1931 [d2]{.decile-low} | 1928 [d1]{.decile-low} | 1926 [d1]{.decile-low} | 1915 [d1]{.decile-low} | 1959 |
+
+: Housing stock within 1 km, from the assessment roll {#tbl-stock}
+:::
+
+::: {.column-page}
+| Metric | Unit | Sainte-Cécile | La Petite-Patrie | La Mennais | Louis-Hippolyte-Lafontaine | Island median |
+|:---|:---|---:|---:|---:|---:|---:|
+| ▼ Assessed value, single-family | $ | [1,009,900 [d9]{.decile-high}]{.best} | 1,055,050 [d9]{.decile-high} | 1,080,967 [d9]{.decile-high} | 1,157,466 [d9]{.decile-high} | 702,608 |
+| ▼ Assessed value, plex | $ | [969,050 [d9]{.decile-high}]{.best} | 975,866 [d9]{.decile-high} | 974,234 [d9]{.decile-high} | 1,128,767 [d10]{.decile-high} | 811,892 |
+| ▼ Assessed value, condo | $ | [476,267 [d9]{.decile-high}]{.best} | 497,984 [d9]{.decile-high} | 492,033 [d9]{.decile-high} | 544,467 [d10]{.decile-high} | 392,416 |
+| ▼ 2026 tax bill, single-family | $ | [6,678 [d9]{.decile-high}]{.best} | 7,017 [d9]{.decile-high} | 7,150 [d9]{.decile-high} | 7,536 [d9]{.decile-high} | 4,665 |
+| ▼ 2026 tax bill, plex | $ | [6,400 [d9]{.decile-high}]{.best} | 6,466 [d9]{.decile-high} | 6,436 [d9]{.decile-high} | 7,355 [d10]{.decile-high} | 5,341 |
+| ▼ 2026 tax bill, condo | $ | [3,149 [d9]{.decile-high}]{.best} | 3,297 [d9]{.decile-high} | 3,239 [d9]{.decile-high} | 3,550 [d10]{.decile-high} | 2,570 |
+| ▼ Effective tax rate (bill / value) | % | 0.66 [d7]{.decile-mid} | 0.66 [d7]{.decile-mid} | 0.66 [d7]{.decile-mid} | [0.65 [d4]{.decile-mid}]{.best} | 0.66 |
+
+: What it costs to own: median 2026 assessed value and median 2026 municipal tax bill per unit within 1 km, residential accounts with five dwellings or fewer {#tbl-cost}
+:::
+
+::: {.callout-tip}
+## Reading the tables
+
+The stock is the classic Petite-Patrie–Villeray mix: plex units are the largest single category
+in the three northern zones, single-family houses are near-absent, and the median building dates
+from between the wars. Assessed values and 2026 tax bills sit in the ninth decile across all four
+zones for every property type, roughly 40% above the island median for a single-family house and
+20% above it for a plex. The two subject zones are marginally cheaper than the Plateau comparator
+on every line, though the gap is small relative to the spread within any one zone. The effective
+tax rate is flat at about two-thirds of a percent across the island, so the bill differences track
+the assessments rather than any borough's rate. Assessed values reflect the July 2024 market and
+lag transactions by roughly eighteen months.
+:::
+
+## Parks and transit
+
+::: {.column-page}
+| Metric | Unit | Sainte-Cécile | La Petite-Patrie | La Mennais | Louis-Hippolyte-Lafontaine | Island median |
+|:---|:---|---:|---:|---:|---:|---:|
+| ▼ Distance to the nearest métro or REM station | m | 248 [d1]{.decile-low} | 450 [d3]{.decile-low} | [65 [d1]{.decile-low}]{.best} | 322 [d1]{.decile-low} | 1,085 |
+| ▲ Métro and REM stations inside the zone | stations | [3 [d9]{.decile-high}]{.best} | [3 [d9]{.decile-high}]{.best} | [3 [d9]{.decile-high}]{.best} | [3 [d9]{.decile-high}]{.best} | 0 |
+| ▲ Park area | % of zone | 9.2 [d7]{.decile-mid} | 2.8 [d1]{.decile-low} | 4.7 [d3]{.decile-low} | [12.9 [d9]{.decile-high}]{.best} | 6.6 |
+| ▲ Park area per 1 000 residents | ha | 0.80 [d4]{.decile-mid} | 0.25 [d1]{.decile-low} | 0.46 [d2]{.decile-low} | [0.96 [d5]{.decile-mid}]{.best} | 0.96 |
+
+: Parks and rapid transit within 1 km: large parks and borough parks (Ville de Montréal), métro and REM stations (OpenStreetMap contributors) {#tbl-parks}
+:::
+
+Parks are where the two subject zones part company most clearly. Sainte-Cécile's circle takes in
+**parc Jarry** — 35 ha, 369 m from the school door — plus the small **parc Sainte-Cécile**
+immediately beside the building, which is why its park share sits above the island median. La
+Petite-Patrie's circle reaches parc Jarry only at its far northern edge, 883 m away, so its own
+kilometre is served by the **Réseau Vert** linear park (693 m) and parc Sainte-Cécile (438 m), and
+lands in the bottom decile on both park measures. La Mennais draws on **parc Père-Marquette**
+(838 m); Louis-Hippolyte-Lafontaine has **parc La Fontaine** 391 m away, which is what puts it in
+the ninth decile.
+
+Rapid transit is strong for all four: each kilometre contains three métro stations, against an
+island median of none. La Mennais is 65 m from Beaubien on the orange line, Sainte-Cécile 248 m
+from Jean-Talon, Louis-Hippolyte-Lafontaine 322 m from Mont-Royal, and La Petite-Patrie 450 m
+from Beaubien — every one of them in the bottom decile for distance, meaning closer than almost
+any school on the island.
+
+# Living there now
+
+::: {.column-page}
+| Type | Bedrooms | Street or sector | Asking price | Source, date seen |
+|:---|---:|:---|---:|:---|
+| Triplex | not stated | 7213–7217 av. Casgrain, Villeray | $895,000 | [Centris 11549231](https://www.centris.ca/fr/triplex~a-vendre~montreal-villeray-saint-michel-parc-extension/11549231), 2026-09-26 |
+| Duplex | not stated | 7524–7526 av. De Gaspé, Villeray | $999,000 | [Centris](https://www.centris.ca/fr/duplex~a-vendre~villeray-montreal-villeray-saint-michel-parc-extension), 2026-09-26 |
+| Duplex | not stated | 7405–7407 av. Henri-Julien, Villeray | $1,399,000 | [Centris 10778944](https://www.centris.ca/en/duplexes~for-sale~montreal-villeray-saint-michel-parc-extension/10778944), 2026-09-26 |
+| House | 3 | 7782Z av. Casgrain, Villeray | $1,650,000 | [Centris 20059701](https://www.centris.ca/fr/maison~a-vendre~montreal-villeray-saint-michel-parc-extension/20059701), 2026-09-26 |
+
+: For sale, within about 1 km of the two schools. All figures from search-result snippets and *unverified*: the listing pages refuse non-browser clients. Bedroom counts are absent for the plexes, where the number that matters is the bedrooms in the owner-occupied unit. {#tbl-for-sale}
+:::
+
+::: {.column-page}
+| Type | Bedrooms | Street or sector | Monthly rent | Source, date seen |
+|:---|---:|:---|---:|:---|
+| Condo / apartment | 3 + office | Rosemont–La Petite-Patrie | $3,000 | [Centris 28036086](https://www.centris.ca/fr/condo-appartement~a-louer~montreal-rosemont-la-petite-patrie/28036086), 2026-09-26 |
+| Condo / apartment, ground floor of a renovated quadruplex | not stated | Villeray / Rosemont–La Petite-Patrie | $2,095 | [Centris 26969525](https://www.centris.ca/fr/condo-appartement~a-louer~montreal-villeray-saint-michel-parc-extension/26969525), 2026-09-26 |
+| Apartment, semi-furnished | 3 | 326 rue Beaubien Est, steps from Beaubien métro | not stated | [Centris 11002737](https://www.centris.ca/en/condos-apartments~for-rent~montreal-rosemont-la-petite-patrie/11002737), 2026-09-26 |
+| Apartment | 3 | 7190 rue de Bordeaux, app. 1, Villeray | not stated | [Centris 21151976](https://www.centris.ca/fr/condo-appartement~a-louer~montreal-villeray-saint-michel-parc-extension/21151976), 2026-09-26 |
+
+: For rent, within about 1 km of the two schools. Same caveat: figures from snippets and *unverified*, with rent missing for two listings and bedrooms for one. {#tbl-for-rent}
+:::
+
+::: {.callout-warning}
+## Listings expire — and this snapshot is thinner than usual
+
+These are 3+ bedroom listings found on 2026-09-26 within about a kilometre of the two schools,
+chosen for variety of type rather than as a sample; prices are asking prices, and the section is
+not refreshed when the post is republished. This run was unusually constrained: Centris,
+DuProprio and Realtor.ca all refuse individual listing pages to anything that is not a browser,
+so every figure here comes from a search-result snippet and is marked *unverified*, and bedroom
+counts are missing for the plex listings, where the relevant number is the bedrooms in the
+owner-occupied unit rather than in the building. Treat the table as four and four examples of
+what was on the market, nothing more. For a durable benchmark use the assessed values in
+@tbl-cost.
+:::
+
+# Sources and caveats
+
+- **School facts**: the CSSDM pages linked in the footnotes, opened 2026-09-26. Both school
+  websites return HTTP 403 to non-browser clients, so program, projet éducatif, admission
+  wording and the AMPLI point of service are *unverified*, taken from search-index extracts. The
+  schoolyard communiqué, the register of relocated schools and the 2012 *Journal Métro* article
+  did load and are verified.
+- **IMSE/SFR**: MEQ, *Indices de défavorisation*, Données Québec, school year 2025-2026.
+- **Zone tables**: `scripts/zone_stats.py` on open data fetched 2026-09-18 (Ville de Montréal,
+  Données Québec, INSPQ, Statistics Canada 2021 Census); 65 dissemination areas for
+  Sainte-Cécile, 61 for La Petite-Patrie, 60 for La Mennais and 75 for
+  Louis-Hippolyte-Lafontaine, assigned by centroid; the IEMV covers 100% of residents in all four
+  zones and tax bills matched for 99.8% to 99.9% of units. Census 2021 is five years old;
+  assessed values reflect the July 2024 market.
+- **Parks named above**: Ville de Montréal *espaces verts*, distances measured from the school
+  point in the same run.
+- **Listings**: as seen on Centris.ca on 2026-09-26, from search-result snippets only.
+- **Deciles**: among 229 in-scope schools, from `data/derived/zone_stats_all.parquet`.
+
+# Conclusion
+
+Four readings, in the order a parent weighs them. Each states what the tables show, not a verdict.
+
+**School.** Two CSSDM neighbourhood schools with no selective stream and no application gate:
+admission is by address, with *libre choix* only if places remain (@tbl-school-sc,
+@tbl-school-lpp). Sainte-Cécile is the larger of the two and has a rebuilt schoolyard from 2022;
+La Petite-Patrie is smaller, hosts the CSSDM's réseau Centre AMPLI classes, and holds a second
+MEQ address that is a transition building for another school rather than a sign of works on its
+own. IMSE deciles are 3 and 4, SFR decile 8 for both — a socioeconomic index of enrolled pupils,
+not a measure of academic performance.
+
+**Safety.** Both kilometres report crime above the island median on every category, with violent
+crime in the top decile and pedestrian and cyclist victims in the top decile within 500 m
+(@tbl-safety). The two subject zones are close to each other and below the Plateau comparator on
+the total. Both datasets are counts of reported events with known coverage gaps.
+
+**Livability.** Dense, heavily rented, strongly French-speaking, and short of children by island
+standards, with high turnover (@tbl-people, @tbl-indices). Transit is the standout: three métro
+stations in every kilometre and walking distance to the orange line from all four schools. Parks
+are where the two subjects diverge — parc Jarry sits inside Sainte-Cécile's circle and only
+clips La Petite-Patrie's (@tbl-parks).
+
+**Affordability.** Plex-dominated prewar stock with almost no single-family houses; assessed
+values and 2026 tax bills in the ninth decile for every property type, above the island median
+by a wide margin (@tbl-stock, @tbl-cost). The month's listings are consistent with that but too
+few and too lightly verified to add much (@tbl-for-sale, @tbl-for-rent).
+
+Next steps for these schools:
+
+1. **Confirm the catchment** on the CSSDM finder for candidate addresses. The boundary between
+   the two schools runs somewhere inside this overlap and the circle is only a stand-in; an
+   address 537 m from both is not necessarily eligible for either one you prefer.
+2. **Watch the January registration window** — registration runs through January at the school
+   secretariat for the following school year.
+3. **Check whether 35 rue Saint-Zotique Est is still a transition building** before reading
+   anything into La Petite-Patrie's second MEQ address; Félix-Leclerc's occupancy ends when its
+   Darlington works do.
+4. **What this report does not yet cover**: childcare places, transit frequency, heat islands,
+   rents by CMHC zone, and the secondary school the zone feeds.
+
+::: {.callout-important}
+## Bottom line
+
+These two schools are close enough that the choice between them is mostly a choice of street
+rather than of neighbourhood: the census, safety and cost tables barely separate them, and the
+clearest difference is that parc Jarry falls inside one kilometre and not the other. The thing to
+verify before acting is the catchment boundary on the CSSDM finder — neither school takes pupils
+on preference alone, and in this overlap an address decides which of the two is yours.
+:::
