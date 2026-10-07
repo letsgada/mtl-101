@@ -40,7 +40,9 @@ than once; use web search results and mark the fact `unverified`.
 
 `program_type`: `regular`, `ib` (Programme d'éducation internationale, PEI, IB PYP), `alternative`
 (Freinet, pédagogie alternative, école alternative), `arts` (musique, danse, arts-études, FACE),
-`science`, `gifted` (douance), `other` (sport-études, langues, anything else; say what in notes).
+`science`, `gifted` (douance), `specialised` (école spécialisée: a mandate for pupils with disabilities or
+specific needs, usually supraregional intake; never a neighbourhood option, so the quartier report lists it in
+its note and excludes it from the tables), `other` (sport-études, langues, anything else; say what in notes).
 A school with no program row is **unknown**, never `regular` by default.
 
 `admission_model` (from `project_brief.md`):

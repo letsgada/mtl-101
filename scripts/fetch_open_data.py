@@ -77,6 +77,12 @@ DATASETS: dict[str, dict] = {
                 note="Ministère de la Famille childcare installations with PLACE_TOTAL; no coordinates."),
     "bikes": dict(portal="mtl", dataset="pistes-cyclables", format="GeoJSON", file="pistes-cyclables.geojson"),
     "rev": dict(portal="mtl", dataset="reseau-express-velo", format="GeoJSON", file="reseau-express-velo.geojson"),
+    "quartiers": dict(portal="mtl", dataset="quartiers-sociologiques", format="GeoJSON",
+                      file="quartiers-sociologiques.geojson",
+                      note="Ville de Montréal sociological quartiers (32 polygons over the 19 boroughs; related cities not covered)."),
+    "schools_private": dict(portal="dq", dataset="localisation-des-etablissements-d-enseignement-du-reseau-scolaire-au-quebec",
+                            format="GeoJSON", name=r"^Établissements privés$", file="pps_prive_etablissement.geojson",
+                            note="MEQ private school points, for the 'also in the quartier' note."),
     "imse": dict(portal="dq", dataset="indices-de-defavorisation", format="CSV",
                  name=r"^Défavorisation - Écoles primaires", file="defav_ecole_prim_public.csv",
                  note="MEQ IMSE and SFR deciles per public elementary school (Code_Org = MEQ school code), yearly."),
@@ -94,7 +100,7 @@ DATASETS: dict[str, dict] = {
                       file="metro_stations_osm.json", headers={"User-Agent": "mtl-101/0.1 (https://letsgada.github.io/mtl-101)"},
                       note="Métro and REM stations from OpenStreetMap via Overpass (ODbL, credit OpenStreetMap contributors)."),
 }
-CORE = ["schools", "crimes", "pdq", "boroughs", "uev", "parks", "collisions", "pampalon", "iemv", "census_da_qc", "imse", "metro_osm"]
+CORE = ["schools", "crimes", "pdq", "boroughs", "uev", "parks", "collisions", "pampalon", "iemv", "census_da_qc", "imse", "metro_osm", "quartiers", "schools_private"]
 
 app = typer.Typer(add_completion=False, help=__doc__, rich_markup_mode=None)
 

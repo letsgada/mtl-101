@@ -8,6 +8,7 @@
     uv run scripts/zone_stats.py --point -73.5978 45.4838 --label "NDG permanent site"
     uv run scripts/zone_stats.py --all            # every francophone public elementary school on the island
     uv run scripts/zone_stats.py --radius 800 --format csv --out data/derived/seed.csv "Saint-Nom-de-Jésus"
+    uv run scripts/zone_stats.py 762071 762076 --edge 762095 --area data/derived/area_villeray.geojson --format csv
 
 The zone is a circle of --radius metres (default 1 000) around the school building, because
 no per-school catchment polygon exists as open data (project_brief.md, Layer 2). Everything
@@ -232,11 +233,21 @@ class Data:
 
 
 def zone_stats(d: Data, x: float, y: float, radius: float, collision_radius: float) -> dict:
-    buf = Point(x, y).buffer(radius)
-    out: dict = {}
+    """Metrics for a circle of `radius` around (x, y) in EPSG:32188."""
+    return zone_stats_geom(d, Point(x, y).buffer(radius), Point(x, y), collision_radius)
 
-    b = d.boroughs[d.boroughs.contains(Point(x, y))]
+
+def zone_stats_geom(d: Data, buf, origin: Point | None, collision_radius: float) -> dict:
+    """Metrics for any polygon `buf` (EPSG:32188). `origin` is the school point for the two
+    point-relative metrics (victims within collision_radius, distance to the nearest station);
+    pass None for an area with no single origin and those two come back as NaN."""
+    out: dict = {}
+    centre = origin if origin is not None else buf.centroid
+    b = d.boroughs[d.boroughs.contains(centre)]
     out["borough"] = b.NOM.iloc[0] if len(b) else None
+    if origin is None:
+        touching = d.boroughs[d.boroughs.intersects(buf)]
+        out["boroughs"] = "; ".join(sorted(touching.NOM))
 
     das = d.das.iloc[d.das.sindex.query(buf, predicate="contains")]
     out["n_da"] = len(das)
@@ -266,9 +277,12 @@ def zone_stats(d: Data, x: float, y: float, radius: float, collision_radius: flo
     for g in ["violent", "breakins", "vehicle", "mischief"]:
         out[f"crime_{g}"] = ratio((cr.group == g).sum() / per_year, pop, 1000)
 
-    cbuf = Point(x, y).buffer(collision_radius)
-    co = d.collisions.iloc[d.collisions.sindex.query(cbuf, predicate="contains")]
-    out["ped_cycl_victims_per_yr"] = co.victims.sum() / len(COLLISION_YEARS)
+    if origin is not None:
+        cbuf = origin.buffer(collision_radius)
+        co = d.collisions.iloc[d.collisions.sindex.query(cbuf, predicate="contains")]
+        out["ped_cycl_victims_per_yr"] = co.victims.sum() / len(COLLISION_YEARS)
+    else:
+        out["ped_cycl_victims_per_yr"] = float("nan")  # defined relative to a school door
 
     un = d.units.iloc[d.units.sindex.query(buf, predicate="contains")]
     resu = un[un.kind != "other"]
@@ -287,12 +301,15 @@ def zone_stats(d: Data, x: float, y: float, radius: float, collision_radius: flo
     out["tax_coverage_pct"] = ratio(resu.cls.notna().sum(), len(resu))
 
     if d.metro is not None:
-        dist = d.metro.geometry.distance(Point(x, y))
-        i = dist.idxmin()
-        out["metro_m"] = float(dist[i])
-        out["metro_name"] = d.metro.loc[i, "name"]
-        out["metro_kind"] = "REM" if d.metro.loc[i, "kind"] == "light_rail" else "métro"
-        out["metro_in_zone"] = int((dist <= radius).sum())
+        out["metro_in_zone"] = int(d.metro.within(buf).sum())
+        if origin is not None:
+            dist = d.metro.geometry.distance(origin)
+            i = dist.idxmin()
+            out["metro_m"] = float(dist[i])
+            out["metro_name"] = d.metro.loc[i, "name"]
+            out["metro_kind"] = "REM" if d.metro.loc[i, "kind"] == "light_rail" else "métro"
+        else:
+            out["metro_m"] = float("nan")  # defined relative to a school door
     else:
         out["metro_m"] = out["metro_in_zone"] = float("nan")
 
@@ -375,7 +392,8 @@ def markdown(results: list[dict], ref: pd.DataFrame | None, radius: float, fetch
             cells.append(cell)
         med = fmt(key, ref[key].median()) if ref is not None else None
         lines.append(f"| {label} | {unit} | " + " | ".join(cells) + (f" | {med} |" if ref is not None else " |"))
-    notes = [f"Zone = {radius:.0f} m circle around the school building; collisions within 500 m. "
+    notes = [f"Zone = {radius:.0f} m circle around the school building (an `area` row is the whole polygon; "
+             f"its victims-within-500-m and métro-distance cells are blank); collisions within 500 m. "
              f"(dN) = decile among {len(ref)} island francophone public elementary schools, 1 = lowest tenth."
              if ref is not None else f"Zone = {radius:.0f} m circle around the school building."]
     for r in results:
@@ -418,6 +436,10 @@ def main(
     no_deciles: Annotated[bool, typer.Option("--no-deciles", help="omit deciles even if the cache exists")] = False,
     anchor: Annotated[Optional[tuple[float, float]], typer.Option(
         "--anchor", metavar="LON LAT", help="centre the FIRST school's zone on this point (temporary site)")] = None,
+    area: Annotated[Optional[Path], typer.Option(
+        "--area", help="GeoJSON polygon (from area_info.py): add one row computed over the whole area")] = None,
+    edge: Annotated[Optional[list[str]], typer.Option(
+        "--edge", help="school codes to mark role=edge (outside the area but within the margin)")] = None,
     age_warn: Annotated[int, typer.Option(help="warn when a cached dataset is older than this many days")] = 90,
     fmt_: Annotated[Format, typer.Option("--format", help="output format")] = Format.md,
     out: Annotated[Optional[Path], typer.Option(help="write the output here instead of stdout")] = None,
@@ -444,9 +466,11 @@ def main(
         logger.warning("no decile cache; run with --all once to get deciles")
 
     results = []
+    edge_codes = set(edge or [])
     if schools:
         for i, s in enumerate(find_schools(d, schools).itertuples()):
             row = school_row(s)
+            row["role"] = "edge" if str(s.CD_ORGNS) in edge_codes else "school"
             x, y = s.geometry.x, s.geometry.y
             if anchor and i == 0:
                 p = gpd.GeoSeries([Point(*anchor)], crs=4326).to_crs(CRS).iloc[0]
@@ -458,11 +482,17 @@ def main(
     if point:
         lon, lat = point
         p = gpd.GeoSeries([Point(lon, lat)], crs=4326).to_crs(CRS).iloc[0]
-        row = dict(label=label or f"{lon:.4f}, {lat:.4f}", school=label or "point", lon=lon, lat=lat)
+        row = dict(label=label or f"{lon:.4f}, {lat:.4f}", school=label or "point", lon=lon, lat=lat, role="point")
         row.update(zone_stats(d, p.x, p.y, radius, collision_radius))
         results.append(row)
+    if area:
+        g = gpd.read_file(area, engine="pyogrio").to_crs(CRS)
+        name = next((str(g.iloc[0][c]) for c in ("name", "Q_sociologique", "NOM") if c in g.columns), area.stem)
+        row = dict(label=name, school=name, role="area", lon=None, lat=None)
+        row.update(zone_stats_geom(d, g.geometry.union_all(), None, collision_radius))
+        results.append(row)
     if not results:
-        logger.error("give school names, --point, or --all")
+        logger.error("give school names, --point, --area, or --all")
         raise typer.Exit(2)
 
     if fmt_ is Format.md:
