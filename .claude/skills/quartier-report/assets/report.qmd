@@ -1,0 +1,201 @@
+---
+title: "<Quartier>: its <N> schools"
+date: "<YYYY-MM-DD>"
+categories: [quartier-report, <borough-slug>, layer-1, layer-2]
+description: "<One sentence: how many francophone public elementary schools the quartier has, how their kilometres differ, and what a three-bedroom home costs there this month.>"
+toc: true
+code-annotations: hover
+---
+
+<!-- Template for the quartier-report skill. Replace every <placeholder>; delete comments and
+     any section the run could not fill (say so in Sources instead of leaving a stub). Every
+     number comes from data/derived/area_<slug>.csv, area_<slug>_schools.csv or a listing
+     opened in this run. -->
+
+<Quartier> is <one sentence placing it: borough, what bounds it>. This report compares every
+francophone public elementary school in it: <N inside> whose building lies inside the quartier
+as the city draws it, and <N edge> just outside its boundary within 300 m, marked † throughout.
+For each school it shows the school itself, the kilometre around its building on the same
+metrics as a school report, and the three-bedroom homes listed near it this month. It is one
+output of MTL-101, which works backwards from the school to the neighbourhood.
+
+::: {.callout-important}
+## Not a ranking
+
+Each zone metric is shown with its decile among the <N> francophone public elementary schools on
+the island outside the West Island, marked [d1]{.decile-low} to [d3]{.decile-low} for the lowest
+three tenths, [d4]{.decile-mid} to [d7]{.decile-mid} for the middle, and [d8]{.decile-high} to
+[d10]{.decile-high} for the top three. A high decile means a high value, nothing more, so the
+column header says which way is favourable for a family: ▲ higher is favourable, ▼ lower is
+favourable, and columns with no glyph are descriptive. In the ▲ and ▼ columns the most
+favourable school is [shaded]{.best}. The report computes no composite score and names no best
+school; the IMSE is a socioeconomic index of the pupils enrolled, not a measure of academic
+performance.
+:::
+
+# The area
+
+The polygon is the city's *quartier sociologique* <or: the municipality's boundary, because the
+city file does not cover related cities>, <area> km² in <borough>. Each pin is a school
+building; dashed pins are the edge schools; M and R squares are métro and REM stations inside
+the quartier.
+
+```{=html}
+<!-- paste the output of zone_map.py --area here -->
+```
+
+::: {.callout-note}
+## Also in the quartier, outside this report's scope
+
+<One line per entry from area_info.py's note: name, what it is (anglophone board, secondary,
+adult centre, private, specialised with its mandate), address. Nothing is computed for them.>
+:::
+
+# The schools
+
+<!-- paste tbl-overview from report_tables.py --layout rows -->
+
+The MEQ's IMSE decile (1 = most advantaged, 10 = most disadvantaged; 8 to 10 is the official
+*milieu défavorisé*) is built from the enrolled pupils' parents' education and employment, not
+from test results, and it can differ from the census figures for the residents of a school's
+kilometre: <one sentence on where the two agree or diverge in this quartier and why (choice
+programs, edge schools drawing from the next quartier)>. Program and admission come from the
+project's hand-checked table; "unknown" means no page has been checked yet, not a regular
+program.
+
+::: {.callout-tip}
+## Reading the table
+
+<Three to five sentences: which schools have a volet and what it means for admission; the
+spread of IMSE deciles inside one quartier (the brief's point); which kilometres stand out on
+the headline columns and why (an arterial street, a park, a métro). No verdicts.>
+:::
+
+# The kilometres compared
+
+Every row is the circle of one kilometre around that school's building, a stand-in for the
+catchment polygon that exists only in the service centre's finder and PDF maps. The *<Quartier>*
+row is computed over the whole polygon, and the island median over all <N> in-scope schools.
+
+## Who lives there
+
+<!-- paste tbl-people -->
+
+::: {.callout-tip}
+## Reading the table
+
+<Two to four sentences. No verdicts.>
+:::
+
+<!-- paste tbl-indices -->
+
+::: {.callout-note}
+## Social deprivation is high across central Montreal
+
+The INSPQ social axis counts people living alone and lone-parent families, which the dense
+central boroughs are full of; read it with the households-with-children column of @tbl-people.
+:::
+
+## Safety
+
+<!-- paste tbl-safety -->
+
+::: {.callout-tip}
+## Reading the table
+
+<Which kilometres sit high and what they contain; the 500 m walk column; edge schools.>
+:::
+
+::: {.callout-warning}
+## What these two datasets cannot say
+
+The city states the incident file is not official SPVM statistics; positions are moved to the
+nearest intersection and 17% of incidents have no coordinates and are absent from the rates.
+The collision extract ends in 2021; its last two years are pandemic years. Both are rates of
+reported events, not of risk. The quartier row has no victims-within-500-m figure because that
+metric is defined from a school door.
+:::
+
+## Housing and what it costs to own
+
+<!-- paste tbl-stock and tbl-cost -->
+
+::: {.callout-tip}
+## Reading the tables
+
+<Stock mix across the quartier; where values sit against the island; the spread between
+schools.>
+:::
+
+## Parks and transit
+
+<!-- paste tbl-parks -->
+
+<One or two sentences: the large parks and which kilometres reach them; the métro stations and
+which schools are nearest.>
+
+# Living there now
+
+<!-- paste the output of listings_assign.py: tbl-for-sale, tbl-for-rent, and its "no listing"
+     lines -->
+
+::: {.callout-warning}
+## Listings expire
+
+These are the 3+ bedroom listings found on <date> near each school, two or three per side per
+school, chosen for variety of type rather than as a sample; each listing is shown once, under
+the school whose building is nearest; prices are asking prices; the section is not refreshed
+when the post is republished. For a durable benchmark use the assessed values in @tbl-cost,
+which reflect the July 2024 market.
+:::
+
+# Sources and caveats
+
+- **Area**: Ville de Montréal, *Quartiers sociologiques* <or agglomeration limits>, opened on
+  <date>; schools within 300 m outside the polygon included as edge schools.
+- **School facts**: MEQ school points and *Indices de défavorisation* (school year <year>);
+  program and admission from the project's `data/schools_programs.csv` as of <date>; no
+  per-school web research in this report.
+- **Zone tables**: `scripts/zone_stats.py` on open data fetched between <oldest> and <newest>
+  (Ville de Montréal, Données Québec, INSPQ, Statistics Canada 2021 Census; métro and REM
+  stations from OpenStreetMap contributors); dissemination areas by centroid, <min> to <max>
+  per school kilometre and <n> for the quartier; IEMV coverage <x>%; tax bills matched for
+  <y>% of units. Census 2021 is five years old; assessed values reflect the July 2024 market.
+- **Listings**: as seen on <sites> on <date>.
+- **Deciles**: among <N> in-scope schools, from `data/derived/zone_stats_all.parquet`.
+
+# Conclusion
+
+Four readings across the quartier, in the order a parent weighs them. Each states what the
+tables show, not a verdict.
+
+**School.** <Which schools carry a volet and how they admit; the IMSE spread across the quartier
+and what the brief says about it; any school with an existing full report (@tbl-overview).>
+
+**Safety.** <Where the crime and walk-to-school columns cluster, which kilometres differ, the
+datasets' limits (@tbl-safety).>
+
+**Livability.** <Children and households with children across the kilometres; the composite
+indices; parks and métro access; the edge schools' other quartier (@tbl-people, @tbl-indices,
+@tbl-parks).>
+
+**Affordability.** <The stock, the assessed values and bills across the quartier against the
+island, and what the listings found this month say (@tbl-stock, @tbl-cost, @tbl-for-sale,
+@tbl-for-rent).>
+
+Next steps:
+
+1. **Run `/school-report`** on the two or three schools that stand out for the family; this
+   report has no per-school research (program pages, renovations, relocations).
+2. **Confirm the catchments** for candidate addresses on the <CSS> finder; a kilometre is a
+   stand-in and neighbouring schools' circles overlap heavily here.
+3. **What this report does not yet cover**: renovations and relocations, childcare places,
+   transit frequency, heat islands, rents by CMHC zone, and the secondary schools the quartier
+   feeds (<list the secondary schools from the note>).
+
+::: {.callout-important}
+## Bottom line
+
+<Two sentences: what a parent now knows about this quartier's schools and kilometres, and the
+one thing to verify before acting.>
+:::

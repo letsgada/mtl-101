@@ -38,6 +38,7 @@ project_brief.md       domain brief (renders nowhere: only *.qmd render)
 scripts/               Layer 2 pipeline and report helpers, `uv run` scripts with inline deps (see Scripts)
 data/schools_programs.csv  hand-checked program and admission model per school, grown by /school-report
 .claude/skills/school-report/  the project's own skill (repo content, not a symlink): one school in, one post out
+.claude/skills/quartier-report/  the project's second skill: one quartier in, every school in it compared
 data/raw/              downloaded open data, gitignored; data/raw/manifest.json records URLs and dates
 data/derived/          parquet caches built by the prep scripts, gitignored
 .github/workflows/publish.yml   renders and deploys to GitHub Pages on push to main
@@ -87,6 +88,11 @@ uv run scripts/imse.py 762103                                        # MEQ IMSE/
 uv run scripts/zone_stats.py 762103 762087 --anchor -73.6235 45.5405 --format csv --out data/derived/report_x.csv  # --anchor recentres the first school's zone (relocated school)
 uv run scripts/report_tables.py data/derived/report_x.csv            # the six captioned Quarto tables with decile spans
 uv run scripts/zone_map.py 762103 762087 --out map.html              # MapLibre map fragment for a ```{=html} block (métro/REM stations from fetch key metro_osm)
+uv run scripts/area_info.py "Villeray" --margin 300                 # quartier polygon (fetch key `quartiers`), schools inside and within the margin, out-of-scope note
+uv run scripts/zone_stats.py <codes…> --edge <code> --area data/derived/area_villeray.geojson --format csv --out data/derived/area_villeray.csv  # + one row over the whole polygon
+uv run scripts/report_tables.py data/derived/area_villeray.csv --layout rows --info data/derived/area_villeray_schools.csv  # overview + group tables, schools as rows
+uv run scripts/zone_map.py <codes…> --edge <code> --area data/derived/area_villeray.geojson --out map.html   # polygon outline, one pin per school, no accent pin
+uv run scripts/listings_assign.py data/derived/area_villeray_listings.csv data/derived/area_villeray_schools.csv  # listings to nearest school, two tables
 ```
 
 `zone_stats.py` is the entry point: a 1 km circle around the school point (no per-school
@@ -96,8 +102,12 @@ and exclude the West Island; `--age-warn` (default 90 days) logs a warning per s
 Metric definitions live in its `METRICS` list as (key, label, unit, format, direction), direction being
 `up` (higher is favourable for a family), `down` (lower is favourable: safety, deprivation, cost) or `""`
 (descriptive); add a metric there and in `zone_stats()`, then re-run `--all`. The STM GTFS link serves a
-bot-check page to non-browsers; métro and REM stations come from OpenStreetMap via Overpass (`metro_osm`). `school_info.py`, `report_tables.py` and `zone_map.py` import from `zone_stats.py`, so keep its
-module-level names (`Data`, `METRICS`, `find_schools`, `deciles`, `fmt`, `WEST_ISLAND`) stable. Downloads need a browser-like User-Agent or the city
+bot-check page to non-browsers; métro and REM stations come from OpenStreetMap via Overpass (`metro_osm`). `school_info.py`, `area_info.py`, `report_tables.py`, `zone_map.py` and `listings_assign.py` import from
+`zone_stats.py` (and `area_info.py` from `school_info.py`, `listings_assign.py` from `geocode.py`), so keep
+their module-level names (`Data`, `METRICS`, `find_schools`, `zone_stats_geom`, `deciles`, `fmt`, `WEST_ISLAND`,
+`programs`, `imse_row`, `all_buildings`, `geocode`, `CACHE`) stable. `program_type` vocabulary in
+`data/schools_programs.csv`: regular, ib, alternative, arts, science, gifted, specialised (excluded from quartier
+tables), other; no row means unknown. Downloads need a browser-like User-Agent or the city
 portal returns `RBAC: access denied` with a 200 status; the fetcher handles it.
 
 ## Writing posts
@@ -162,6 +172,11 @@ and deployment → Source: "GitHub Actions". Regenerate the workflow with the
 `quarto-writeup` and `surge-artifacts` under `.claude/skills/`, and `commit-changes` under
 `.claude/commands/`, are symlinks into `../dotfiles/.claude/` on the author's machine, not repo
 content; they resolve only there. `/quarto-site-setup` step 0 recreates them.
+
+`quartier-report` under `.claude/skills/` is repo content too: `/quartier-report "Villeray"` resolves the city's
+quartier polygon, confirms the school set with the user, runs the zone scripts for every school plus the whole
+polygon, gathers listings per school, and drafts `posts/<quartier>-schools.qmd` the same way. An area map draws
+the polygon and zone-coloured pins only; the accent pin is reserved for a chosen school.
 
 `school-report` under `.claude/skills/` is repo content and is committed: `/school-report "École X"`
 resolves the school, researches it, runs the zone scripts, asks for comparators, drafts a post through
