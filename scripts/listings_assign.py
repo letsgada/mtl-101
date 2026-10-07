@@ -47,9 +47,14 @@ def table(rows: pd.DataFrame, side: str, schools: pd.DataFrame) -> str:
     L = ["::: {.column-page}", f"| School | Type | Bedrooms | Street or sector | {price_head} | Source, date seen |",
          "|:---|:---|---:|:---|---:|:---|"]
     got = set()
-    for r in rows.sort_values(["school_short", "price"]).itertuples():
+    rows = rows.assign(_p=pd.to_numeric(rows.price, errors="coerce"))
+    for r in rows.sort_values(["school_short", "_p"]).itertuples():
         got.add(r.school_code)
-        L.append(f"| {r.school_short} | {r.type} | {r.bedrooms} | {r.street_or_sector} | {r.price} | "
+        try:
+            price = f"${float(r.price):,.0f}"
+        except ValueError:
+            price = r.price
+        L.append(f"| {r.school_short} | {r.type} | {r.bedrooms} | {r.street_or_sector} | {price} | "
                  f"[{r.source}]({r.url}), {r.date_seen} |")
     missing = [s.short for s in schools.itertuples() if s.code not in got]
     L += ["", f": {cap} {{#{tid}}}", ":::", ""]
