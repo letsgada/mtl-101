@@ -1,0 +1,495 @@
+---
+title: "Villeray: its ten schools"
+date: "2026-10-07"
+categories: [quartier-report, villeray-saint-michel-parc-extension, layer-1, layer-2]
+description: "Nine francophone public elementary schools inside the Villeray quartier and one on its edge, compared on who lives around them, safety, housing and cost, with the MEQ deciles running from 3 to 10 inside one neighbourhood."
+toc: true
+code-annotations: hover
+---
+
+Villeray is the central part of the Villeray–Saint-Michel–Parc-Extension borough: the
+Metropolitan autoroute to the north, Parc-Extension beyond parc Jarry and the railway to the
+west, Saint-Michel to the east, and Rosemont–La Petite-Patrie across rue Jean-Talon to the
+south. This report compares every
+francophone public elementary school in it: nine whose building lies inside the quartier as the
+city draws it, and one just outside its southern boundary within 300 m, Saint-Arsène, marked †
+throughout. For each school it shows the school itself, the kilometre around its building on
+the same metrics as a school report, and the three-bedroom homes listed near it this month. It
+is the first output of MTL-101's `quartier-report` skill, run as a dry run.
+
+::: {.callout-important}
+## Not a ranking
+
+Each zone metric is shown with its decile among the 229 francophone public elementary schools on
+the island outside the West Island, marked [d1]{.decile-low} to [d3]{.decile-low} for the lowest
+three tenths, [d4]{.decile-mid} to [d7]{.decile-mid} for the middle, and [d8]{.decile-high} to
+[d10]{.decile-high} for the top three. A high decile means a high value, nothing more, so the
+column header says which way is favourable for a family: ▲ higher is favourable, ▼ lower is
+favourable, and columns with no glyph are descriptive. In the ▲ and ▼ columns the most
+favourable school is [shaded]{.best}. The report computes no composite score and names no best
+school; the IMSE is a socioeconomic index of the pupils enrolled, not a measure of academic
+performance.
+:::
+
+# The area
+
+The polygon is the city's *quartier sociologique*, 5.67 km² in Villeray–Saint-Michel–Parc-
+Extension. Each pin is a school building; the dashed pin is the edge school; M squares are the
+three métro stations inside the quartier, Jarry, De Castelnau and D'Iberville; Jean-Talon
+station lies just outside its boundary.
+
+```{=html}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/maplibre-gl/4.7.1/maplibre-gl.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/maplibre-gl/4.7.1/maplibre-gl.min.js"></script>
+<div id="zone-map-area_villeray" class="zone-map" style="height:420px;border:1px solid var(--zone-soft);border-radius:4px"></div>
+<script>
+(function () {
+  var css = getComputedStyle(document.documentElement);
+  var accent = css.getPropertyValue('--accent').trim() || '#c1272d';
+  var zone = css.getPropertyValue('--zone').trim() || '#5b6b7a';
+  var soft = css.getPropertyValue('--zone-soft').trim() || '#dfe4ea';
+  var data = {"subject": null, "anchor": {"lon": -73.607641, "lat": 45.55252, "label": null}, "radius": 1000.0, "circle": null, "area": {"type": "Feature", "properties": {}, "geometry": {"type": "Polygon", "coordinates": [[[-73.64578, 45.535135], [-73.645686, 45.535284], [-73.644575, 45.536993], [-73.64281, 45.539728], [-73.642429, 45.540323], [-73.64172, 45.541423], [-73.640911, 45.542669], [-73.64072, 45.54297], [-73.640536, 45.543245], [-73.640384, 45.543463], [-73.640235, 45.543674], [-73.640105, 45.543839], [-73.639858, 45.544138], [-73.639092, 45.545027], [-73.637358, 45.547035], [-73.636698, 45.547793], [-73.636411, 45.548114], [-73.636104, 45.548394], [-73.635655, 45.548737], [-73.63533, 45.548945], [-73.634907, 45.54918], [-73.634562, 45.549338], [-73.63404, 45.549559], [-73.633585, 45.549719], [-73.633165, 45.54984], [-73.63293, 45.549894], [-73.632419, 45.55], [-73.631614, 45.550132], [-73.631075, 45.550212], [-73.630508, 45.550319], [-73.629969, 45.550451], [-73.629542, 45.550572], [-73.628997, 45.550759], [-73.628503, 45.550962], [-73.627984, 45.551212], [-73.62637, 45.552076], [-73.624003, 45.553358], [-73.622797, 45.554008], [-73.621945, 45.554566], [-73.621313, 45.55474], [-73.620709, 45.554994], [-73.618803, 45.555787], [-73.618219, 45.556028], [-73.61664, 45.556689], [-73.613789, 45.557873], [-73.613357, 45.558049], [-73.612441, 45.558431], [-73.612235, 45.558244], [-73.612168, 45.558177], [-73.611963, 45.558053], [-73.611719, 45.557915], [-73.611265, 45.557726], [-73.608965, 45.556699], [-73.607094, 45.555856], [-73.606676, 45.555667], [-73.606249, 45.555479], [-73.604795, 45.554839], [-73.604364, 45.554649], [-73.603951, 45.554467], [-73.602481, 45.55382], [-73.602023, 45.553618], [-73.60159, 45.553428], [-73.600091, 45.552772], [-73.599294, 45.552569], [-73.598468, 45.552188], [-73.598457, 45.552183], [-73.601867, 45.548189], [-73.602055, 45.547957], [-73.602946, 45.546957], [-73.603532, 45.546343], [-73.607041, 45.547955], [-73.608387, 45.546447], [-73.609671, 45.545059], [-73.610055, 45.544631], [-73.610904, 45.543685], [-73.612273, 45.542202], [-73.612613, 45.541691], [-73.612944, 45.541074], [-73.613876, 45.539143], [-73.614095, 45.538737], [-73.614315, 45.538443], [-73.614777, 45.53793], [-73.615552, 45.537105], [-73.616101, 45.536472], [-73.6173, 45.535207], [-73.6182, 45.534789], [-73.618296, 45.534682], [-73.621517, 45.531134], [-73.621534, 45.53111], [-73.62173, 45.531172], [-73.62798, 45.532197], [-73.634423, 45.533254], [-73.634743, 45.533308], [-73.641122, 45.534362], [-73.645414, 45.535076], [-73.64578, 45.535135]]]}}, "bounds": [[-73.64578, 45.53111], [-73.598457, 45.558431]], "comparators": [{"lon": -73.607641, "lat": 45.55252, "name": "École Saint-Barthélemy, pavillon des Érables", "address": "Saint-Barthélémy, pavillon Sagard, 7400, rue Sagard", "edge": false}, {"lon": -73.616826, "lat": 45.552681, "name": "École Saint-Grégoire-le-Grand", "address": "Saint-Grégoire-le-Grand, 7950, rue Cartier", "edge": false}, {"lon": -73.611574, "lat": 45.54703, "name": "École Saint-Gabriel-Lalemant", "address": "Saint-Gabriel-Lalemant, 7350, rue Garnier", "edge": false}, {"lon": -73.620453, "lat": 45.546057, "name": "École Marie-Favery", "address": "Marie-Favery, 7750, avenue Christophe-Colomb", "edge": false}, {"lon": -73.635082, "lat": 45.545293, "name": "École Saint-Gérard", "address": "Saint-Gérard, 505, rue de Liège Est", "edge": false}, {"lon": -73.629502, "lat": 45.540127, "name": "École Hélène-Boullé", "address": "Hélène-Boullé, 8050, avenue de Gaspé", "edge": false}, {"lon": -73.61782, "lat": 45.536806, "name": "École Sainte-Cécile", "address": "Sainte-Cécile, 7230, avenue de Gaspé", "edge": false}, {"lon": -73.628584, "lat": 45.548064, "name": "École Gadbois", "address": "Gadbois, 8305, rue Saint-André", "edge": false}, {"lon": -73.639501, "lat": 45.540028, "name": "École Saint-Pierre-Apôtre", "address": "Saint-Pierre-Apôtre, 8550, rue Clark", "edge": false}, {"lon": -73.610278, "lat": 45.54136, "name": "École Saint-Arsène", "address": "Saint-Arsène, 6972, avenue Christophe-Colomb", "edge": true}], "mark": null, "stations": [{"lon": -73.6026995, "lat": 45.5525993, "name": "D’Iberville", "kind": "subway"}, {"lon": -73.6201056, "lat": 45.5352621, "name": "De Castelnau", "kind": "subway"}, {"lon": -73.6286029, "lat": 45.5432233, "name": "Jarry", "kind": "subway"}]};
+  var map = new maplibregl.Map({
+    container: 'zone-map-area_villeray', style: 'https://tiles.openfreemap.org/styles/positron', bounds: data.bounds,
+    fitBoundsOptions: {padding: 24}, scrollZoom: false, attributionControl: false
+  });
+  map.addControl(new maplibregl.NavigationControl({showCompass: false}), 'top-left');
+  map.addControl(new maplibregl.AttributionControl({compact: true,
+    customAttribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &middot; <a href="https://openfreemap.org">OpenFreeMap</a>'}));
+  function pin(lonlat, style, html, text) {
+    var el = document.createElement('div');
+    el.style.cssText = style;
+    if (text) { el.textContent = text; }
+    var m = new maplibregl.Marker({element: el}).setLngLat(lonlat).addTo(map);
+    if (html) { m.setPopup(new maplibregl.Popup({offset: 12, closeButton: false}).setHTML(html)); }
+    return m;
+  }
+  map.on('load', function () {
+    if (data.circle) {
+      map.addSource('zone', {type: 'geojson', data: data.circle});
+      map.addLayer({id: 'zone-fill', type: 'fill', source: 'zone', paint: {'fill-color': soft, 'fill-opacity': 0.35}});
+      map.addLayer({id: 'zone-line', type: 'line', source: 'zone', paint: {'line-color': zone, 'line-width': 2}});
+    }
+    if (data.area) {
+      map.addSource('area', {type: 'geojson', data: data.area});
+      map.addLayer({id: 'area-fill', type: 'fill', source: 'area', paint: {'fill-color': soft, 'fill-opacity': 0.2}});
+      map.addLayer({id: 'area-line', type: 'line', source: 'area', paint: {'line-color': zone, 'line-width': 2.5}});
+    }
+    data.stations.forEach(function (st) {
+      pin([st.lon, st.lat], 'width:18px;height:18px;border-radius:3px;background:#fff;border:2px solid ' + zone +
+          ';color:' + zone + ';font:bold 11px/14px sans-serif;text-align:center;cursor:pointer',
+          '<b>' + st.name + '</b><br>' + (st.kind === 'light_rail' ? 'REM' : 'Métro') + ' station',
+          st.kind === 'light_rail' ? 'R' : 'M');
+    });
+    data.comparators.forEach(function (s) {
+      var border = (s.edge ? '2px dashed ' : '2px solid ') + zone;
+      var size = data.subject ? 12 : 14;
+      pin([s.lon, s.lat], 'width:' + size + 'px;height:' + size + 'px;border-radius:50%;background:' + soft + ';border:' + border + ';cursor:pointer',
+          '<b>' + s.name + '</b><br>' + s.address + (s.edge ? '<br><i>outside the area, within the margin</i>' : ''));
+    });
+    if (data.mark) {
+      pin([data.mark.lon, data.mark.lat], 'width:14px;height:14px;border-radius:50%;background:#fff;border:2px dashed ' + accent + ';cursor:pointer',
+          data.mark.label);
+    }
+    if (data.anchor.label) {
+      pin([data.anchor.lon, data.anchor.lat], 'width:10px;height:10px;border-radius:50%;background:#fff;border:2px solid ' + accent, data.anchor.label);
+    }
+    if (data.subject) {
+      pin([data.subject.lon, data.subject.lat], 'width:16px;height:16px;border-radius:50%;background:' + accent + ';border:3px solid ' + accent + ';cursor:pointer',
+          '<b>' + data.subject.name + '</b><br>' + data.subject.address);
+    }
+  });
+})();
+</script>
+```
+
+::: {.callout-note}
+## Also in the quartier, outside this report's scope
+
+- **École Victor-Doré**, 1350 boulevard Crémazie Est: a CSSDM specialised school with a
+  supraregional mandate for pupils aged 4 to 13 with serious motor or organic disabilities;
+  most pupils come from other service centres, so it is not a neighbourhood option and is left
+  out of the tables.[^vd]
+- **Secondary schools**, all CSSDM: Joseph-Charbonneau and Henri-Julien (rue Rousselot),
+  Académie De Roberval and Georges-Vanier (rue Jarry Est), Lucien-Pagé (boulevard
+  Saint-Laurent). Which of them a given elementary school feeds is not yet in the project's
+  data.
+- **Centre Sainte-Croix**, adult education, rue Jarry Ouest.
+- No anglophone-board or private school has its building inside the polygon.
+:::
+
+[^vd]: [École Victor-Doré, école spécialisée](https://victor-dore.cssdm.gouv.qc.ca/ecole/), CSSDM; read through its search-index extract on 2026-10-07 and recorded in the project's program table.
+
+# The schools
+
+::: {.column-page}
+| School | Program, admission | IMSE decile | Pupils | ▲ Children 0-14 % | Median HH income $ | ▼ Crime /1000 | ▼ Ped+cycl victims /yr (500 m) | ▼ Value plex $ | ▼ Métro m |
+|:---|:---|---:|---:|---:|---:|---:|---:|---:|---:|
+| Saint-Barthélemy | ib, selective | d8 | 573 | 14.2 [d4]{.decile-mid} | 56,000 [d1]{.decile-low} | 13.0 [d7]{.decile-mid} | 8.8 [d8]{.decile-high} | 786,833 [d5]{.decile-mid} | 386 [d2]{.decile-low} |
+| Saint-Grégoire-le-Grand | unknown | d10 | 367 | 14.5 [d4]{.decile-mid} | 55,600 [d1]{.decile-low} | 11.5 [d5]{.decile-mid} | 8.2 [d8]{.decile-high} | [784,267 [d5]{.decile-mid}]{.best} | 965 [d5]{.decile-mid} |
+| Saint-Gabriel-Lalemant | unknown | d9 | 223 | 13.5 [d3]{.decile-low} | 57,200 [d2]{.decile-low} | 14.9 [d8]{.decile-high} | 8.4 [d8]{.decile-high} | 853,934 [d7]{.decile-mid} | 296 [d1]{.decile-low} |
+| Marie-Favery | unknown | d7 | 343 | 13.7 [d3]{.decile-low} | 62,400 [d5]{.decile-mid} | 11.2 [d5]{.decile-mid} | 9.0 [d8]{.decile-high} | 876,567 [d8]{.decile-high} | 710 [d4]{.decile-mid} |
+| Saint-Gérard | other, unknown | d3 | 485 | 13.5 [d3]{.decile-low} | 70,000 [d8]{.decile-high} | 12.3 [d7]{.decile-mid} | 7.4 [d7]{.decile-mid} | 857,000 [d7]{.decile-mid} | 308 [d1]{.decile-low} |
+| Hélène-Boullé | unknown | d5 | 277 | 13.5 [d3]{.decile-low} | 70,500 [d9]{.decile-high} | 11.1 [d5]{.decile-mid} | 8.0 [d8]{.decile-high} | 882,200 [d8]{.decile-high} | 351 [d2]{.decile-low} |
+| Sainte-Cécile | regular, neighbourhood | d3 | 388 | 11.7 [d1]{.decile-low} | 66,500 [d7]{.decile-mid} | 14.6 [d8]{.decile-high} | 17.8 [d10]{.decile-high} | 969,050 [d9]{.decile-high} | [248 [d1]{.decile-low}]{.best} |
+| Gadbois | alternative, unknown | d7 | 236 | 13.4 [d3]{.decile-low} | 68,000 [d7]{.decile-mid} | [10.7 [d4]{.decile-mid}]{.best} | 11.6 [d9]{.decile-high} | 889,116 [d8]{.decile-high} | 538 [d3]{.decile-low} |
+| Saint-Pierre-Apôtre | unknown | d9 | 97 | [14.9 [d4]{.decile-mid}]{.best} | 67,000 [d7]{.decile-mid} | 13.0 [d7]{.decile-mid} | [4.4 [d5]{.decile-mid}]{.best} | 809,767 [d5]{.decile-mid} | 682 [d4]{.decile-mid} |
+| Saint-Arsène† | other, selective | d7 | 289 | 12.5 [d2]{.decile-low} | 61,200 [d4]{.decile-mid} | 14.7 [d8]{.decile-high} | 15.8 [d10]{.decile-high} | 939,784 [d9]{.decile-high} | 345 [d2]{.decile-low} |
+| *Villeray* | | | | 13.6 [d3]{.decile-low} | 63,600 [d6]{.decile-mid} | 11.8 [d6]{.decile-mid} | n/a | 847,950 [d7]{.decile-mid} | n/a |
+| *Island median* | | | | 15.8 | 62,800 | 11.6 | 4.6 | 811,892 | 1,085 |
+
+: The schools at a glance: IMSE decile from the MEQ file (socioeconomic, not academic), zone metrics within 1 km of each building with island deciles; † = outside the area but within the margin {#tbl-overview}
+:::
+
+The MEQ's IMSE decile (1 = most advantaged, 10 = most disadvantaged; 8 to 10 is the official
+*milieu défavorisé*) is built from the enrolled pupils' parents' education and employment, not
+from test results, and it can differ from the census figures for the residents of a school's
+kilometre. Villeray is the case the project brief uses to make its point: inside one quartier
+the deciles run from 3 (Saint-Gérard, Sainte-Cécile) to 10 (Saint-Grégoire-le-Grand), while the
+kilometres around those schools differ far less on income in @tbl-people. Program and admission
+come from the project's hand-checked table; "unknown" means no page has been checked yet, not a
+regular program.
+
+::: {.callout-tip}
+## Reading the table
+
+Three schools carry a volet: Saint-Barthélemy's IB primary years programme, selective and
+housed at its pavillon Sagard only; Gadbois, an alternative school; and Saint-Gérard's
+intensive-English stream for the last two grades. Saint-Arsène, the edge school, runs a
+selective athlete programme. The deciles split the quartier in two: the three eastern schools
+(Saint-Barthélemy, Saint-Grégoire-le-Grand, Saint-Gabriel-Lalemant) and Saint-Pierre-Apôtre in
+the north-west sit in the *milieu défavorisé* band, the schools along avenue De Gaspé and in the
+centre of the quartier do not. Every kilometre here is denser and more mobile than the island
+median and has fewer children, and only Saint-Grégoire-le-Grand's and Marie-Favery's lie more
+than 700 m from a métro.
+:::
+
+# The kilometres compared
+
+Every row is the circle of one kilometre around that school's building, a stand-in for the
+catchment polygon that exists only in the CSSDM's finder and PDF maps. The *Villeray* row is
+computed over the whole polygon, and the island median over all 229 in-scope schools. The
+circles overlap heavily: the quartier is 5.67 km² and each circle is 3.1 km².
+
+## Who lives there
+
+::: {.column-page}
+| School | Residents | ▲ Children 0-14 % | ▲ HH with children % | Median HH income $ | ▼ Low income % | ▼ No diploma % | Immigrants % | French at home % | Renters % | Moved <5 yrs % |
+|:---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| Saint-Barthélemy | 34,317 [d9]{.decile-high} | 14.2 [d4]{.decile-mid} | 26.9 [d4]{.decile-mid} | 56,000 [d1]{.decile-low} | 18.6 [d8]{.decile-high} | 10.8 [d6]{.decile-mid} | 32.2 [d6]{.decile-mid} | 65.5 [d7]{.decile-mid} | 71.7 [d9]{.decile-high} | 45.3 [d6]{.decile-mid} |
+| Saint-Grégoire-le-Grand | 28,159 [d7]{.decile-mid} | 14.5 [d4]{.decile-mid} | 27.2 [d4]{.decile-mid} | 55,600 [d1]{.decile-low} | 17.6 [d7]{.decile-mid} | 10.1 [d6]{.decile-mid} | 32.8 [d6]{.decile-mid} | 65.4 [d7]{.decile-mid} | 71.3 [d8]{.decile-high} | 47.1 [d7]{.decile-mid} |
+| Saint-Gabriel-Lalemant | 37,843 [d10]{.decile-high} | 13.5 [d3]{.decile-low} | 23.7 [d3]{.decile-low} | 57,200 [d2]{.decile-low} | 17.8 [d7]{.decile-mid} | 7.9 [d4]{.decile-mid} | 27.1 [d5]{.decile-mid} | 70.6 [d7]{.decile-mid} | 73.1 [d9]{.decile-high} | 49.1 [d8]{.decile-high} |
+| Marie-Favery | 40,933 [d10]{.decile-high} | 13.7 [d3]{.decile-low} | 23.8 [d3]{.decile-low} | 62,400 [d5]{.decile-mid} | 15.9 [d4]{.decile-mid} | 6.9 [d3]{.decile-low} | 25.6 [d5]{.decile-mid} | 72.5 [d8]{.decile-high} | 72.3 [d9]{.decile-high} | 48.8 [d8]{.decile-high} |
+| Saint-Gérard | 28,214 [d8]{.decile-high} | 13.5 [d3]{.decile-low} | 23.6 [d3]{.decile-low} | 70,000 [d8]{.decile-high} | [12.7 [d2]{.decile-low}]{.best} | [5.3 [d2]{.decile-low}]{.best} | 21.9 [d3]{.decile-low} | 75.1 [d8]{.decile-high} | 64.7 [d5]{.decile-mid} | 46.8 [d7]{.decile-mid} |
+| Hélène-Boullé | 31,958 [d8]{.decile-high} | 13.5 [d3]{.decile-low} | 22.7 [d2]{.decile-low} | 70,500 [d9]{.decile-high} | 13.9 [d3]{.decile-low} | 5.9 [d3]{.decile-low} | 21.1 [d3]{.decile-low} | 74.0 [d8]{.decile-high} | 66.4 [d6]{.decile-mid} | 49.2 [d8]{.decile-high} |
+| Sainte-Cécile | 35,960 [d10]{.decile-high} | 11.7 [d1]{.decile-low} | 19.7 [d2]{.decile-low} | 66,500 [d7]{.decile-mid} | 16.3 [d5]{.decile-mid} | 5.8 [d3]{.decile-low} | 23.1 [d4]{.decile-mid} | 69.5 [d7]{.decile-mid} | 68.4 [d7]{.decile-mid} | 52.4 [d9]{.decile-high} |
+| Gadbois | 32,754 [d9]{.decile-high} | 13.4 [d3]{.decile-low} | 22.8 [d3]{.decile-low} | 68,000 [d7]{.decile-mid} | 14.0 [d3]{.decile-low} | 5.4 [d2]{.decile-low} | 22.4 [d3]{.decile-low} | 76.5 [d9]{.decile-high} | 65.9 [d5]{.decile-mid} | 48.8 [d8]{.decile-high} |
+| Saint-Pierre-Apôtre | 26,723 [d7]{.decile-mid} | [14.9 [d4]{.decile-mid}]{.best} | [28.6 [d4]{.decile-mid}]{.best} | 67,000 [d7]{.decile-mid} | 16.7 [d6]{.decile-mid} | 11.7 [d7]{.decile-mid} | 31.3 [d6]{.decile-mid} | 55.3 [d5]{.decile-mid} | 67.4 [d6]{.decile-mid} | 46.0 [d7]{.decile-mid} |
+| Saint-Arsène† | 40,561 [d10]{.decile-high} | 12.5 [d2]{.decile-low} | 21.0 [d2]{.decile-low} | 61,200 [d4]{.decile-mid} | 16.3 [d5]{.decile-mid} | 5.7 [d2]{.decile-low} | 23.9 [d4]{.decile-mid} | 73.7 [d8]{.decile-high} | 74.7 [d10]{.decile-high} | 50.9 [d9]{.decile-high} |
+| *Villeray* | 58,662 [d10]{.decile-high} | 13.6 [d3]{.decile-low} | 23.8 [d3]{.decile-low} | 63,600 [d6]{.decile-mid} | 15.9 [d5]{.decile-mid} | 7.2 [d4]{.decile-mid} | 26.1 [d5]{.decile-mid} | 71.4 [d8]{.decile-high} | 70.1 [d8]{.decile-high} | 48.7 [d8]{.decile-high} |
+| *Island median* | 21,094 | 15.8 | 31.4 | 62,800 | 16.6 | 9.9 | 28.4 | 58.8 | 66.2 | 43.9 |
+
+: Who lives within 1 km of the school (2021 census, aggregated over dissemination areas whose centroid falls in the circle) {#tbl-people}
+:::
+
+::: {.callout-tip}
+## Reading the table
+
+Income rises from east to west and north: the two easternmost kilometres sit in the lowest
+decile of household income and in high deciles of low income and renters, while the kilometres
+around Saint-Gérard and Hélène-Boullé, a few streets west, are in the eighth and ninth deciles
+of income. Children are scarce everywhere relative to the island, scarcest around Sainte-Cécile and
+Saint-Arsène near Jean-Talon, least so around Saint-Pierre-Apôtre, which also has the most
+households with children. Saint-Pierre-Apôtre is the one kilometre where French at home falls
+near the island median; everywhere else it is in the top deciles.
+:::
+
+::: {.column-page}
+| School | ▼ Materially deprived % | ▼ Socially deprived % | ▼ IEMV (0-6) |
+|:---|---:|---:|---:|
+| Saint-Barthélemy | 54 [d6]{.decile-mid} | 80 [d6]{.decile-mid} | 2.4 [d6]{.decile-mid} |
+| Saint-Grégoire-le-Grand | 63 [d7]{.decile-mid} | 75 [d5]{.decile-mid} | 2.6 [d7]{.decile-mid} |
+| Saint-Gabriel-Lalemant | 37 [d4]{.decile-mid} | 84 [d7]{.decile-mid} | 2.2 [d5]{.decile-mid} |
+| Marie-Favery | 36 [d4]{.decile-mid} | 84 [d7]{.decile-mid} | 2.2 [d5]{.decile-mid} |
+| Saint-Gérard | 19 [d3]{.decile-low} | 92 [d9]{.decile-high} | [1.8 [d3]{.decile-low}]{.best} |
+| Hélène-Boullé | 21 [d3]{.decile-low} | 83 [d6]{.decile-mid} | 2.1 [d4]{.decile-mid} |
+| Sainte-Cécile | [17 [d3]{.decile-low}]{.best} | 88 [d8]{.decile-high} | 2.2 [d5]{.decile-mid} |
+| Gadbois | 21 [d3]{.decile-low} | 91 [d9]{.decile-high} | 2.1 [d4]{.decile-mid} |
+| Saint-Pierre-Apôtre | 49 [d6]{.decile-mid} | [61 [d4]{.decile-mid}]{.best} | 2.5 [d7]{.decile-mid} |
+| Saint-Arsène† | 21 [d3]{.decile-low} | 88 [d8]{.decile-high} | 2.0 [d4]{.decile-mid} |
+| *Villeray* | 36 [d4]{.decile-mid} | 83 [d6]{.decile-mid} | 2.2 [d5]{.decile-mid} |
+| *Island median* | 46 | 76 | 2.3 |
+
+: Two composite indices computed by others: INSPQ material and social deprivation (share of residents in the two most deprived quintiles) and the city's 2026 equity index (population-weighted mean, 0 least vulnerable to 6 most) {#tbl-indices}
+:::
+
+::: {.callout-note}
+## Social deprivation is high across central Montreal
+
+The INSPQ social axis counts people living alone and lone-parent families, which the dense
+central boroughs are full of; read it with the households-with-children column of @tbl-people.
+The material axis is where Villeray's east–west split shows: more than half the residents
+around the two eastern schools live in materially deprived areas, about a fifth or less around
+Saint-Gérard, Hélène-Boullé, Sainte-Cécile and Gadbois.
+:::
+
+## Safety
+
+::: {.column-page}
+| School | ▼ Crime /1000 | ▼ Violent /1000 | ▼ Break-ins /1000 | ▼ Vehicle /1000 | ▼ Mischief /1000 | ▼ Ped+cycl victims /yr (500 m) |
+|:---|---:|---:|---:|---:|---:|---:|
+| Saint-Barthélemy | 13.0 [d7]{.decile-mid} | 0.77 [d6]{.decile-mid} | 3.3 [d7]{.decile-mid} | 6.3 [d7]{.decile-mid} | 2.6 [d6]{.decile-mid} | 8.8 [d8]{.decile-high} |
+| Saint-Grégoire-le-Grand | 11.5 [d5]{.decile-mid} | 0.65 [d4]{.decile-mid} | 2.6 [d6]{.decile-mid} | 5.9 [d6]{.decile-mid} | [2.3 [d4]{.decile-mid}]{.best} | 8.2 [d8]{.decile-high} |
+| Saint-Gabriel-Lalemant | 14.9 [d8]{.decile-high} | 1.22 [d9]{.decile-high} | 4.0 [d9]{.decile-high} | 6.8 [d8]{.decile-high} | 2.9 [d7]{.decile-mid} | 8.4 [d8]{.decile-high} |
+| Marie-Favery | 11.2 [d5]{.decile-mid} | 0.92 [d7]{.decile-mid} | 2.8 [d6]{.decile-mid} | 5.1 [d4]{.decile-mid} | 2.5 [d5]{.decile-mid} | 9.0 [d8]{.decile-high} |
+| Saint-Gérard | 12.3 [d7]{.decile-mid} | 0.82 [d6]{.decile-mid} | 3.0 [d7]{.decile-mid} | 5.6 [d6]{.decile-mid} | 2.9 [d7]{.decile-mid} | 7.4 [d7]{.decile-mid} |
+| Hélène-Boullé | 11.1 [d5]{.decile-mid} | [0.65 [d4]{.decile-mid}]{.best} | 2.8 [d6]{.decile-mid} | 5.2 [d4]{.decile-mid} | 2.4 [d5]{.decile-mid} | 8.0 [d8]{.decile-high} |
+| Sainte-Cécile | 14.6 [d8]{.decile-high} | 1.45 [d10]{.decile-high} | 4.2 [d9]{.decile-high} | 5.7 [d6]{.decile-mid} | 3.2 [d8]{.decile-high} | 17.8 [d10]{.decile-high} |
+| Gadbois | [10.7 [d4]{.decile-mid}]{.best} | 0.67 [d4]{.decile-mid} | [2.6 [d5]{.decile-mid}]{.best} | [5.0 [d4]{.decile-mid}]{.best} | 2.4 [d5]{.decile-mid} | 11.6 [d9]{.decile-high} |
+| Saint-Pierre-Apôtre | 13.0 [d7]{.decile-mid} | 0.80 [d6]{.decile-mid} | 2.8 [d6]{.decile-mid} | 6.3 [d7]{.decile-mid} | 3.1 [d8]{.decile-high} | [4.4 [d5]{.decile-mid}]{.best} |
+| Saint-Arsène† | 14.7 [d8]{.decile-high} | 1.35 [d9]{.decile-high} | 3.9 [d9]{.decile-high} | 6.2 [d7]{.decile-mid} | 3.2 [d8]{.decile-high} | 15.8 [d10]{.decile-high} |
+| *Villeray* | 11.8 [d6]{.decile-mid} | 0.63 [d4]{.decile-mid} | 3.1 [d7]{.decile-mid} | 5.7 [d6]{.decile-mid} | 2.4 [d5]{.decile-mid} | n/a |
+| *Island median* | 11.6 | 0.75 | 2.6 | 5.6 | 2.5 | 4.6 |
+
+: Safety: SPVM incidents 2023 to 2025 per 1 000 residents per year within 1 km, and SAAQ pedestrian and cyclist victims 2017 to 2021 within 500 m of the school, per year; the area row is computed over the whole polygon, so its point-relative cells are blank {#tbl-safety}
+:::
+
+::: {.callout-tip}
+## Reading the table
+
+Crime per resident sits between the fourth and eighth deciles across the quartier, lowest around
+Gadbois and highest around Saint-Gabriel-Lalemant, Sainte-Cécile and Saint-Arsène, whose circles
+take in rue Jean-Talon and its commercial side streets. The walk-to-school
+column separates the schools more than crime does: Sainte-Cécile and Saint-Arsène, both within
+500 m of rue Jean-Talon, are in the top decile for pedestrian and cyclist victims, while
+Saint-Pierre-Apôtre, on a residential street in the north-west, is near the island median.
+:::
+
+::: {.callout-warning}
+## What these two datasets cannot say
+
+The city states the incident file is not official SPVM statistics; positions are moved to the
+nearest intersection and 17% of incidents have no coordinates and are absent from the rates.
+The collision extract ends in 2021; its last two years are pandemic years. Both are rates of
+reported events, not of risk. The quartier row has no victims-within-500-m figure because that
+metric is defined from a school door.
+:::
+
+## Housing and what it costs to own
+
+::: {.column-page}
+| School | Dwellings | Single-family % | Plex % | Condo % | 6+ unit rental % | Median year built |
+|:---|---:|---:|---:|---:|---:|---:|
+| Saint-Barthélemy | 18,520 [d9]{.decile-high} | 7 [d5]{.decile-mid} | 56 [d9]{.decile-high} | 3 [d2]{.decile-low} | 34 [d5]{.decile-mid} | 1953 [d3]{.decile-low} |
+| Saint-Grégoire-le-Grand | 14,518 [d7]{.decile-mid} | 7 [d5]{.decile-mid} | 45 [d6]{.decile-mid} | 7 [d3]{.decile-low} | 42 [d8]{.decile-high} | 1956 [d4]{.decile-mid} |
+| Saint-Gabriel-Lalemant | 21,810 [d10]{.decile-high} | 5 [d4]{.decile-mid} | 51 [d8]{.decile-high} | 7 [d4]{.decile-mid} | 37 [d6]{.decile-mid} | 1952 [d3]{.decile-low} |
+| Marie-Favery | 22,182 [d10]{.decile-high} | 4 [d3]{.decile-low} | 51 [d8]{.decile-high} | 8 [d4]{.decile-mid} | 37 [d6]{.decile-mid} | 1949 [d3]{.decile-low} |
+| Saint-Gérard | 16,052 [d8]{.decile-high} | 4 [d3]{.decile-low} | 60 [d9]{.decile-high} | 12 [d6]{.decile-mid} | 24 [d2]{.decile-low} | 1947 [d3]{.decile-low} |
+| Hélène-Boullé | 18,282 [d8]{.decile-high} | 3 [d3]{.decile-low} | 57 [d9]{.decile-high} | 14 [d7]{.decile-mid} | 26 [d3]{.decile-low} | 1937 [d2]{.decile-low} |
+| Sainte-Cécile | 20,718 [d10]{.decile-high} | 3 [d2]{.decile-low} | 47 [d7]{.decile-mid} | 20 [d8]{.decile-high} | 29 [d4]{.decile-mid} | 1931 [d2]{.decile-low} |
+| Gadbois | 18,904 [d9]{.decile-high} | 4 [d3]{.decile-low} | 50 [d7]{.decile-mid} | 16 [d7]{.decile-mid} | 30 [d4]{.decile-mid} | 1949 [d3]{.decile-low} |
+| Saint-Pierre-Apôtre | 13,193 [d7]{.decile-mid} | 4 [d3]{.decile-low} | 66 [d10]{.decile-high} | 7 [d3]{.decile-low} | 24 [d2]{.decile-low} | 1950 [d3]{.decile-low} |
+| Saint-Arsène† | 23,794 [d10]{.decile-high} | 3 [d2]{.decile-low} | 52 [d8]{.decile-high} | 11 [d5]{.decile-mid} | 35 [d6]{.decile-mid} | 1944 [d2]{.decile-low} |
+| *Villeray* | 33,722 [d10]{.decile-high} | 4 [d3]{.decile-low} | 52 [d8]{.decile-high} | 11 [d5]{.decile-mid} | 33 [d5]{.decile-mid} | 1951 [d3]{.decile-low} |
+| *Island median* | 10,684 | 8 | 41 | 11 | 34 | 1959 |
+
+: Housing stock within 1 km, from the assessment roll {#tbl-stock}
+:::
+
+::: {.column-page}
+| School | ▼ Value single $ | ▼ Value plex $ | ▼ Value condo $ | ▼ Tax single $ | ▼ Tax plex $ | ▼ Tax condo $ | ▼ Tax rate % |
+|:---|---:|---:|---:|---:|---:|---:|---:|
+| Saint-Barthélemy | 688,833 [d5]{.decile-mid} | 786,833 [d5]{.decile-mid} | [394,500 [d6]{.decile-mid}]{.best} | 4,544 [d5]{.decile-mid} | 5,195 [d5]{.decile-mid} | [2,603 [d6]{.decile-mid}]{.best} | 0.66 [d7]{.decile-mid} |
+| Saint-Grégoire-le-Grand | [687,867 [d5]{.decile-mid}]{.best} | [784,267 [d5]{.decile-mid}]{.best} | 419,600 [d7]{.decile-mid} | [4,538 [d5]{.decile-mid}]{.best} | [5,174 [d5]{.decile-mid}]{.best} | 2,738 [d6]{.decile-mid} | 0.66 [d6]{.decile-mid} |
+| Saint-Gabriel-Lalemant | 730,400 [d6]{.decile-mid} | 853,934 [d7]{.decile-mid} | 440,050 [d7]{.decile-mid} | 4,836 [d6]{.decile-mid} | 5,634 [d7]{.decile-mid} | 2,903 [d7]{.decile-mid} | 0.66 [d7]{.decile-mid} |
+| Marie-Favery | 756,400 [d7]{.decile-mid} | 876,567 [d8]{.decile-high} | 440,067 [d7]{.decile-mid} | 5,017 [d7]{.decile-mid} | 5,786 [d8]{.decile-high} | 2,906 [d7]{.decile-mid} | 0.66 [d7]{.decile-mid} |
+| Saint-Gérard | 836,916 [d7]{.decile-mid} | 857,000 [d7]{.decile-mid} | 422,100 [d7]{.decile-mid} | 5,513 [d7]{.decile-mid} | 5,648 [d7]{.decile-mid} | 2,759 [d7]{.decile-mid} | [0.66 [d6]{.decile-mid}]{.best} |
+| Hélène-Boullé | 942,100 [d8]{.decile-high} | 882,200 [d8]{.decile-high} | 480,633 [d9]{.decile-high} | 6,215 [d9]{.decile-high} | 5,829 [d8]{.decile-high} | 3,171 [d9]{.decile-high} | 0.66 [d7]{.decile-mid} |
+| Sainte-Cécile | 1,009,900 [d9]{.decile-high} | 969,050 [d9]{.decile-high} | 476,267 [d9]{.decile-high} | 6,678 [d9]{.decile-high} | 6,400 [d9]{.decile-high} | 3,149 [d9]{.decile-high} | 0.66 [d7]{.decile-mid} |
+| Gadbois | 806,000 [d7]{.decile-mid} | 889,116 [d8]{.decile-high} | 422,933 [d7]{.decile-mid} | 5,313 [d7]{.decile-mid} | 5,873 [d8]{.decile-high} | 2,762 [d7]{.decile-mid} | 0.66 [d6]{.decile-mid} |
+| Saint-Pierre-Apôtre | 778,600 [d7]{.decile-mid} | 809,767 [d5]{.decile-mid} | 448,833 [d8]{.decile-high} | 5,107 [d7]{.decile-mid} | 5,323 [d5]{.decile-mid} | 2,950 [d8]{.decile-high} | 0.66 [d6]{.decile-mid} |
+| Saint-Arsène† | 979,050 [d9]{.decile-high} | 939,784 [d9]{.decile-high} | 483,900 [d9]{.decile-high} | 6,456 [d9]{.decile-high} | 6,207 [d9]{.decile-high} | 3,193 [d9]{.decile-high} | 0.66 [d7]{.decile-mid} |
+| *Villeray* | 788,000 [d7]{.decile-mid} | 847,950 [d7]{.decile-mid} | 465,534 [d8]{.decile-high} | 5,198 [d7]{.decile-mid} | 5,599 [d7]{.decile-mid} | 3,073 [d9]{.decile-high} | 0.66 [d7]{.decile-mid} |
+| *Island median* | 702,608 | 811,892 | 392,416 | 4,665 | 5,341 | 2,570 | 0.66 |
+
+: What it costs to own: median 2026 assessed value and median 2026 municipal tax bill per unit within 1 km, residential accounts with five dwellings or fewer {#tbl-cost}
+:::
+
+::: {.callout-tip}
+## Reading the tables
+
+Villeray is a plex quartier: about half of the dwellings in every kilometre are in two- to
+five-unit buildings, two thirds around Saint-Pierre-Apôtre, and single-family houses are rare
+everywhere. The condo share grows towards Jean-Talon and De Gaspé, where the stock is also
+oldest. Assessed values follow the income gradient: the two eastern kilometres are at the island
+median for a plex, the kilometres around Sainte-Cécile and Saint-Arsène in the ninth decile for
+every type. The effective tax rate is identical across the quartier, so the bill differences are
+the value differences.
+:::
+
+## Parks and transit
+
+::: {.column-page}
+| School | ▲ Park % of zone | ▲ Park ha /1000 | ▼ Métro m | ▲ Stations in zone |
+|:---|---:|---:|---:|---:|
+| Saint-Barthélemy | 2.7 [d1]{.decile-low} | 0.24 [d1]{.decile-low} | 386 [d2]{.decile-low} | 2 [d8]{.decile-high} |
+| Saint-Grégoire-le-Grand | 12.6 [d9]{.decile-high} | [1.40 [d7]{.decile-mid}]{.best} | 965 [d5]{.decile-mid} | 1 [d6]{.decile-mid} |
+| Saint-Gabriel-Lalemant | 5.4 [d4]{.decile-mid} | 0.44 [d2]{.decile-low} | 296 [d1]{.decile-low} | [3 [d9]{.decile-high}]{.best} |
+| Marie-Favery | 4.4 [d3]{.decile-low} | 0.33 [d1]{.decile-low} | 710 [d4]{.decile-mid} | [3 [d9]{.decile-high}]{.best} |
+| Saint-Gérard | 4.6 [d3]{.decile-low} | 0.51 [d3]{.decile-low} | 308 [d1]{.decile-low} | 2 [d8]{.decile-high} |
+| Hélène-Boullé | [12.8 [d9]{.decile-high}]{.best} | 1.25 [d7]{.decile-mid} | 351 [d2]{.decile-low} | [3 [d9]{.decile-high}]{.best} |
+| Sainte-Cécile | 9.2 [d7]{.decile-mid} | 0.80 [d4]{.decile-mid} | [248 [d1]{.decile-low}]{.best} | [3 [d9]{.decile-high}]{.best} |
+| Gadbois | 4.9 [d3]{.decile-low} | 0.47 [d2]{.decile-low} | 538 [d3]{.decile-low} | 2 [d8]{.decile-high} |
+| Saint-Pierre-Apôtre | 10.1 [d8]{.decile-high} | 1.19 [d6]{.decile-mid} | 682 [d4]{.decile-mid} | 2 [d8]{.decile-high} |
+| Saint-Arsène† | 3.1 [d2]{.decile-low} | 0.24 [d1]{.decile-low} | 345 [d2]{.decile-low} | [3 [d9]{.decile-high}]{.best} |
+| *Villeray* | 9.4 [d7]{.decile-mid} | 0.91 [d5]{.decile-mid} | n/a | 3 [d9]{.decile-high} |
+| *Island median* | 6.6 | 0.96 | 1,085 | 0 |
+
+: Parks and rapid transit within 1 km: large parks and borough parks (Ville de Montréal), métro and REM stations (OpenStreetMap contributors); the area row is computed over the whole polygon, so its point-relative cells are blank {#tbl-parks}
+:::
+
+Park space is unevenly spread: the kilometres around Saint-Grégoire-le-Grand (parc
+Frédéric-Back and parc Villeray), Hélène-Boullé and Saint-Pierre-Apôtre (parc Jarry) are in the
+top deciles, while Saint-Barthélemy's and Saint-Arsène's hold almost none. Six of the ten
+buildings are within 400 m of an orange-line station; Gadbois, Saint-Pierre-Apôtre,
+Marie-Favery and Saint-Grégoire-le-Grand walk further.
+
+# Which school for which family
+
+Not a ranking: each line points at the table that shows it, and the catchment, not the
+circle, decides who may enrol.
+
+- **A volet rather than the neighbourhood school:** Saint-Barthélemy's IB programme (selective,
+  pavillon Sagard), Gadbois (alternative), Saint-Gérard's intensive English in grades 5 and 6,
+  and Saint-Arsène's athlete stream (@tbl-overview).
+- **A park at the door:** Saint-Grégoire-le-Grand, Hélène-Boullé, Saint-Pierre-Apôtre
+  (@tbl-parks).
+- **The métro at the door:** Sainte-Cécile, Saint-Gabriel-Lalemant, Saint-Gérard, Saint-Arsène,
+  Hélène-Boullé and Saint-Barthélemy, all under 400 m (@tbl-parks).
+- **The quietest streets for the walk:** Saint-Pierre-Apôtre, then Saint-Gérard (@tbl-safety).
+- **The lowest cost of owning:** the two eastern kilometres, Saint-Barthélemy's and
+  Saint-Grégoire-le-Grand's, on every housing type (@tbl-cost); several of this month's listings under a
+  million dollars were found there (@tbl-for-sale).
+- **The most children around:** Saint-Pierre-Apôtre, Saint-Grégoire-le-Grand, Saint-Barthélemy
+  (@tbl-people).
+
+# Living there now
+
+Listings found on Centris.ca on 7 October 2026 for homes with three or more bedrooms in the
+quartier, read from the neighbourhood search pages for condos, plexes, houses and rentals and
+each shown once under the school whose building is nearest. Two or three per school was the
+aim; the tables say where none turned up.
+
+::: {.column-page}
+| School | Type | Bedrooms | Street or sector | Asking price | Source, date seen |
+|:---|:---|---:|:---|---:|:---|
+| Hélène-Boullé | Quadruplex (4-bedroom unit) | 4 | avenue Casgrain | $1,525,000 | [Centris](https://www.centris.ca/fr/quadruplex~a-vendre~montreal-villeray-saint-michel-parc-extension/26981158), 2026-10-07 |
+| Saint-Barthélemy | House | 3 | rue Chabot | $599,000 | [Centris](https://www.centris.ca/fr/maison~a-vendre~montreal-villeray-saint-michel-parc-extension/24417399), 2026-10-07 |
+| Saint-Barthélemy | House | 4 | rue D'Iberville | $734,800 | [Centris](https://www.centris.ca/fr/maison~a-vendre~montreal-villeray-saint-michel-parc-extension/27111568), 2026-10-07 |
+| Saint-Barthélemy | House | 3 | rue Sagard | $829,000 | [Centris](https://www.centris.ca/fr/maison~a-vendre~montreal-villeray-saint-michel-parc-extension/16080320), 2026-10-07 |
+| Saint-Barthélemy | Duplex (3-bedroom unit) | 3 | rue D'Iberville | $860,000 | [Centris](https://www.centris.ca/fr/duplex~a-vendre~montreal-villeray-saint-michel-parc-extension/21579146), 2026-10-07 |
+| Saint-Barthélemy | Duplex (6 bedrooms) | 6 | rue des Écores | $949,000 | [Centris](https://www.centris.ca/fr/duplex~a-vendre~montreal-villeray-saint-michel-parc-extension/27156188), 2026-10-07 |
+| Saint-Barthélemy | Quadruplex (3-bedroom unit) | 3 | 1re Avenue, near Jean-Talon | $1,049,000 | [Centris](https://www.centris.ca/fr/quadruplex~a-vendre~montreal-villeray-saint-michel-parc-extension/9536819), 2026-10-07 |
+| Saint-Barthélemy | Quadruplex (3-bedroom unit) | 3 | avenue des Érables | $1,248,000 | [Centris](https://www.centris.ca/fr/quadruplex~a-vendre~montreal-villeray-saint-michel-parc-extension/11473762), 2026-10-07 |
+| Saint-Grégoire-le-Grand | Duplex (3-bedroom unit) | 3 | rue de Bordeaux | $849,000 | [Centris](https://www.centris.ca/fr/duplex~a-vendre~montreal-villeray-saint-michel-parc-extension/20633560), 2026-10-07 |
+| Saint-Gérard | Triplex (3-bedroom unit) | 3 | rue Saint-Denis, north | $1,749,000 | [Centris](https://www.centris.ca/fr/triplex~a-vendre~montreal-villeray-saint-michel-parc-extension/12036025), 2026-10-07 |
+| Saint-Pierre-Apôtre | House | 3 | rue Clark, north Villeray | $819,000 | [Centris](https://www.centris.ca/fr/maison~a-vendre~montreal-villeray-saint-michel-parc-extension/13377693), 2026-10-07 |
+| Saint-Pierre-Apôtre | House | 4 | rue Clark, north Villeray | $975,000 | [Centris](https://www.centris.ca/fr/maison~a-vendre~montreal-villeray-saint-michel-parc-extension/16952660), 2026-10-07 |
+| Sainte-Cécile | Condo | 3 | rue Lajeunesse, near Jarry | $539,000 | [Centris](https://www.centris.ca/fr/condo~a-vendre~montreal-villeray-saint-michel-parc-extension/22753173), 2026-10-07 |
+| Sainte-Cécile | House | 3 | avenue De Gaspé | $965,000 | [Centris](https://www.centris.ca/fr/maison~a-vendre~montreal-villeray-saint-michel-parc-extension/25942227), 2026-10-07 |
+| Sainte-Cécile | Triplex (3-bedroom unit) | 3 | rue Saint-Dominique | $1,049,000 | [Centris](https://www.centris.ca/fr/triplex~a-vendre~montreal-villeray-saint-michel-parc-extension/21866916), 2026-10-07 |
+| Sainte-Cécile | House | 3 | avenue De Gaspé | $1,579,000 | [Centris](https://www.centris.ca/fr/maison~a-vendre~montreal-villeray-saint-michel-parc-extension/24553921), 2026-10-07 |
+
+: For sale, 3+ bedrooms, each listing under the school whose building is nearest {#tbl-for-sale}
+:::
+
+No sale listing with three or more bedrooms turned up nearest to: Saint-Gabriel-Lalemant, Marie-Favery, Gadbois, Saint-Arsène.
+
+::: {.column-page}
+| School | Type | Bedrooms | Street or sector | Monthly rent | Source, date seen |
+|:---|:---|---:|:---|---:|:---|
+| Gadbois | Apartment | 3 | rue Saint-Hubert, north | $1,795 | [Centris](https://www.centris.ca/fr/condo-appartement~a-louer~montreal-villeray-saint-michel-parc-extension/18672341), 2026-10-07 |
+| Saint-Barthélemy | Apartment | 3 | rue D'Iberville | $1,650 | [Centris](https://www.centris.ca/fr/condo-appartement~a-louer~montreal-villeray-saint-michel-parc-extension/22065549), 2026-10-07 |
+| Saint-Barthélemy | Apartment | 3 | rue Cartier | $1,750 | [Centris](https://www.centris.ca/fr/condo-appartement~a-louer~montreal-villeray-saint-michel-parc-extension/25285408), 2026-10-07 |
+| Saint-Barthélemy | Condo | 3 | rue Jean-Talon Est | $2,700 | [Centris](https://www.centris.ca/fr/condo-appartement~a-louer~montreal-villeray-saint-michel-parc-extension/24079130), 2026-10-07 |
+| Saint-Gérard | Apartment | 4 | rue Saint-Denis, north | $2,800 | [Centris](https://www.centris.ca/fr/condo-appartement~a-louer~montreal-villeray-saint-michel-parc-extension/24045430), 2026-10-07 |
+| Saint-Gérard | Apartment | 3 | rue Saint-Denis | $2,850 | [Centris](https://www.centris.ca/fr/condo-appartement~a-louer~montreal-villeray-saint-michel-parc-extension/9341057), 2026-10-07 |
+
+: For rent, 3+ bedrooms, each listing under the school whose building is nearest {#tbl-for-rent}
+:::
+
+No rental listing with three or more bedrooms turned up nearest to: Saint-Grégoire-le-Grand, Saint-Gabriel-Lalemant, Marie-Favery, Hélène-Boullé, Sainte-Cécile, Saint-Pierre-Apôtre, Saint-Arsène.
+
+::: {.callout-warning}
+## Listings expire
+
+These are the listings found on 7 October 2026, chosen for variety of type rather than as a
+sample; each is shown once, under the school whose building is nearest, which is why the
+eastern schools carry most of the sale listings and several schools carry none; prices are
+asking prices; the section is not refreshed when the post is republished. For a durable
+benchmark use the assessed values in @tbl-cost, which reflect the July 2024 market.
+:::
+
+# Sources and caveats
+
+- **Area**: Ville de Montréal, *Quartiers sociologiques*, opened on 2026-10-07; Saint-Arsène,
+  181 m outside the polygon, included as an edge school; Barthélemy-Vimont, 90 m outside on the
+  Parc-Extension side, excluded at the reader's request.
+- **School facts**: MEQ school points and *Indices de défavorisation* (school year 2025-2026);
+  program and admission from the project's `data/schools_programs.csv` as of 2026-10-07; no
+  per-school web research in this report, so renovations and relocations are not covered.
+- **Zone tables**: `scripts/zone_stats.py` on open data fetched between 2026-09-18 and
+  2026-10-07 (Ville de Montréal, Données Québec, INSPQ, Statistics Canada 2021 Census; métro and
+  REM stations from OpenStreetMap contributors); dissemination areas by centroid, 46 to 82 per
+  school kilometre and 108 for the quartier; the city's equity index covers all residents of
+  every zone; tax bills matched 99.8% to 99.9% of assessment units. Census 2021 is five years
+  old; assessed values are from the 2026-2028 roll and reflect the July 2024 market.
+- **Listings**: as seen on Centris.ca on 2026-10-07, see the source column of each table.
+- **Deciles**: among 229 in-scope schools, from `data/derived/zone_stats_all.parquet`.
+
+# Conclusion
+
+Four readings across the quartier, in the order a parent weighs them. Each states what the
+tables show, not a verdict.
+
+**School.** Ten francophone public elementary schools, three with a volet and one selective
+athlete stream on the edge; IMSE deciles from 3 to 10 inside one quartier, with the
+*milieu défavorisé* band in the east and north-west and the De Gaspé and Saint-Hubert schools
+outside it. No school here has a full report yet (@tbl-overview).
+
+**Safety.** Crime per resident runs from the fourth to the eighth decile, with the market and
+the Saint-Hubert strip in the higher circles; the walk to school is the sharper line, top
+decile at Sainte-Cécile and Saint-Arsène near Jean-Talon, near the island median at
+Saint-Pierre-Apôtre (@tbl-safety).
+
+**Livability.** Fewer children than the island everywhere, most around Saint-Pierre-Apôtre;
+material deprivation concentrated in the east, social deprivation high across the quartier as
+in all of central Montreal; parks top-decile around three schools and almost absent around two;
+the métro within 400 m of seven buildings (@tbl-people, @tbl-indices, @tbl-parks).
+
+**Affordability.** A plex quartier with little single-family stock; assessed values at the
+island median in the east and in the ninth decile near Jean-Talon, at one effective tax rate;
+this month's three-bedroom listings run from a condo at about half a million dollars to plexes
+above a million, and rentals from about $1,650 to $2,850 a month (@tbl-stock,
+@tbl-cost, @tbl-for-sale, @tbl-for-rent).
+
+Next steps:
+
+1. **Run `/school-report`** on the two or three schools that stand out for the family; this
+   report has no per-school research (program pages, renovations, relocations), and seven of the
+   ten schools have no program row yet.
+2. **Confirm the catchments** for candidate addresses on the CSSDM finder; the kilometres overlap
+   heavily and a street can belong to a school two circles away.
+3. **What this report does not yet cover**: renovations and relocations, childcare places,
+   transit frequency, heat islands, rents by CMHC zone, and which of the quartier's five
+   secondary schools each elementary school feeds.
+
+::: {.callout-important}
+## Bottom line
+
+Villeray's ten schools sit in kilometres that look alike on density, mobility and language and
+differ on income, deprivation and cost along an east–west line, while the schools' own IMSE
+deciles span almost the whole scale. The one thing to verify before acting is the catchment of
+the candidate address, because in this quartier the nearest school is rarely the only one
+within a kilometre.
+:::
