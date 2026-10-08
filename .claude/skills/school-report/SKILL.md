@@ -1,6 +1,6 @@
 ---
 name: school-report
-description: Produce an MTL-101 school report as a Quarto post for one francophone public elementary school on the island of Montreal — the school itself (service centre, buildings, program and admission model, MEQ IMSE/SFR deciles, renovation or relocation status), the kilometre around it (census, deprivation indices, crime, road safety, housing stock, assessed values and tax bills, parks, métro access, with island deciles and an interactive map), and a dated snapshot of 3+ bedroom listings for sale and for rent. Use it whenever the user says "school report", "/school-report", "report on école X", "évalue l'école X", "what is it like around école X", "should we live near school X", or names a Montreal elementary school and asks for the neighbourhood picture. It resolves the school with the repo's scripts, asks when a name is ambiguous or the school is relocated, lets the user pick comparator schools, hands the draft to the quarto-writeup skill with pre-filled interview answers, lints and renders, and never commits or pushes without a yes.
+description: Produce an MTL-101 school report as a Quarto post for one francophone public elementary school on the island of Montreal — the school itself (service centre, buildings, program and admission model, MEQ IMSE/SFR deciles, renovation or relocation status, links to its fondation, OPP and parent groups), the kilometre around it (census, deprivation indices, crime, road safety, housing stock, assessed values and tax bills, parks, métro access, with island deciles and an interactive map), and a dated snapshot of 3+ bedroom listings for sale and for rent. Use it whenever the user says "school report", "/school-report", "report on école X", "évalue l'école X", "what is it like around école X", "should we live near school X", or names a Montreal elementary school and asks for the neighbourhood picture. It resolves the school with the repo's scripts, asks when a name is ambiguous or the school is relocated, lets the user pick comparator schools, hands the draft to the quarto-writeup skill with pre-filled interview answers, lints and renders, and never commits or pushes without a yes.
 ---
 
 # School report
@@ -69,11 +69,17 @@ uv run scripts/school_info.py "<name or code>" --nearest 8 --same-program
    relocalisation, école transitoire, with dates and the return date if given.
 3. On 403, timeout or an empty page: web-search the same facts, quote the snippets, and mark
    each fact `unverified` in the post. Never stop the run for this alone.
-4. **If a relocation or a split site is found, ask** which address anchors the zone and the
+4. Gather the **community and parent links** for the `Community` row of the school table — the
+   fondation, the OPP, the conseil d'établissement, parent Facebook groups — following
+   `references/layer1.md`. At most five, best first, each labelled with who runs it and whether
+   the page loaded, each with its own footnote. Links that will not open are included and marked
+   `unverified`; a link that cannot be tied to this school rather than a same-named one says so.
+   Run this every time: when nothing is found, the row stays and reads `None found on <date>`.
+5. **If a relocation or a split site is found, ask** which address anchors the zone and the
    listings: the permanent building, the temporary one, or both (two columns). Geocode a
    temporary address with `uv run scripts/geocode.py "<address>"` and pass it as `--anchor` to
    `zone_stats.py` and `zone_map.py`.
-5. Prepare the school's row for `data/schools_programs.csv` (schema in `references/layer1.md`)
+6. Prepare the school's row for `data/schools_programs.csv` (schema in `references/layer1.md`)
    and show it to the user; it is written in step 8 with the commit offer.
 
 ### 3. Comparators
@@ -140,14 +146,16 @@ quarto render                                                                  #
 ### 8. Hand off
 
 Report: the file path; the school's key facts and where each came from; the anchor decision;
-the comparators; the listings count and date; what is `unverified`; the data fetch dates.
+the comparators; the community links found and which of them are `unverified`; the listings
+count and date; what else is `unverified`; the data fetch dates.
 Then offer, and wait for a yes: the `/commit-changes` commit of the post and of the new row in
 `data/schools_programs.csv`. A dry run stops here with nothing committed.
 
 ## Files in this skill
 
 - `assets/report.qmd` — the post template.
-- `references/layer1.md` — school-site research guide, vocabulary, relocation cues, CSV schema.
+- `references/layer1.md` — school-site research guide, vocabulary, relocation cues, community
+  and parent links, CSV schema.
 - `references/listings.md` — the Layer 3 procedure and wording.
 - `references/interview.md` — pre-filled answers for the quarto-writeup interview.
 

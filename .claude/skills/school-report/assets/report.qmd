@@ -52,6 +52,7 @@ which address anchors the zone below and why.>[^travaux]
 | IMSE <year> | <value>, decile <d> <(milieu défavorisé)> |
 | SFR <year> | <value>, decile <d> |
 | Website | <url> |
+| Community | <[Label](<url>)[^link1] · [Label](<url>)[^link2] — up to 5, best first; or "None found on <date>"> |
 
 : The school in one table; facts marked *unverified* could not be confirmed on a page that loaded {#tbl-school}
 
@@ -64,6 +65,11 @@ agree here, and why they might not (choice program, private-school leakage)>.
 [^travaux]: <Source page title>, <site>, <date>: <url>.
 [^prog]: <Source>, <url>.
 [^adm]: <Source>, <url>.
+[^link1]: <What it is and who runs it (the school, the OPP, a fondation, parents, unknown);
+    public or private; how it was found and whether the page loaded. When it did not, mark it
+    *unverified* and warn in one line that the reader should confirm it belongs to this school
+    and not a same-named one elsewhere on the island.>
+[^link2]: <Same shape; one footnote per link. Delete the unused stubs.>
 
 # The zone
 
@@ -156,6 +162,8 @@ in @tbl-cost, which lag the market by about eighteen months.
 
 - **School facts**: the school's site and the <CSS> pages linked in the footnotes, opened on
   <date>; <which facts are unverified and why>.
+- **Community links**: searched on <date>; <which ones loaded, which are unverified, and whether
+  any could not be tied to this school rather than a same-named one>.
 - **IMSE/SFR**: MEQ, *Indices de défavorisation*, Données Québec, school year <year>.
 - **Zone tables**: `scripts/zone_stats.py` on open data fetched between <oldest> and <newest>
   (Ville de Montréal, Données Québec, INSPQ, Statistics Canada 2021 Census); <n> dissemination

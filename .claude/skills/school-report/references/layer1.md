@@ -35,6 +35,7 @@ than once; use web search results and mark the fact `unverified`.
 | Renovation / relocation | "Travaux", "Info-travaux", CSS news, local press | what is being done, where the pupils are now, the announced return date, the date of the notice |
 | Enrolment | `imse.py` (`Nbre_Eleves`) | number and school year |
 | IMSE / SFR | `imse.py` | value, decile, "milieu défavorisé" flag when decile ≥ 8 |
+| Community links | the school site's "Fondation", "OPP", "Conseil d'établissement" or "Vie scolaire" pages; the CSS establishment page; Facebook and Instagram search | up to 5 links, each with who runs it, public or private, and whether the page loaded |
 
 ## Vocabulary
 
@@ -65,6 +66,54 @@ When any cue is found: record the temporary address, geocode it
 (`uv run scripts/geocode.py "<address>, Montréal"`), and **ask the user** whether the zone and
 listings anchor on the permanent building, the temporary one, or both. Put the relocation in a
 `callout-important` at the top of "The school", with the notice date and the announced return.
+
+## Community and parent links
+
+The post's `Community` row carries up to five links to the human layer around the school: the
+fondation, the OPP, the conseil d'établissement, the parent Facebook group. Research them in
+every run; a school with none is a finding, not a skipped step.
+
+**Where to look, in order**
+
+1. The school's own site: a `Fondation`, `OPP`, `Conseil d'établissement` or `Vie scolaire`
+   page, usually under "École" or "Parents". These are the best links because they are
+   self-identifying.
+2. The service centre's establishment page for the school.
+3. Web search: `"<school>" fondation OR OPP OR "conseil d'établissement"`, and
+   `"<school>" <borough> facebook parents`.
+4. Facebook and Instagram for the school name plus the borough. Expect most results to be
+   unopenable; see below.
+5. The Registraire des entreprises du Québec when a fondation's legal status is unclear.
+
+**The French vocabulary that signals each**: *fondation* (a registered charity, often for the
+schoolyard or equipment); *OPP*, organisme de participation des parents (the parent volunteer
+body); *conseil d'établissement*, CE (the statutory governing board, whose minutes are often
+public); *comité de parents* (the service-centre-level body); *amicale*; *service de garde*.
+
+**Label each link** with who runs it — the school, the OPP, a fondation, parents, or unknown —
+whether it is public or private, and whether the page actually loaded. The inline label in the
+table stays to a few words; the detail goes in that link's footnote.
+
+**Cap at five**, best first. Prefer official and school-run over informal, and one good parent
+group over three overlapping ones. Quality of identification beats quantity.
+
+**Disambiguation is the real failure mode here.** School names repeat across service centres on
+the island — `École Marguerite-Bourgeoys` exists in both the CSSDM and the CSSMB, `Saint-Gérard`
+likewise — and a Facebook group named only for the school is ambiguous. Tie a group to *this*
+school's borough or address before including it; when you cannot, say so in the footnote rather
+than dropping the link silently.
+
+**Unopenable links**: Facebook groups and some fondation pages will not load for an automated
+request. Include them anyway, marked `unverified`, exactly as this guide already treats a school
+site that returns 403 — and say in the footnote that the link was found by search and not
+confirmed.
+
+**No scraping**, the same rule `references/listings.md` applies to Centris: find links by search,
+open each at most once, and record nothing but the URL and its label. Never enumerate a group's
+members, posts or content, and never join a private group.
+
+**Zero results is a result.** Write `None found on <date>` in the row rather than deleting it, so
+the reader can tell the search happened.
 
 ## The IMSE sentence
 
