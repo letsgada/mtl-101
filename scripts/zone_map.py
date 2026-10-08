@@ -8,8 +8,12 @@
     uv run scripts/zone_map.py 762103 762087 762089 --mark -73.6175 45.5404 --mark-label "Temporary site" --out map.html
 
 The first school is the subject (accent-coloured pin and the zone circle); the others are
-comparators (zone-coloured pins). Métro and REM stations inside the circle, or the nearest one,
-are drawn as M / R squares from data/raw/metro_stations_osm.json (OpenStreetMap). --anchor moves
+comparators (zone-coloured pins). Métro and REM stations are drawn as M / R squares from
+data/raw/metro_stations_osm.json (OpenStreetMap); --stations chooses how many: `zone` keeps the
+old behaviour (inside the circle or polygon, else the nearest one), `bounds` (the default) adds
+every station in view, so comparator schools show their own stations too, and `all` embeds the
+whole island network, which is ~90 stations and a few kilobytes. Stations outside the zone are
+drawn smaller and lighter so the zone's own keep the emphasis. --anchor moves
 the circle to another point; --mark adds a dashed marker (a temporary site) without moving it.
 --area draws a quartier polygon instead of a circle and, since no single school is chosen, every
 school becomes a zone-coloured pin (--edge codes dashed); stations inside the polygon are drawn.
@@ -31,7 +35,7 @@ from typing import Annotated, Optional
 import geopandas as gpd
 import typer
 from loguru import logger
-from shapely.geometry import Point, mapping
+from shapely.geometry import Point, box, mapping
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from zone_stats import CRS, Data, find_schools  # noqa: E402
@@ -84,8 +88,12 @@ TEMPLATE = """<link rel="stylesheet" href="{maplibre}/maplibre-gl.min.css">
       map.addLayer({{id: 'area-line', type: 'line', source: 'area', paint: {{'line-color': zone, 'line-width': 2.5}}}});
     }}
     data.stations.forEach(function (st) {{
-      pin([st.lon, st.lat], 'width:18px;height:18px;border-radius:3px;background:#fff;border:2px solid ' + zone +
-          ';color:' + zone + ';font:bold 11px/14px sans-serif;text-align:center;cursor:pointer',
+      var near = st.in_zone !== false;
+      var s = near ? 18 : 13;
+      pin([st.lon, st.lat], 'width:' + s + 'px;height:' + s + 'px;border-radius:3px;background:#fff;border:' +
+          (near ? '2px solid ' + zone : '1px solid ' + soft) + ';color:' + (near ? zone : soft) +
+          ';font:bold ' + (near ? 11 : 9) + 'px/' + (near ? 14 : 11) + 'px sans-serif;text-align:center;cursor:pointer' +
+          (near ? '' : ';opacity:0.85'),
           '<b>' + st.name + '</b><br>' + (st.kind === 'light_rail' ? 'REM' : 'Métro') + ' station',
           st.kind === 'light_rail' ? 'R' : 'M');
     }});
@@ -125,6 +133,8 @@ def main(
     area: Annotated[Optional[Path], typer.Option("--area", help="GeoJSON polygon from area_info.py: draw its outline")] = None,
     no_circle: Annotated[bool, typer.Option("--no-circle", help="do not draw the kilometre circle")] = False,
     edge: Annotated[Optional[list[str]], typer.Option("--edge", help="codes drawn as dashed pins (edge schools)")] = None,
+    stations_mode: Annotated[str, typer.Option("--stations", metavar="zone|bounds|all",
+                                               help="which métro/REM stations to draw")] = "bounds",
     height: Annotated[int, typer.Option(help="map height in pixels")] = 420,
     out: Annotated[Optional[Path], typer.Option(help="write the fragment here instead of stdout")] = None,
     verbose: Annotated[bool, typer.Option("--verbose", "-v")] = False,
@@ -159,18 +169,31 @@ def main(
           [Point(float(r.COORD_X_LL84_IMM), float(r.COORD_Y_LL84_IMM)) for r in rows.itertuples()]
     bounds = gpd.GeoSeries(pts, crs=4326).total_bounds  # minx, miny, maxx, maxy
 
+    if stations_mode not in {"zone", "bounds", "all"}:
+        logger.error(f"--stations must be zone, bounds or all, not {stations_mode!r}")
+        raise typer.Exit(1)
+
     stations = []
     if d.metro is not None:
-        keep: set = set()
+        # the zone's own stations: inside the polygon or the circle, falling back to the nearest one
+        in_zone: set = set()
         if area_m is not None:
             inside = d.metro[d.metro.within(area_m)]
-            keep.update(inside.index.tolist() or [d.metro.geometry.distance(area_m.centroid).idxmin()])
+            in_zone.update(inside.index.tolist() or [d.metro.geometry.distance(area_m.centroid).idxmin()])
         else:
             for c in [centre_m] + ([to_m(*mark)] if mark else []):
                 dist = d.metro.geometry.distance(c)
-                keep.update(dist[dist <= radius].index.tolist() or [dist.idxmin()])  # in the circle, or the nearest one
-        stations = [dict(lon=float(st.lon), lat=float(st.lat), name=st.name, kind=st.kind)
+                in_zone.update(dist[dist <= radius].index.tolist() or [dist.idxmin()])
+        keep = set(in_zone)
+        if stations_mode == "all":
+            keep = set(d.metro.index)
+        elif stations_mode == "bounds":
+            view_m = gpd.GeoSeries([box(*bounds)], crs=4326).to_crs(CRS).iloc[0].buffer(300)
+            keep |= set(d.metro[d.metro.within(view_m)].index)
+        stations = [dict(lon=float(st.lon), lat=float(st.lat), name=st.name, kind=st.kind,
+                         in_zone=st.Index in in_zone)
                     for st in d.metro.loc[sorted(keep)].itertuples()]
+        logger.debug(f"stations: {len(stations)} drawn ({len(in_zone)} in the zone), mode {stations_mode}")
     else:
         logger.warning("no metro_stations_osm.json; run fetch_open_data.py metro_osm to show stations")
 

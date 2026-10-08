@@ -88,6 +88,7 @@ uv run scripts/imse.py 762103                                        # MEQ IMSE/
 uv run scripts/zone_stats.py 762103 762087 --anchor -73.6235 45.5405 --format csv --out data/derived/report_x.csv  # --anchor recentres the first school's zone (relocated school)
 uv run scripts/report_tables.py data/derived/report_x.csv            # the six captioned Quarto tables with decile spans
 uv run scripts/zone_map.py 762103 762087 --out map.html              # MapLibre map fragment for a ```{=html} block (métro/REM stations from fetch key metro_osm)
+uv run scripts/zone_map.py 762106 … --stations all --out map.html    # --stations zone|bounds|all: the zone's own, everything in view (default), or the whole 89-station network (+9 kB)
 uv run scripts/area_info.py "Villeray" --margin 300                 # quartier polygon (fetch key `quartiers`), schools inside and within the margin, out-of-scope note
 uv run scripts/zone_stats.py <codes…> --edge <code> --area data/derived/area_villeray.geojson --format csv --out data/derived/area_villeray.csv  # + one row over the whole polygon
 uv run scripts/report_tables.py data/derived/area_villeray.csv --layout rows --info data/derived/area_villeray_schools.csv  # overview + group tables, schools as rows
