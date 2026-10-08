@@ -1,0 +1,582 @@
+---
+title: "École Hélène-Boullé: the school and its kilometre"
+date: "2026-10-08"
+categories: [school-report, villeray-saint-michel-parc-extension, layer-1, layer-2]
+description: "A full Villeray neighbourhood school 193 m from parc Jarry, at 100% of its capacity with a gymnasium still unfunded: its deprivation deciles, its kilometre against four nearby schools, and what a three-bedroom home costs there this month."
+toc: true
+code-annotations: hover
+---
+
+École Hélène-Boullé is a francophone public elementary school of the Centre de services scolaire
+de Montréal (CSSDM) in Villeray–Saint-Michel–Parc-Extension, in a 1927-28 building at the corner
+of avenue de Gaspé and rue Gounod. This report describes it in three layers: the school itself,
+the kilometre around it, and what a three-bedroom home there costs to buy or rent this month. It
+is one output of MTL-101, which works backwards from the school to the neighbourhood.
+
+Four nearby schools carry through the tables as comparators: **Sainte-Cécile**, 984 m south on the
+same avenue, which has [its own report](villeray-petite-patrie-report.qmd); **Marie-Favery** and
+**Saint-Gabriel-Lalemant**, both in Villeray; and **Saint-Arsène**, across the borough line in
+Rosemont–La Petite-Patrie. Each of the five has its own section below, because the zone tables
+describe kilometres and say nothing about the school standing in the middle of one — and on that
+score the five differ more than their overlapping circles suggest.
+
+::: {.callout-important}
+## Not a ranking
+
+Each zone metric is shown with its decile among the 229 francophone public elementary schools on
+the island outside the West Island, marked [d1]{.decile-low} to [d3]{.decile-low} for the lowest
+three tenths, [d4]{.decile-mid} to [d7]{.decile-mid} for the middle, and [d8]{.decile-high} to
+[d10]{.decile-high} for the top three. A high decile means a high value, nothing
+more, so the label says which way is favourable for a family: ▲ higher is favourable (children,
+parks, stations), ▼ lower is favourable (crime, collisions, deprivation, cost), and rows with no
+glyph are descriptive. On the ▲ and ▼ rows the most favourable of the compared zones is [shaded]{.best}.
+The report computes no composite score, and the IMSE is a socioeconomic index of the pupils enrolled,
+not a measure of academic performance.
+:::
+
+# The schools
+
+Five schools carry through this report. Hélène-Boullé is the subject; the other four are
+comparators, and each gets its own section here because a zone table says nothing about the school
+standing in it. Four of the five are ordinary neighbourhood schools taking pupils by address, with
+the CSSDM's *libre choix* applying only if places remain; Saint-Arsène is the exception, carrying a
+selective *élève-athlète* stream alongside its regular programme.
+
+Every one of the five school websites returns HTTP 403 to anything that is not a browser, as most
+`cssdm.gouv.qc.ca` school sites do. Facts drawn from their indexed pages rather than from a page
+that loaded are marked *unverified* throughout.
+
+## École Hélène-Boullé
+
+| | |
+|:---|:---|
+| Service centre | Centre de services scolaire de Montréal (762000) |
+| MEQ code | 762106 |
+| Building | Hélène-Boullé, 8050 avenue de Gaspé, H2R 2A7 (préscolaire and primaire); CSSDM building no. 278, built 1927-28, renovated 1984[^meq][^ptrdi] |
+| Program | Regular program of a neighbourhood school; the projet éducatif puts French and mathematics first, with cultural outings and visits from artists and authors, and uses taekwondo for social skills (*unverified*: school site returns 403, wording from its indexed pages)[^ecole] |
+| Admission | Neighbourhood school, by address; registration at the school 7 to 27 January 2026 for 2026-2027, information evening 15 January, two proofs of residence required and a lease is not accepted (*unverified*, same source)[^adm] |
+| Pupils (2025-2026) | 277 in the MEQ index file; the CSSDM's own triennial plan declares 17 classes and 351 pupils for the same year (see below)[^ptrdi] |
+| Capacity | 17 classes, 391 places; occupancy **100%**[^ptrdi] |
+| IMSE 2025-2026 | 6.38, decile 5 |
+| SFR 2025-2026 | 7.96, decile 8 |
+| Website | <https://helene-boulle.cssdm.gouv.qc.ca/> (returns 403 to automated requests) |
+| Community | [Conseil d'établissement](https://helene-boulle.cssdm.gouv.qc.ca/ecole/structure/)[^ce] · [AGA 2025 — the OPP and the other routes in](https://helene-boulle.cssdm.gouv.qc.ca/files/05.-PV-AGA-16-sept-2025-2.pdf)[^aga] · two more on the same blocked domain, described but not linked[^unlinked] — no fondation and no parent Facebook group found on 2026-10-08[^nofb] |
+
+: The school in one table; facts marked *unverified* could not be confirmed on a page that loaded {#tbl-school-hb}
+
+::: {.callout-note}
+## A full school, an expansion already built, and a gymnasium still waiting
+
+The CSSDM's triennial plan for 2025-2028 states plainly that *"l'école occupe la totalité de
+l'immeuble"* — the school has its whole building, so there is no relocation and no shared site to
+weigh. What the same entry shows is a school at exactly 100% occupancy: 17 classes and 351 pupils
+against a capacity of 391 places, with the plan's own forecasts easing to 14 classes and 315
+pupils by 2027-2028.[^ptrdi]
+
+That fullness has a history. Earlier CSSDM plans describe an expansion of eight to ten classrooms
+and a gymnasium delivered around 2020-22, the documents disagreeing on the count, and a phased
+masonry and window renovation of the rear façade across 2023 and 2024 (*unverified*: from search
+extracts of the plans, not pages opened here). The gymnasium is the part that did not happen. The
+CSSDM's funding page lists *"Ajout d'un gymnase (primaire)"* for Hélène-Boullé as **"non retenu au
+PQI 2024-2034"** and then **"déposé de nouveau au PQI 2025-2035"**; the triennial plan adds that
+the request went back to the ministry in autumn 2024. The school does not appear in the
+PQI 2026-2036 list, and neither page says why, so the project's current status is genuinely
+unresolved here rather than simply unknown to the agent.[^financement][^ptrdi]
+
+This matters to a parent mainly as a question to ask: a full school with no gym of its own is the
+single thing the public record flags about Hélène-Boullé.
+:::
+
+## École Sainte-Cécile
+
+| | |
+|:---|:---|
+| Service centre | Centre de services scolaire de Montréal (762000) |
+| MEQ code | 762107 |
+| Building | Sainte-Cécile, 7230 avenue de Gaspé, H2R 1Z6 (préscolaire and primaire)[^meq] |
+| Program | Regular program of a neighbourhood school; the projet éducatif is oriented to raising pupils' literacy (*unverified*: site returns 403)[^sc] |
+| Admission | Neighbourhood school, by address; registration at the secretariat in January, CSSDM *libre choix* if places remain (*unverified*, same source)[^sc] |
+| Pupils (2025-2026) | 388 in the MEQ index file; the school's pages and a 2022 CSSDM communiqué describe about 470, a figure that predates the current index[^yard] |
+| IMSE 2025-2026 | 4.27, decile 3 |
+| SFR 2025-2026 | 8.78, decile 8 |
+| Website | <https://ste-cecile.cssdm.gouv.qc.ca/> |
+| Community | [Conseil d'établissement, OPP et partenaires](https://ste-cecile.cssdm.gouv.qc.ca/ecole/conseil-detablissement-opp-et-partenaires/)[^sc-ce] · [OPP École Ste-Cécile on Facebook](https://www.facebook.com/oppsaintececile/)[^sc-opp] — no fondation found on 2026-10-08 |
+
+: École Sainte-Cécile; facts marked *unverified* could not be confirmed on a page that loaded {#tbl-school-sc}
+
+Sainte-Cécile already has [its own report](villeray-petite-patrie-report.qmd) in this project. Its
+schoolyard was rebuilt for $5M and inaugurated on 27 September 2022, and a small municipal park
+carrying the school's name sits immediately beside the building.[^yard] It is the only one of the
+five with a parent organisation that maintains its own public page rather than a page on the
+school's site.
+
+## École Saint-Arsène
+
+| | |
+|:---|:---|
+| Service centre | Centre de services scolaire de Montréal (762000) |
+| MEQ code | 762095 |
+| Building | Saint-Arsène, 6972 avenue Christophe-Colomb, H2S 2H5 (préscolaire and primaire); Rosemont–La Petite-Patrie, not Villeray[^meq] |
+| Program | Neighbourhood school carrying a *programme élève-athlète* for cycles 2 and 3 (grades 3 to 6) — one stream, not the whole school — alongside "Les Panthères" sports activities in volleyball, handball, basketball, cosom hockey and athletics (*unverified*: site returns 403)[^sa] |
+| Admission | By address for the regular stream. The élève-athlète stream is **selective**: partner sports clubs have priority in the choice, academic aptitude is weighed, selection happens each January, and a pupil chosen from outside the catchment enters through CSSDM *libre choix* (*unverified*, same source)[^sa] |
+| Pupils (2025-2026) | 289 in the MEQ index file; the school's own pages say "more than 350" on one and "more than 450" on another[^sa] |
+| IMSE 2025-2026 | 8.10, decile 7 |
+| SFR 2025-2026 | 10.37, decile 8 |
+| Website | <https://st-arsene.cssdm.gouv.qc.ca/> |
+| Community | [Conseil d'établissement](https://st-arsene.cssdm.gouv.qc.ca/ecole/structure-fonctionnement/)[^sa-ce] · [Parents](https://st-arsene.cssdm.gouv.qc.ca/parents/)[^sa-par] · [Fondation des élèves de Montréal — schoolyard project](https://fondationelevesmtl.ca/projet/lecole-saint-arsene-installe-de-nouveaux-paniers-de-basket-dans-sa-cours/)[^sa-fond] — no parent Facebook group found on 2026-10-08 |
+
+: École Saint-Arsène; facts marked *unverified* could not be confirmed on a page that loaded {#tbl-school-sa}
+
+Saint-Arsène is the only one of the five with any selective gate, and the gate covers one stream
+rather than the school: a family moving into its catchment enters the regular programme by address
+like anywhere else. It is also the only one whose schoolyard work is documented through an outside
+charity rather than the service centre.
+
+## École Saint-Gabriel-Lalemant
+
+| | |
+|:---|:---|
+| Service centre | Centre de services scolaire de Montréal (762000) |
+| MEQ code | 762084 |
+| Buildings | Saint-Gabriel-Lalemant, 7350 rue Garnier, H2E 2A3; and its annexe at 7375 rue Garnier, H2E 2A1 — both préscolaire and primaire, about 100 m apart[^meq] |
+| Program | Regular program of a neighbourhood school; the projet éducatif 2023-2027 targets literacy and numeracy, aiming to raise the share of pupils scoring 70% or better by June 2027, and a French-language support teacher works with allophone pupils (*unverified*: site returns 403)[^sgl] |
+| Admission | Neighbourhood school, by address; registration 7 to 27 January 2026 for 2026-2027 with an open house on 14 January, CSSDM *libre choix* if places remain (*unverified*, same source)[^sgl] |
+| Pupils (2025-2026) | 223 in the MEQ index file; the school describes itself as having "over 300"[^sgl] |
+| IMSE 2025-2026 | 12.36, decile 9 — **milieu défavorisé** |
+| SFR 2025-2026 | 13.15, decile 9 |
+| Website | <https://st-gabriel-lalemant.cssdm.gouv.qc.ca/> |
+| Community | [Conseil d'établissement](https://st-gabriel-lalemant.cssdm.gouv.qc.ca/ecole/structure-fonctionnement/)[^sgl-ce] · [Parents](https://st-gabriel-lalemant.cssdm.gouv.qc.ca/parents/)[^sgl-par] — an OPP exists and runs fundraising; no fondation found on 2026-10-08 |
+
+: École Saint-Gabriel-Lalemant; facts marked *unverified* could not be confirmed on a page that loaded {#tbl-school-sgl}
+
+::: {.callout-note}
+## The annexe: phase one done, phase two waiting on the ministry
+
+The CSSDM's project sheet for the annexe records that phase one, selective interior demolition, is
+complete, and that the service centre is seeking ministry funding for phase two: **eight added
+classrooms**, renovation of the existing ones, a *carrefour d'apprentissage*, a multipurpose room
+and a motor-skills room, and a regreened schoolyard, for a stated capacity of **184 pupils** and an
+investment of **13.9 M$**. The schedule is given only as *"à venir"*, and the sheet was last
+modified on 6 February 2024, so its current state is not established here.[^sgl-projet]
+
+This is the second of the five schools whose published building file ends in a funding request
+rather than a date — Hélène-Boullé's gymnasium is the other.
+:::
+
+## École Marie-Favery
+
+| | |
+|:---|:---|
+| Service centre | Centre de services scolaire de Montréal (762000) |
+| MEQ code | 762094 |
+| Building | Marie-Favery, 7750 avenue Christophe-Colomb, H2R 2S9 (préscolaire and primaire)[^meq] |
+| Program | Regular neighbourhood school, and a school **designated for integrating pupils with a physical disability**: lift, wide corridors, ramps and other adaptations. It runs *La Passerelle*, a specialised class for 4- and 5-year-olds with a mild motor impairment who could move to a regular class, and takes children from prématernelle and préscolaire 4 ans (*unverified*: site returns 403)[^mf] |
+| Admission | Neighbourhood school, by address; registration each January, in person or online with the documents still brought to the school, and *libre choix* exercised only during the official window (*unverified*, same source)[^mf] |
+| Pupils (2025-2026) | 343 |
+| IMSE 2025-2026 | 8.62, decile 7 |
+| SFR 2025-2026 | 8.18, decile 8 |
+| Website | <https://marie-favery.cssdm.gouv.qc.ca/> |
+| Community | [Conseil d'établissement](https://marie-favery.cssdm.gouv.qc.ca/ecole/structure/)[^mf-ce] · [Parents](https://marie-favery.cssdm.gouv.qc.ca/parents/)[^mf-par] · [CE minutes, 29 April 2025](https://marie-favery.cssdm.gouv.qc.ca/files/PV-CE-29-avril-2025_final.pdf)[^mf-pv] · [École Marie-Favery on Facebook](https://www.facebook.com/317440791613054)[^mf-fb] — no fondation found on 2026-10-08 |
+
+: École Marie-Favery; facts marked *unverified* could not be confirmed on a page that loaded {#tbl-school-mf}
+
+Marie-Favery's designation for pupils with a physical disability is the one feature in this set that
+would decide a family's choice outright rather than by degree, and it is not visible anywhere in the
+zone tables. It also lists its OPP members for 2025-2026 and shares a Facebook page run with them.
+
+## What the indices say
+
+The MEQ's IMSE places the five schools in deciles 5 (Hélène-Boullé), 3 (Sainte-Cécile), 7
+(Saint-Arsène and Marie-Favery) and 9 (Saint-Gabriel-Lalemant) for 2025-2026, where 1 is most
+advantaged, 10 most disadvantaged, and 8 to 10 is the official *milieu défavorisé*. Only
+Saint-Gabriel-Lalemant falls inside that band. All five sit in decile 8 or 9 on the SFR, the
+low-income-threshold index, which is the more volatile of the two. The IMSE is built from the
+enrolled pupils' parents' education and employment, not from test results, and Quebec publishes no
+academic ranking of elementary schools.
+
+The interesting part is where the school indices and the census agree and where they do not. At
+Saint-Gabriel-Lalemant they agree: the most deprived index of the five sits over the zone with the
+lowest median household income in @tbl-people, in the second decile. At Hélène-Boullé they diverge
+in the opposite direction — a mid-range index over the most advantaged zone of the five, ninth
+decile for income and third for low income. A school's index describes the families who enrol, not
+the households who live within a kilometre of it, and in a borough where gentrifying blocks sit
+beside older low-income pockets a catchment can draw from quite different streets than a circle
+does. Nothing in the data settles which explanation applies to any one of them.
+
+[^meq]: Building list and codes from the MEQ *organismes et établissements* file via `scripts/school_info.py`, data fetched 2026-09-18.
+[^ptrdi]: *Plan triennal de répartition et destination des immeubles 2025-2028 du CSSDM*, annexe I, building 278: <https://www.cssdm.gouv.qc.ca/wp-content/uploads/INF-CA-10-202411-51-Annexe-I.pdf>, opened and text-extracted 2026-10-08.
+[^ecole]: "École" and "Projet éducatif", École Hélène-Boullé: <https://helene-boulle.cssdm.gouv.qc.ca/ecole/>. The whole domain returns HTTP 403, including to a browser User-Agent; wording from search-index extracts seen 2026-10-08.
+[^adm]: "Admission et inscription" and "Inscriptions 2026-2027", École Hélène-Boullé: <https://helene-boulle.cssdm.gouv.qc.ca/ecole/admission-inscription/>. Site returns 403; extracts seen 2026-10-08.
+[^financement]: "Financement pour les différents projets de travaux au CSSDM": <https://www.cssdm.gouv.qc.ca/batiments-scolaires/financement/>, opened 2026-10-08; its PQI 2026-2036 list is marked updated November 2025.
+[^ce]: The school's "Conseil d'établissement et autres instances" page, run by the school; the CE is reachable at `hboulle.ce@cssdm.gouv.qc.ca` and its president is named as Frédéric Thouin on the page and again in the September 2025 general assembly minutes. Found by search; the page would not load, so *unverified* — though the address is on the school's own domain, which ties it to this school and not to the unrelated École Hélène-Boullé in Sherbrooke.
+[^aga]: Minutes of the general assembly of 16 September 2025, published by the school. They set out the four routes for parents — conseil d'établissement, organisme de participation des parents (OPP), comité des usagers du service de garde, and one-off activities — and name Geneviève Marquis as outgoing OPP president. The current OPP leadership is not stated. PDF found by search, would not load, *unverified*.
+[^unlinked]: Two further school-run resources are recorded here without a hyperlink, because the school's server answers an automated check for them with 404 rather than the 403 it gives every other page, so this report cannot show they are live. Both are school-run and were seen in search results on 2026-10-08: **"Communications aux parents"** (`/parents/communications-parents/`), carrying the monthly *Info Hélène-Boullé* newsletter and the conseil d'établissement's agendas and minutes; and **"Résumé — Actions, agrandissement de l'école Hélène-Boullé"** (a PDF under `/files/`), the parent-side record of the campaign to expand the school, including the bid to use the former convent and the adjacent 8055 Casgrain lot. Radio-Canada covered the convent fight on 17 May 2018 as "Sauver un couvent pour agrandir une école".[^rc]
+[^rc]: "Sauver un couvent pour agrandir une école", *Le Téléjournal Grand Montréal 18 h*, Radio-Canada, 17 May 2018: <https://ici.radio-canada.ca/tele/le-telejournal-18h/2016-2017/segments/reportage/72543/ecole-couvent-villeray-montreal-parents-helene>, opened 2026-10-08.
+[^nofb]: Searched on 2026-10-08: no fondation and no parent-run Facebook group could be tied to this school. One caution for anyone searching themselves — a directory listing for "École Hélène-Boullé" points at `facebook.com/CSsherbrooke`, the Sherbrooke service centre, because a school of the same name exists there. It is a different school and is excluded here.
+[^sc]: "École", "Projet éducatif" and "Admission et inscription", École Sainte-Cécile: <https://ste-cecile.cssdm.gouv.qc.ca/ecole/>. Site returns 403; wording from search-index extracts seen 2026-10-08.
+[^yard]: "Une nouvelle cour pour l'école Sainte-Cécile", CSSDM communiqué, inauguration of 27 September 2022: <https://www.cssdm.gouv.qc.ca/communique/nouvelle-cour-ecole-sainte-cecile/>, opened 2026-09-26 for the earlier report.
+[^sc-ce]: "Conseil d'établissement, OPP et partenaires", run by the school; its page describes a council meeting six or seven times a year. Found by search, *unverified*.
+[^sc-opp]: Public Facebook page of the "OPP École Ste-Cécile", run by the school's parent organisation rather than by the school, with roughly 240 followers and no recent posts visible in the snippet. Found by search on 2026-10-08, page not opened, so *unverified* — the name ties it to this school, but confirm before relying on it.
+[^sa]: "École", "Programmes — élève-athlète" and "Admission et inscription", École Saint-Arsène: <https://st-arsene.cssdm.gouv.qc.ca/programmes/eleve-athlete/>. Site returns 403; extracts seen 2026-10-08, including the two conflicting enrolment figures.
+[^sa-ce]: "Conseil d'établissement et autres instances", run by the school; its page describes a council meeting about every six weeks. Found by search, *unverified*.
+[^sa-par]: The school's "Parents" section, which invites parents to school meetings and committees. Found by search, *unverified*.
+[^sa-fond]: Project page of the Fondation des élèves de Montréal recording new basketball hoops installed during the schoolyard revitalisation at Saint-Arsène, and describing the school's "Les Panthères" sports programme. An outside charity, not the school: <https://fondationelevesmtl.ca/projet/lecole-saint-arsene-installe-de-nouveaux-paniers-de-basket-dans-sa-cours/>.
+[^sgl]: "École", "Projet éducatif" and "Inscription 2026-2027", École Saint-Gabriel-Lalemant: <https://st-gabriel-lalemant.cssdm.gouv.qc.ca/ecole/>. Site returns 403; extracts seen 2026-10-08. Schools of the same name exist in Victoriaville, Sorel-Tracy and Kamouraska; only the CSSDM school is described here.
+[^sgl-projet]: "Fiche projet — école Saint-Gabriel-Lalemant", CSSDM: <https://www.cssdm.gouv.qc.ca/nouvelles/fiche-projet-ecole-saint-gabriel-lalemant/>, opened 2026-10-08; the page states it was last modified on 6 February 2024.
+[^sgl-ce]: "Conseil d'établissement et autres instances", run by the school, listing 2025-2026 members and reachable at `st.glalemant.ce@cssdm.gouv.qc.ca`. Found by search, *unverified*.
+[^sgl-par]: The school's "Parents" section, which describes the OPP as an optional parents-only committee created at the annual general meeting, and records its fundraising campaigns. Found by search, *unverified*.
+[^mf]: "École", "Programmes — primaire", "Services complémentaires" and "Admission et inscription", École Marie-Favery: <https://marie-favery.cssdm.gouv.qc.ca/ecole/>. Site returns 403; extracts seen 2026-10-08.
+[^mf-ce]: "Conseil d'établissement et autres instances", run by the school, listing 2025-2026 council members and linking the meeting calendar, agendas and minutes. Found by search, *unverified*.
+[^mf-par]: The school's "Parents" section, which lists the 2025-2026 OPP members and a way to contact them. Found by search, *unverified*.
+[^mf-pv]: Minutes of the conseil d'établissement meeting of 29 April 2025, published by the school. Found by search, *unverified*.
+[^mf-fb]: A Facebook page titled "École Marie-Favery", which Facebook itself labels an unofficial page, with about 168 followers; a third-party directory describes it as run jointly by the OPP and the school team. Found by search on 2026-10-08, page not opened, so *unverified* — confirm it is this school's before relying on it.
+
+# The zone
+
+The zone is a circle of one kilometre around 8050 avenue de Gaspé, a stand-in for the catchment
+polygon that exists only in the service centre's finder and PDF maps. The Sainte-Cécile circle
+overlaps this one substantially; Saint-Gabriel-Lalemant, Marie-Favery and Saint-Arsène sit further
+out and overlap less.
+
+```{=html}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/maplibre-gl/4.7.1/maplibre-gl.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/maplibre-gl/4.7.1/maplibre-gl.min.js"></script>
+<div id="zone-map-762106" class="zone-map" style="height:420px;border:1px solid var(--zone-soft);border-radius:4px"></div>
+<script>
+(function () {
+  var css = getComputedStyle(document.documentElement);
+  var accent = css.getPropertyValue('--accent').trim() || '#c1272d';
+  var zone = css.getPropertyValue('--zone').trim() || '#5b6b7a';
+  var soft = css.getPropertyValue('--zone-soft').trim() || '#dfe4ea';
+  var data = {"subject": {"lon": -73.629502, "lat": 45.540127, "name": "École Hélène-Boullé", "address": "Hélène-Boullé, 8050, avenue de Gaspé"}, "anchor": {"lon": -73.629502, "lat": 45.540127, "label": null}, "radius": 1000.0, "circle": {"type": "Feature", "properties": {}, "geometry": {"type": "Polygon", "coordinates": [[[-73.61669706443263, 45.540140798699355], [-73.6167115750531, 45.53969925467677], [-73.61675689823676, 45.539258742811796], [-73.61683292407973, 45.53882032430059], [-73.61693946872639, 45.53838505527197], [-73.61707627481894, 45.53795398424371], [-73.61724301212405, 45.53752814959735], [-73.61743927833471, 45.53710857707768], [-73.61766460004543, 45.536696277322854], [-73.61791843389827, 45.53629224343115], [-73.61820016789707, 45.53589744857004], [-73.6185091228865, 45.53551284363367], [-73.61884455419228, 45.535139354953856], [-73.61920565341893, 45.53477788207064], [-73.61959155040014, 45.534429295567385], [-73.62000131529746, 45.534094434975735], [-73.62043396084215, 45.53377410675546], [-73.62088844471455, 45.53346908235401], [-73.62136367205557, 45.53318009635042], [-73.62185849810393, 45.53290784468817], [-73.62237173095303, 45.53265298300086], [-73.62290213442067, 45.53241612503517], [-73.62344843102481, 45.53219784117457], [-73.62400930505818, 45.531998657067376], [-73.62458340575441, 45.53181905236249], [-73.62516935053794, 45.531659459555925], [-73.62576572835023, 45.531520262950615], [-73.62637110304388, 45.53140179773218], [-73.62698401683693, 45.53130434916304], [-73.62760299381877, 45.53122815189633], [-73.62822654349955, 45.531173389411684], [-73.62885316439427, 45.53114019357405], [-73.62948134763325, 45.53112864431662], [-73.63010958059031, 45.531138769448596], [-73.63073635051985, 45.531170544588406], [-73.63136014819419, 45.53122389322228], [-73.63197947153253, 45.53129868688825], [-73.63259282921298, 45.53139474548505], [-73.63319874425851, 45.53151183770521], [-73.63379575758896, 45.531649681591254], [-73.63438243153004, 45.531807945213764], [-73.63495735327123, 45.531986247469575], [-73.63551913826417, 45.53218415899823], [-73.63606643355345, 45.53240120321465], [-73.6365979210318, 45.53263685745531], [-73.63711232061196, 45.53289055423522], [-73.63760839330753, 45.53316168261301], [-73.63808494421528, 45.53344958966035], [-73.63854082539224, 45.53375358203264], [-73.63897493861997, 45.53407292763689], [-73.63938623804997, 45.53440685739304], [-73.63977373272351, 45.534754567084235], [-73.6401364889599, 45.535115219291924], [-73.64047363260744, 45.535487945410935], [-73.64078435115172, 45.53587184773966], [-73.64106789567589, 45.53626600164055], [-73.64132358266843, 45.53666945776551], [-73.64155079567395, 45.53708124434113], [-73.6417489867829, 45.53750036950779], [-73.64191767795663, 45.53792582370764], [-73.64205646218466, 45.53835658211515], [-73.64216500447112, 45.53879160710483], [-73.64224304264809, 45.53922985074982], [-73.64229038801372, 45.53967025734569], [-73.64230692579356, 45.540111765953064], [-73.64229261542397, 45.54055331295316], [-73.6422474906568, 45.54099383460996], [-73.64217165948506, 45.54143226963301], [-73.6420653038896, 45.54186756173449], [-73.64192867940751, 45.542298662174424], [-73.64176211452316, 45.542724532288], [-73.64156600988302, 45.543144145988876], [-73.6413408373366, 45.54355649224229], [-73.64108713880528, 45.543960577502155], [-73.64080552498199, 45.5443554281063], [-73.64049667386475, 45.544740092623776], [-73.64016132912742, 45.54511364414891], [-73.63980029833185, 45.54547518253647], [-73.6394144509853, 45.54582383657222], [-73.63900471644818, 45.54615876607416], [-73.63857208169689, 45.546479163918875], [-73.63811758894713, 45.546784257988406], [-73.63764233314346, 45.547073313032726], [-73.63714745932128, 45.547345632443516], [-73.6366341598473, 45.547600559934665], [-73.63610367154534, 45.54783748112582], [-73.63555727271442, 45.54805582502458], [-73.63499628004635, 45.54825506540445], [-73.63442204545, 45.54843472207455], [-73.63383595279043, 45.548594362038465], [-73.63323941455035, 45.5487336005391], [-73.63263386842215, 45.54885210198732], [-73.63202077383882, 45.54894958077185], [-73.63140160845202, 45.54902580194853], [-73.6307778645661, 45.54908058180744], [-73.63015104553635, 45.54911378831634], [-73.62952266214059, 45.5491253414393], [-73.62889422893261, 45.54911521332981], [-73.62826726058657, 45.549083428398156], [-73.62764326824097, 45.54903006325243], [-73.62702375585143, 45.54895524651361], [-73.6264102165605, 45.548859158505124], [-73.6258041290942, 45.54874203081775], [-73.62520695419322, 45.5486041457505], [-73.62462013108785, 45.5484458356294], [-73.62404507402515, 45.54826748200542], [-73.6234831688567, 45.548069514733726], [-73.62293576969526, 45.547852410936194], [-73.62240419564844, 45.5476166938502], [-73.62188972763721, 45.547362931565964], [-73.62139360530702, 45.54709173565567], [-73.62091702403906, 45.54680375969802], [-73.62046113206873, 45.5464996977013], [-73.6200270277184, 45.546180282428985], [-73.61961575675105, 45.5458462836321], [-73.61922830985134, 45.54549850619238], [-73.61886562023986, 45.54513778818083], [-73.61852856142664, 45.54476499883636], [-73.61821794510914, 45.54438103646948], [-73.61793451921969, 45.54398682629594], [-73.61767896612727, 45.543583318205734], [-73.61745190099776, 45.54317148447278], [-73.61725387031662, 45.542752317410795], [-73.61708535057743, 45.54232682698116], [-73.61694674713969, 45.54189603835828], [-73.61683839325816, 45.54146098945865], [-73.6167605492863, 45.54102272843938], [-73.6167134020557, 45.54058231117223], [-73.61669706443263, 45.540140798699355]]]}}, "area": null, "bounds": [[-73.64230692579356, 45.53112864431662], [-73.610278, 45.5491253414393]], "comparators": [{"lon": -73.61782, "lat": 45.536806, "name": "École Sainte-Cécile", "address": "Sainte-Cécile, 7230, avenue de Gaspé", "edge": false}, {"lon": -73.610278, "lat": 45.54136, "name": "École Saint-Arsène", "address": "Saint-Arsène, 6972, avenue Christophe-Colomb", "edge": false}, {"lon": -73.611574, "lat": 45.54703, "name": "École Saint-Gabriel-Lalemant", "address": "Saint-Gabriel-Lalemant, 7350, rue Garnier", "edge": false}, {"lon": -73.620453, "lat": 45.546057, "name": "École Marie-Favery", "address": "Marie-Favery, 7750, avenue Christophe-Colomb", "edge": false}], "mark": null, "stations": [{"lon": -73.6201056, "lat": 45.5352621, "name": "De Castelnau", "kind": "subway"}, {"lon": -73.6286029, "lat": 45.5432233, "name": "Jarry", "kind": "subway"}, {"lon": -73.6388375, "lat": 45.5461436, "name": "Crémazie", "kind": "subway"}]};
+  var map = new maplibregl.Map({
+    container: 'zone-map-762106', style: 'https://tiles.openfreemap.org/styles/positron', bounds: data.bounds,
+    fitBoundsOptions: {padding: 24}, scrollZoom: false, attributionControl: false
+  });
+  map.addControl(new maplibregl.NavigationControl({showCompass: false}), 'top-left');
+  map.addControl(new maplibregl.AttributionControl({compact: true,
+    customAttribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &middot; <a href="https://openfreemap.org">OpenFreeMap</a>'}));
+  function pin(lonlat, style, html, text) {
+    var el = document.createElement('div');
+    el.style.cssText = style;
+    if (text) { el.textContent = text; }
+    var m = new maplibregl.Marker({element: el}).setLngLat(lonlat).addTo(map);
+    if (html) { m.setPopup(new maplibregl.Popup({offset: 12, closeButton: false}).setHTML(html)); }
+    return m;
+  }
+  map.on('load', function () {
+    if (data.circle) {
+      map.addSource('zone', {type: 'geojson', data: data.circle});
+      map.addLayer({id: 'zone-fill', type: 'fill', source: 'zone', paint: {'fill-color': soft, 'fill-opacity': 0.35}});
+      map.addLayer({id: 'zone-line', type: 'line', source: 'zone', paint: {'line-color': zone, 'line-width': 2}});
+    }
+    if (data.area) {
+      map.addSource('area', {type: 'geojson', data: data.area});
+      map.addLayer({id: 'area-fill', type: 'fill', source: 'area', paint: {'fill-color': soft, 'fill-opacity': 0.2}});
+      map.addLayer({id: 'area-line', type: 'line', source: 'area', paint: {'line-color': zone, 'line-width': 2.5}});
+    }
+    data.stations.forEach(function (st) {
+      pin([st.lon, st.lat], 'width:18px;height:18px;border-radius:3px;background:#fff;border:2px solid ' + zone +
+          ';color:' + zone + ';font:bold 11px/14px sans-serif;text-align:center;cursor:pointer',
+          '<b>' + st.name + '</b><br>' + (st.kind === 'light_rail' ? 'REM' : 'Métro') + ' station',
+          st.kind === 'light_rail' ? 'R' : 'M');
+    });
+    data.comparators.forEach(function (s) {
+      var border = (s.edge ? '2px dashed ' : '2px solid ') + zone;
+      var size = data.subject ? 12 : 14;
+      pin([s.lon, s.lat], 'width:' + size + 'px;height:' + size + 'px;border-radius:50%;background:' + soft + ';border:' + border + ';cursor:pointer',
+          '<b>' + s.name + '</b><br>' + s.address + (s.edge ? '<br><i>outside the area, within the margin</i>' : ''));
+    });
+    if (data.mark) {
+      pin([data.mark.lon, data.mark.lat], 'width:14px;height:14px;border-radius:50%;background:#fff;border:2px dashed ' + accent + ';cursor:pointer',
+          data.mark.label);
+    }
+    if (data.anchor.label) {
+      pin([data.anchor.lon, data.anchor.lat], 'width:10px;height:10px;border-radius:50%;background:#fff;border:2px solid ' + accent, data.anchor.label);
+    }
+    if (data.subject) {
+      pin([data.subject.lon, data.subject.lat], 'width:16px;height:16px;border-radius:50%;background:' + accent + ';border:3px solid ' + accent + ';cursor:pointer',
+          '<b>' + data.subject.name + '</b><br>' + data.subject.address);
+    }
+  });
+})();
+</script>
+```
+
+The red pin is École Hélène-Boullé and the solid circle its kilometre; grey pins are the four
+comparators. M squares are métro stations inside the circle.
+
+## Who lives there
+
+::: {.column-page}
+| Metric | Unit | Hélène-Boullé | Sainte-Cécile | Saint-Arsène | Saint-Gabriel-Lalemant | Marie-Favery | Island median |
+|:---|:---|---:|---:|---:|---:|---:|---:|
+| Residents (2021 census) | people | 31,958 [d8]{.decile-high} | 35,960 [d10]{.decile-high} | 40,561 [d10]{.decile-high} | 37,843 [d10]{.decile-high} | 40,933 [d10]{.decile-high} | 21,094 |
+| ▲ Children 0 to 14 | % of residents | 13.5 [d3]{.decile-low} | 11.7 [d1]{.decile-low} | 12.5 [d2]{.decile-low} | 13.5 [d3]{.decile-low} | [13.7 [d3]{.decile-low}]{.best} | 15.8 |
+| ▲ Households with children | % of households | 22.7 [d2]{.decile-low} | 19.7 [d2]{.decile-low} | 21.0 [d2]{.decile-low} | 23.7 [d3]{.decile-low} | [23.8 [d3]{.decile-low}]{.best} | 31.4 |
+| Median household income (2020) | $ | 70,500 [d9]{.decile-high} | 66,500 [d7]{.decile-mid} | 61,200 [d4]{.decile-mid} | 57,200 [d2]{.decile-low} | 62,400 [d5]{.decile-mid} | 62,800 |
+| ▼ Low income (LIM-AT) | % of residents | [13.9 [d3]{.decile-low}]{.best} | 16.3 [d5]{.decile-mid} | 16.3 [d5]{.decile-mid} | 17.8 [d7]{.decile-mid} | 15.9 [d4]{.decile-mid} | 16.6 |
+| ▼ No diploma, ages 25 to 64 | % | 5.9 [d3]{.decile-low} | 5.8 [d3]{.decile-low} | [5.7 [d2]{.decile-low}]{.best} | 7.9 [d4]{.decile-mid} | 6.9 [d3]{.decile-low} | 9.9 |
+| Immigrants | % of residents | 21.1 [d3]{.decile-low} | 23.1 [d4]{.decile-mid} | 23.9 [d4]{.decile-mid} | 27.1 [d5]{.decile-mid} | 25.6 [d5]{.decile-mid} | 28.4 |
+| French most often at home | % of residents | 74.0 [d8]{.decile-high} | 69.5 [d7]{.decile-mid} | 73.7 [d8]{.decile-high} | 70.6 [d7]{.decile-mid} | 72.5 [d8]{.decile-high} | 58.8 |
+| Renter households | % | 66.4 [d6]{.decile-mid} | 68.4 [d7]{.decile-mid} | 74.7 [d10]{.decile-high} | 73.1 [d9]{.decile-high} | 72.3 [d9]{.decile-high} | 66.2 |
+| Moved in the last five years | % of residents | 49.2 [d8]{.decile-high} | 52.4 [d9]{.decile-high} | 50.9 [d9]{.decile-high} | 49.1 [d8]{.decile-high} | 48.8 [d8]{.decile-high} | 43.9 |
+
+: Who lives within 1 km of the school (2021 census, aggregated over dissemination areas whose centroid falls in the circle) {#tbl-people}
+:::
+
+::: {.callout-tip}
+## Reading the table
+
+Of the five zones this one is the most advantaged on the census measures: the highest median
+household income, the lowest low-income rate and the lowest share of residents in materially
+deprived areas. It also has the fewest residents and the fewest dwellings, which is what a circle
+containing 35 ha of parkland rather than housing produces. Children are scarce by island standards
+here as everywhere in the centre, though less so than around Sainte-Cécile. The contrast worth
+noting is Saint-Gabriel-Lalemant, barely 1.5 km away toward Parc-Extension, where median income is
+in the second decile against this zone's ninth — a reminder of how fast the picture changes inside
+Villeray. French at home is high across all five.
+:::
+
+::: {.column-page}
+| Metric | Unit | Hélène-Boullé | Sainte-Cécile | Saint-Arsène | Saint-Gabriel-Lalemant | Marie-Favery | Island median |
+|:---|:---|---:|---:|---:|---:|---:|---:|
+| ▼ In materially deprived DAs (INSPQ Q4-5) | % of residents | 21 [d3]{.decile-low} | [17 [d3]{.decile-low}]{.best} | 21 [d3]{.decile-low} | 37 [d4]{.decile-mid} | 36 [d4]{.decile-mid} | 46 |
+| ▼ In socially deprived DAs (INSPQ Q4-5) | % of residents | [83 [d6]{.decile-mid}]{.best} | 88 [d8]{.decile-high} | 88 [d8]{.decile-high} | 84 [d7]{.decile-mid} | 84 [d7]{.decile-mid} | 76 |
+| ▼ Equity index IEMV 2026 (0 best, 6 worst) | score | 2.1 [d4]{.decile-mid} | 2.2 [d5]{.decile-mid} | [2.0 [d4]{.decile-mid}]{.best} | 2.2 [d5]{.decile-mid} | 2.2 [d5]{.decile-mid} | 2.3 |
+
+: Two composite indices computed by others: INSPQ material and social deprivation (share of residents in the two most deprived quintiles) and the city's 2026 equity index (population-weighted mean, 0 least vulnerable to 6 most) {#tbl-indices}
+:::
+
+::: {.callout-note}
+## Social deprivation is high across central Montreal
+
+The INSPQ social axis counts people living alone and lone-parent families, which the dense
+central boroughs are full of; read it with the households-with-children line of @tbl-people.
+All five zones sit above the island median on the social axis and well below it on the material
+axis, and the city's own equity index barely separates them.
+:::
+
+## Safety
+
+::: {.column-page}
+| Metric | Unit | Hélène-Boullé | Sainte-Cécile | Saint-Arsène | Saint-Gabriel-Lalemant | Marie-Favery | Island median |
+|:---|:---|---:|---:|---:|---:|---:|---:|
+| ▼ Crime incidents per 1 000 residents per year | /1000/yr | [11.1 [d5]{.decile-mid}]{.best} | 14.6 [d8]{.decile-high} | 14.7 [d8]{.decile-high} | 14.9 [d8]{.decile-high} | 11.2 [d5]{.decile-mid} | 11.6 |
+| ▼ Violent (robbery, homicide) | /1000/yr | [0.65 [d4]{.decile-mid}]{.best} | 1.45 [d10]{.decile-high} | 1.35 [d9]{.decile-high} | 1.22 [d9]{.decile-high} | 0.92 [d7]{.decile-mid} | 0.75 |
+| ▼ Break-ins | /1000/yr | 2.8 [d6]{.decile-mid} | 4.2 [d9]{.decile-high} | 3.9 [d9]{.decile-high} | 4.0 [d9]{.decile-high} | [2.8 [d6]{.decile-mid}]{.best} | 2.6 |
+| ▼ Vehicle theft and theft from vehicles | /1000/yr | 5.2 [d4]{.decile-mid} | 5.7 [d6]{.decile-mid} | 6.2 [d7]{.decile-mid} | 6.8 [d8]{.decile-high} | [5.1 [d4]{.decile-mid}]{.best} | 5.6 |
+| ▼ Mischief | /1000/yr | [2.4 [d5]{.decile-mid}]{.best} | 3.2 [d8]{.decile-high} | 3.2 [d8]{.decile-high} | 2.9 [d7]{.decile-mid} | 2.5 [d5]{.decile-mid} | 2.5 |
+| ▼ Pedestrian and cyclist victims within 500 m | /yr | [8.0 [d8]{.decile-high}]{.best} | 17.8 [d10]{.decile-high} | 15.8 [d10]{.decile-high} | 8.4 [d8]{.decile-high} | 9.0 [d8]{.decile-high} | 4.6 |
+
+: Safety: SPVM incidents 2023 to 2025 per 1 000 residents per year within 1 km, and SAAQ pedestrian and cyclist victims 2017 to 2021 within 500 m of the school, per year {#tbl-safety}
+:::
+
+::: {.callout-tip}
+## Reading the table
+
+This is where Hélène-Boullé's kilometre departs most clearly from its neighbours. Its total
+incident rate is the lowest of the five and close to the island median, where Sainte-Cécile,
+Saint-Arsène and Saint-Gabriel-Lalemant all sit in the eighth decile. The violent-crime line is
+the sharpest difference: decile 4 here against decile 10 at Sainte-Cécile, a rate less than half
+its neighbour's a kilometre down the same avenue. Break-ins and mischief follow the same pattern.
+The pedestrian and cyclist line is still in the eighth decile — this is a dense grid with arterials
+— but at well under half the rate recorded around Sainte-Cécile and Saint-Arsène. Marie-Favery is
+the closest of the four to this zone's profile.
+:::
+
+::: {.callout-warning}
+## What these two datasets cannot say
+
+The city states the incident file is not official SPVM statistics; positions are moved to the
+nearest intersection and 17% of incidents have no coordinates and are absent from the rates.
+The collision extract ends in 2021; its last two years are pandemic years. Both are rates of
+reported events, not of risk.
+:::
+
+## Housing and what it costs to own
+
+::: {.column-page}
+| Metric | Unit | Hélène-Boullé | Sainte-Cécile | Saint-Arsène | Saint-Gabriel-Lalemant | Marie-Favery | Island median |
+|:---|:---|---:|---:|---:|---:|---:|---:|
+| Dwellings | units | 18,282 [d8]{.decile-high} | 20,718 [d10]{.decile-high} | 23,794 [d10]{.decile-high} | 21,810 [d10]{.decile-high} | 22,182 [d10]{.decile-high} | 10,684 |
+| Single-family houses | % of dwellings | 3 [d3]{.decile-low} | 3 [d2]{.decile-low} | 3 [d2]{.decile-low} | 5 [d4]{.decile-mid} | 4 [d3]{.decile-low} | 8 |
+| Plex units (2 to 5 per building) | % of dwellings | 57 [d9]{.decile-high} | 47 [d7]{.decile-mid} | 52 [d8]{.decile-high} | 51 [d8]{.decile-high} | 51 [d8]{.decile-high} | 41 |
+| Condominium units | % of dwellings | 14 [d7]{.decile-mid} | 20 [d8]{.decile-high} | 11 [d5]{.decile-mid} | 7 [d4]{.decile-mid} | 8 [d4]{.decile-mid} | 11 |
+| Rental buildings, 6+ units | % of dwellings | 26 [d3]{.decile-low} | 29 [d4]{.decile-mid} | 35 [d6]{.decile-mid} | 37 [d6]{.decile-mid} | 37 [d6]{.decile-mid} | 34 |
+| Median year built | year | 1937 [d2]{.decile-low} | 1931 [d2]{.decile-low} | 1944 [d2]{.decile-low} | 1952 [d3]{.decile-low} | 1949 [d3]{.decile-low} | 1959 |
+
+: Housing stock within 1 km, from the assessment roll {#tbl-stock}
+:::
+
+::: {.column-page}
+| Metric | Unit | Hélène-Boullé | Sainte-Cécile | Saint-Arsène | Saint-Gabriel-Lalemant | Marie-Favery | Island median |
+|:---|:---|---:|---:|---:|---:|---:|---:|
+| ▼ Assessed value, single-family | $ | 942,100 [d8]{.decile-high} | 1,009,900 [d9]{.decile-high} | 979,050 [d9]{.decile-high} | [730,400 [d6]{.decile-mid}]{.best} | 756,400 [d7]{.decile-mid} | 702,608 |
+| ▼ Assessed value, plex | $ | 882,200 [d8]{.decile-high} | 969,050 [d9]{.decile-high} | 939,784 [d9]{.decile-high} | [853,934 [d7]{.decile-mid}]{.best} | 876,567 [d8]{.decile-high} | 811,892 |
+| ▼ Assessed value, condo | $ | 480,633 [d9]{.decile-high} | 476,267 [d9]{.decile-high} | 483,900 [d9]{.decile-high} | [440,050 [d7]{.decile-mid}]{.best} | 440,067 [d7]{.decile-mid} | 392,416 |
+| ▼ 2026 tax bill, single-family | $ | 6,215 [d9]{.decile-high} | 6,678 [d9]{.decile-high} | 6,456 [d9]{.decile-high} | [4,836 [d6]{.decile-mid}]{.best} | 5,017 [d7]{.decile-mid} | 4,665 |
+| ▼ 2026 tax bill, plex | $ | 5,829 [d8]{.decile-high} | 6,400 [d9]{.decile-high} | 6,207 [d9]{.decile-high} | [5,634 [d7]{.decile-mid}]{.best} | 5,786 [d8]{.decile-high} | 5,341 |
+| ▼ 2026 tax bill, condo | $ | 3,171 [d9]{.decile-high} | 3,149 [d9]{.decile-high} | 3,193 [d9]{.decile-high} | [2,903 [d7]{.decile-mid}]{.best} | 2,906 [d7]{.decile-mid} | 2,570 |
+| ▼ Effective tax rate (bill / value) | % | 0.66 [d7]{.decile-mid} | 0.66 [d7]{.decile-mid} | 0.66 [d7]{.decile-mid} | [0.66 [d7]{.decile-mid}]{.best} | 0.66 [d7]{.decile-mid} | 0.66 |
+
+: What it costs to own: median 2026 assessed value and median 2026 municipal tax bill per unit within 1 km, residential accounts with five dwellings or fewer {#tbl-cost}
+:::
+
+::: {.callout-tip}
+## Reading the tables
+
+Plexes dominate more here than in any of the comparator zones — 57% of dwellings, in the ninth
+decile — with single-family houses near-absent and a median building dating from the late 1930s.
+Assessed values and 2026 tax bills sit in the eighth and ninth deciles, above the island median
+but below Sainte-Cécile on every property type, and well above the two zones nearer
+Parc-Extension. The effective tax rate is flat at about two-thirds of a percent across all five,
+so the differences in bills track assessments rather than any borough's rate. Assessed values
+reflect the July 2024 market and lag transactions by roughly eighteen months.
+:::
+
+## Parks and transit
+
+::: {.column-page}
+| Metric | Unit | Hélène-Boullé | Sainte-Cécile | Saint-Arsène | Saint-Gabriel-Lalemant | Marie-Favery | Island median |
+|:---|:---|---:|---:|---:|---:|---:|---:|
+| ▼ Distance to the nearest métro or REM station | m | 351 [d2]{.decile-low} | [248 [d1]{.decile-low}]{.best} | 345 [d2]{.decile-low} | 296 [d1]{.decile-low} | 710 [d4]{.decile-mid} | 1,085 |
+| ▲ Métro and REM stations inside the zone | stations | [3 [d9]{.decile-high}]{.best} | [3 [d9]{.decile-high}]{.best} | [3 [d9]{.decile-high}]{.best} | [3 [d9]{.decile-high}]{.best} | [3 [d9]{.decile-high}]{.best} | 0 |
+| ▲ Park area | % of zone | [12.8 [d9]{.decile-high}]{.best} | 9.2 [d7]{.decile-mid} | 3.1 [d2]{.decile-low} | 5.4 [d4]{.decile-mid} | 4.4 [d3]{.decile-low} | 6.6 |
+| ▲ Park area per 1 000 residents | ha | [1.25 [d7]{.decile-mid}]{.best} | 0.80 [d4]{.decile-mid} | 0.24 [d1]{.decile-low} | 0.44 [d2]{.decile-low} | 0.33 [d1]{.decile-low} | 0.96 |
+
+: Parks and rapid transit within 1 km: large parks and borough parks (Ville de Montréal), métro and REM stations (OpenStreetMap contributors) {#tbl-parks}
+:::
+
+Parks are this zone's strongest line, and it is one park that does it: **parc Jarry**, 35 ha,
+whose edge is **193 m** from the school door — nearer than for any school reported in this project
+so far. It alone carries the zone to the ninth decile for park share and the seventh for park area
+per resident, against neighbours in the first and second. Smaller spaces follow further out: parc
+Villeray (965 m), parc Saint-Roch (844 m).
+
+Rapid transit is strong but one-sided: three orange-line stations fall inside the kilometre — Jarry
+at 349 m, De Castelnau at 909 m and Crémazie at 986 m — so the line is walkable, but there is no
+second line within the circle.
+
+# Living there now
+
+::: {.column-page}
+| Type | Bedrooms | Street or sector | Asking price | Source, date seen |
+|:---|---:|:---|---:|:---|
+| Triplex (ground-floor unit) | 3 | 8481–8485 av. De Gaspé — ~400 m from the school | $999,000 | [Centris 18961897](https://www.centris.ca/fr/triplex~a-vendre~montreal-villeray-saint-michel-parc-extension/18961897), 2026-10-08 |
+| Quintuplex | not stated | 8004 av. Casgrain — ~250 m | $1,499,000 | [Centris 26662298](https://www.centris.ca/fr/quintuplex~a-vendre~montreal-villeray-saint-michel-parc-extension/26662298), 2026-10-08 |
+| Duplex | 3 | 8388–8390 rue Berri | $899,000 | [Centris 22148967](https://www.centris.ca/fr/duplex~a-vendre~montreal-villeray-saint-michel-parc-extension/22148967), 2026-10-08 |
+| Duplex | not stated | 300–304 rue Jarry Est | $1,099,000 | [Centris 18151331](https://www.centris.ca/fr/duplex~a-vendre~montreal-villeray-saint-michel-parc-extension/18151331), 2026-10-08 |
+
+: For sale, 3+ bedrooms, within about 1 km of 8050 avenue de Gaspé. Figures from search-result snippets and *unverified*: the listing pages refuse non-browser clients. Bedroom counts are absent where no snippet stated them. {#tbl-for-sale}
+:::
+
+::: {.column-page}
+| Type | Bedrooms | Street or sector | Monthly rent | Source, date seen |
+|:---|---:|:---|---:|:---|
+| Condo / apartment | 3 | 8202 av. De Chateaubriand, Villeray | $2,800 | [Centris 12148245](https://www.centris.ca/fr/condo-appartement~a-louer~montreal-villeray-saint-michel-parc-extension/12148245), 2026-10-08 |
+| Condo / apartment | 3 | 8151 av. Stuart, app. 3 | $2,100 | [Centris 11692638](https://www.centris.ca/fr/condo-appartement~a-louer~montreal-villeray-saint-michel-parc-extension/11692638), 2026-10-08 |
+| Condo / apartment | 3 | 8380 av. Stuart, app. 3 | $1,750 | [Centris 28547019](https://www.centris.ca/fr/condo-appartement~a-louer~montreal-villeray-saint-michel-parc-extension/28547019), 2026-10-08 |
+| Condo / apartment | 3 + office | 8333 rue Saint-Denis, Villeray | not stated | [Centris 20827629](https://www.centris.ca/fr/condo-appartement~a-louer~montreal-villeray-saint-michel-parc-extension/20827629), 2026-10-08 |
+
+: For rent, 3+ bedrooms, within about 1 km of the school. Same caveat: figures from snippets and *unverified*, with rent missing for one. {#tbl-for-rent}
+:::
+
+::: {.callout-warning}
+## Listings expire
+
+These are the 3+ bedroom listings found on 2026-10-08 within about a kilometre of 8050 avenue de
+Gaspé, chosen for variety of type rather than as a sample; prices are asking prices, and the
+section is not refreshed when the post is republished. Centris and Realtor.ca both refuse
+individual listing pages to anything that is not a browser, so every figure here comes from a
+search-result snippet and is marked *unverified*. Rentals turn over fast and some of these may
+already be let. Bedroom counts are given only where a snippet stated them —
+for a plex the number that matters is the bedrooms in the unit the owner would occupy, not in the
+building. For a durable benchmark use the assessed values in @tbl-cost.
+:::
+
+# Sources and caveats
+
+- **School facts**: the CSSDM pages linked in the footnotes, opened 2026-10-08. The school's own
+  domain returns HTTP 403 to every automated request, including with a browser User-Agent, so the
+  program, projet éducatif and admission wording are *unverified*, taken from search-index
+  extracts. The triennial plan, the funding page and the Radio-Canada report did load; the
+  occupancy, capacity, whole-building and gymnasium facts come from them and are verified.
+- **Community links**: searched for all five schools on 2026-10-08, and *unverified* throughout —
+  every school domain returns 403 to an automated request, and neither Facebook page was opened.
+  For Hélène-Boullé, two of the four found are given without a hyperlink because the server answers
+  an automated check for them with 404. Where a link sits on the school's own domain, that domain is
+  what ties it to the right school; the two Facebook pages and the Fondation des élèves de Montréal
+  page are outside it and were matched by name, borough and the school they describe. Four of the
+  five have a conseil d'établissement page and an OPP; Sainte-Cécile's OPP and Marie-Favery's
+  school-and-OPP page are the only Facebook presences found, Saint-Arsène's schoolyard project is
+  the only outside-charity link, and no school of the five has a fondation of its own.
+- **IMSE/SFR**: MEQ, *Indices de défavorisation*, Données Québec, school year 2025-2026. The MEQ
+  index file counts 277 pupils where the CSSDM's triennial plan declares 351 for the same year;
+  this report quotes both rather than choosing.
+- **Zone tables**: `scripts/zone_stats.py` on open data fetched between 2026-09-18 and 2026-10-07
+  (Ville de Montréal, Données Québec, INSPQ, Statistics Canada 2021 Census); 57 dissemination areas
+  for Hélène-Boullé, 65 for Sainte-Cécile, 82 for Saint-Arsène, 73 for Saint-Gabriel-Lalemant and
+  79 for Marie-Favery, assigned by centroid; the IEMV covers 100% of residents in all five zones
+  and tax bills matched for 99.8% to 99.9% of units. Census 2021 is five years old; assessed values
+  reflect the July 2024 market.
+- **Parks and stations named above**: Ville de Montréal *espaces verts* and OpenStreetMap, with
+  distances measured from the school point in the same run.
+- **Listings**: as seen on Centris.ca on 2026-10-08, from search-result snippets.
+- **Deciles**: among 229 in-scope schools, from `data/derived/zone_stats_all.parquet`.
+
+# Conclusion
+
+Four readings, in the order a parent weighs them. Each states what the tables show, not a verdict.
+
+**School.** Hélène-Boullé is an ordinary neighbourhood school with no selective stream and no
+application gate — admission is by address, in a January window (@tbl-school-hb). It is full: 100%
+occupancy against a capacity of 391, with the CSSDM's own forecasts easing over the next two years.
+An expansion was built around 2020-22; the gymnasium that went with it was not funded, was refused
+at PQI 2024-2034, resubmitted for 2025-2035, and does not appear in the 2026-2036 list. IMSE decile
+5 and SFR decile 8 — a socioeconomic index of enrolled pupils, not a measure of academic
+performance.
+
+The four comparators differ from it in ways no zone table shows (@tbl-school-sc, @tbl-school-sa,
+@tbl-school-sgl, @tbl-school-mf). Saint-Arsène is the only one with a selective gate, and it covers
+one stream rather than the school. Marie-Favery is designated for integrating pupils with a physical
+disability and runs a specialised class for 4- and 5-year-olds. Saint-Gabriel-Lalemant is the only
+one in the official *milieu défavorisé* band, and its annexe sits between a completed demolition and
+an unfunded phase two. Sainte-Cécile has the newest schoolyard of the five and its own report.
+
+**Safety.** The clearest point of difference. This kilometre reports the lowest crime rate of the
+five compared, near the island median, with violent crime at decile 4 against decile 10 a kilometre
+south at Sainte-Cécile (@tbl-safety). Pedestrian and cyclist victims remain in the eighth decile.
+Both datasets count reported events with known coverage gaps.
+
+**Livability.** The most advantaged census picture of the five, on income, low-income rate and
+material deprivation, with high French-at-home and high turnover (@tbl-people, @tbl-indices). Parc
+Jarry at 193 m is the standout, and Jarry station at 349 m puts the orange line within a short walk
+(@tbl-parks). Children remain scarce by island standards.
+
+**Affordability.** Plex-dominated prewar stock, 57% plex units, almost no houses; assessed values
+and tax bills in the eighth and ninth deciles — above the island median, below Sainte-Cécile, above
+the zones toward Parc-Extension (@tbl-stock, @tbl-cost). The month's listings are consistent with
+that, though lightly verified (@tbl-for-sale, @tbl-for-rent).
+
+Next steps for this school:
+
+1. **Confirm the catchment** on the CSSDM finder for candidate addresses; the circle is a stand-in,
+   and Sainte-Cécile's zone overlaps this one.
+2. **Ask about the gymnasium and the squeeze on space** — whether the PQI 2025-2035 request
+   succeeded, where physical education happens meanwhile, and what 100% occupancy means for class
+   sizes and the schoolyard. The conseil d'établissement and the OPP in @tbl-school-hb are the places
+   to ask.
+3. **Watch the January registration window**, which ran 7 to 27 January for the 2026-2027 year.
+4. **What this report does not yet cover**: childcare places, transit frequency, heat islands,
+   rents by CMHC zone, and the secondary school the zone feeds.
+
+::: {.callout-important}
+## Bottom line
+
+Hélène-Boullé's kilometre is the quietest and greenest of the five compared — lowest crime, parc
+Jarry across the street, the orange line a short walk — and its housing costs sit just below its
+nearest neighbour's while staying well above the island median. The thing to verify before acting
+is inside the school rather than around it: it is at 100% of capacity and its gymnasium project has
+been refused once and resubmitted, with no published outcome.
+:::
