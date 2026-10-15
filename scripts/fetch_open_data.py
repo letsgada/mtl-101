@@ -75,6 +75,10 @@ DATASETS: dict[str, dict] = {
     "cpe": dict(portal="dq", dataset="liste-des-centres-de-la-petite-enfance-cpe-et-des-garderies-en-fonction",
                 format="CSV", file="repertoire-installation.csv",
                 note="Ministère de la Famille childcare installations with PLACE_TOTAL; no coordinates."),
+    "cp_territoires": dict(portal="dq", dataset="cp-territoires", format="CSV",
+                           name=r"codes postaux actifs", file="cp_territoires.csv",
+                           note="ISQ geolocated postal codes (CP, LAT/LONG, residential units, DA, service centre), "
+                                "derived from the Référentiel québécois des adresses. CC-BY 4.0, ~110 MB."),
     "bikes": dict(portal="mtl", dataset="pistes-cyclables", format="GeoJSON", file="pistes-cyclables.geojson"),
     "rev": dict(portal="mtl", dataset="reseau-express-velo", format="GeoJSON", file="reseau-express-velo.geojson"),
     "quartiers": dict(portal="mtl", dataset="quartiers-sociologiques", format="GeoJSON",
