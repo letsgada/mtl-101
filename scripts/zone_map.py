@@ -17,6 +17,10 @@ drawn smaller and lighter so the zone's own keep the emphasis. --anchor moves
 the circle to another point; --mark adds a dashed marker (a temporary site) without moving it.
 --area draws a quartier polygon instead of a circle and, since no single school is chosen, every
 school becomes a zone-coloured pin (--edge codes dashed); stations inside the polygon are drawn.
+--catchment overlays a school's zone from school_zone.py, keeping the accent pin and the circle;
+its outline is solid when the zone came from a service centre's own lookup and dashed when it is
+modelled, so a reader can see which one they are looking at. Repeat --catchment to draw several
+zones at once: they are computed from one partition, so they tile without gaps or overlaps.
 
 Paste the fragment into a post inside a ```{=html} block; no Python runs at render time. The map
 is MapLibre GL (cdnjs) over OpenFreeMap's Positron vector style: no API key, no usage cap, OSM
@@ -43,6 +47,17 @@ from zone_stats import CRS, Data, find_schools  # noqa: E402
 MAPLIBRE = "https://cdnjs.cloudflare.com/ajax/libs/maplibre-gl/4.7.1"
 STYLE = "https://tiles.openfreemap.org/styles/positron"
 app = typer.Typer(add_completion=False, help=__doc__, rich_markup_mode=None)
+
+
+def json_safe(v):
+    """numpy scalars, and the dates pyogrio infers when reading a GeoJSON property back."""
+    if isinstance(v, (str, bool, int, float, type(None))):
+        return v
+    if hasattr(v, "date"):          # pyogrio parses "2026-10-14" into a timestamp on read
+        return v.date().isoformat()
+    if hasattr(v, "item"):          # numpy scalar
+        return v.item()
+    return str(v)
 
 
 def setup_logging(verbose: bool) -> None:
@@ -81,6 +96,17 @@ TEMPLATE = """<link rel="stylesheet" href="{maplibre}/maplibre-gl.min.css">
       map.addSource('zone', {{type: 'geojson', data: data.circle}});
       map.addLayer({{id: 'zone-fill', type: 'fill', source: 'zone', paint: {{'fill-color': soft, 'fill-opacity': 0.35}}}});
       map.addLayer({{id: 'zone-line', type: 'line', source: 'zone', paint: {{'line-color': zone, 'line-width': 2}}}});
+    }}
+    if (data.catchment) {{
+      map.addSource('catchment', {{type: 'geojson', data: data.catchment}});
+      map.addLayer({{id: 'catchment-fill', type: 'fill', source: 'catchment', paint: {{'fill-color': soft, 'fill-opacity': 0.25}}}});
+      // two line layers, not one: line-dasharray takes no data-driven expression
+      map.addLayer({{id: 'catchment-line-official', type: 'line', source: 'catchment',
+        filter: ['==', ['get', 'source'], 'official-probe'],
+        paint: {{'line-color': zone, 'line-width': 2.5}}}});
+      map.addLayer({{id: 'catchment-line-modelled', type: 'line', source: 'catchment',
+        filter: ['!=', ['get', 'source'], 'official-probe'],
+        paint: {{'line-color': zone, 'line-width': 2.5, 'line-dasharray': [2, 1.5]}}}});
     }}
     if (data.area) {{
       map.addSource('area', {{type: 'geojson', data: data.area}});
@@ -131,6 +157,8 @@ def main(
                                                                 help="an extra marker (e.g. a temporary site) without moving the circle")] = None,
     mark_label: Annotated[Optional[str], typer.Option(help="popup text for --mark")] = None,
     area: Annotated[Optional[Path], typer.Option("--area", help="GeoJSON polygon from area_info.py: draw its outline")] = None,
+    catchment: Annotated[Optional[list[Path]], typer.Option("--catchment",
+        help="GeoJSON zone from school_zone.py; repeat for several (dashed when modelled)")] = None,
     no_circle: Annotated[bool, typer.Option("--no-circle", help="do not draw the kilometre circle")] = False,
     edge: Annotated[Optional[list[str]], typer.Option("--edge", help="codes drawn as dashed pins (edge schools)")] = None,
     stations_mode: Annotated[str, typer.Option("--stations", metavar="zone|bounds|all",
@@ -159,12 +187,24 @@ def main(
     centre_m = to_m(a["lon"], a["lat"])
     circle_m = centre_m.buffer(radius, quad_segs=32)
     circle_ll = gpd.GeoSeries([circle_m], crs=CRS).to_crs(4326).iloc[0]
+    catch_ll, catch_features = None, []
+    for path in catchment or []:
+        cg = gpd.read_file(path, engine="pyogrio").to_crs(4326)
+        for row in cg.itertuples():
+            props = {k: json_safe(v) for k, v in row._asdict().items()
+                     if k not in ("Index", "geometry")}
+            catch_features.append({"type": "Feature", "properties": props,
+                                   "geometry": mapping(row.geometry)})
+            logger.info("catchment: {} ({})", props.get("school", path.stem),
+                        props.get("source", "source not recorded"))
+        catch_ll = cg.geometry.union_all() if catch_ll is None else catch_ll.union(cg.geometry.union_all())
     area_m = area_ll = None
     if area:
         g = gpd.read_file(area, engine="pyogrio")
         area_ll = g.to_crs(4326).geometry.union_all()
         area_m = g.to_crs(CRS).geometry.union_all()
-    pts = ([area_ll] if area_ll is not None else [] if no_circle else [circle_ll]) + \
+    pts = ([catch_ll] if catch_ll is not None else []) + \
+           ([area_ll] if area_ll is not None else [] if no_circle else [circle_ll]) + \
           ([Point(*mark)] if mark else []) + \
           [Point(float(r.COORD_X_LL84_IMM), float(r.COORD_Y_LL84_IMM)) for r in rows.itertuples()]
     bounds = gpd.GeoSeries(pts, crs=4326).total_bounds  # minx, miny, maxx, maxy
@@ -207,6 +247,7 @@ def main(
     data = dict(subject=subject, anchor=a, radius=radius,
                 circle=None if (no_circle or area_ll is not None) else {"type": "Feature", "properties": {}, "geometry": mapping(circle_ll)},
                 area={"type": "Feature", "properties": {}, "geometry": mapping(area_ll)} if area_ll is not None else None,
+                catchment={"type": "FeatureCollection", "features": catch_features} if catch_features else None,
                 bounds=[[float(bounds[0]), float(bounds[1])], [float(bounds[2]), float(bounds[3])]],
                 comparators=pins,
                 mark=dict(lon=mark[0], lat=mark[1], label=mark_label or "marker") if mark else None,
