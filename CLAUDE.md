@@ -74,6 +74,8 @@ Run them in this order the first time (about 3.5 GB of downloads, then a few min
 uv run scripts/fetch_open_data.py --core taxes   # Ville de Montréal, Données Québec, StatCan files -> data/raw/
 uv run scripts/prep_taxes.py                      # 19 borough tax-bill CSVs -> one row per account (assessed value, bill, class)
 uv run scripts/prep_uev.py                        # 780 MB assessment-unit GeoJSON -> one point per unit
+uv run scripts/fetch_open_data.py cp_territoires  # ISQ postal codes (105 MB); only needed for school_zone.py
+uv run scripts/prep_postal.py                     # -> the ~44k island postal codes with coordinates and service centre
 uv run scripts/census_da.py                       # 6.4 GB census file -> island DAs x selected variables
 uv run scripts/zone_stats.py --all                # every island franco public elementary school; the decile reference
 uv run scripts/zone_stats.py "Saint-Barthélemy" "La Vérendrye"   # a Markdown table with deciles
@@ -88,6 +90,8 @@ uv run scripts/imse.py 762103                                        # MEQ IMSE/
 uv run scripts/zone_stats.py 762103 762087 --anchor -73.6235 45.5405 --format csv --out data/derived/report_x.csv  # --anchor recentres the first school's zone (relocated school)
 uv run scripts/report_tables.py data/derived/report_x.csv            # the six captioned Quarto tables with decile spans
 uv run scripts/zone_map.py 762103 762087 --out map.html              # MapLibre map fragment for a ```{=html} block (métro/REM stations from fetch key metro_osm)
+uv run scripts/school_zone.py "Hélène-Boullé"                        # catchment polygon + postal codes: probed (CSSPI) or modelled (everyone else)
+uv run scripts/zone_map.py 762106 --catchment data/derived/zone_762106.geojson --out map.html   # overlay the zone, solid if official, dashed if modelled
 uv run scripts/zone_map.py 762106 … --stations all --out map.html    # --stations zone|bounds|all: the zone's own, everything in view (default), or the whole 89-station network (+9 kB)
 uv run scripts/area_info.py "Villeray" --margin 300                 # quartier polygon (fetch key `quartiers`), schools inside and within the margin, out-of-scope note
 uv run scripts/zone_stats.py <codes…> --edge <code> --area data/derived/area_villeray.geojson --format csv --out data/derived/area_villeray.csv  # + one row over the whole polygon
@@ -96,6 +100,18 @@ uv run scripts/zone_map.py <codes…> --edge <code> --area data/derived/area_vil
 uv run scripts/listings_assign.py data/derived/area_villeray_listings.csv data/derived/area_villeray_schools.csv  # listings to nearest school, two tables
 ```
 
+`school_zone.py` draws a school's catchment. No service centre on the island publishes per-school polygons,
+so the zone is one of two things and the GeoJSON says which: `official-probe` (CSSPI only, which answers
+postal-code lookups) or `modelled-nearest` (everyone else, CSSDM included — each postal code goes to the nearest
+school that can hold a territory, dissolved by Voronoi and clipped to the island). **A modelled zone is an
+estimate and a post must say so next to the map.** Schools whose program is island-wide libre choix
+(`alternative`, `specialised`, `gifted`), and the six that also run a secondary level (specialised schools taking
+referred pupils, the Sainte-Justine hospital school among them), hold no territory and are excluded; schools with
+no row in `data/schools_programs.csv` are assumed territorial, which is the model's main soft spot. Measured against CSSPI's published zones (the only place it can be checked), the model puts about three-quarters of homes in the right school; see `project_brief.md` for the two runs behind that figure. **Not wired yet:** CSSMB also has an official lookup (GEOBUS, civic address rather than postal code), so the
+in-scope CSSMB schools in LaSalle, Verdun, Saint-Laurent and Lachine currently get a modelled zone even
+though a real one could be fetched. Probing is cached in `data/derived/csspi_postal_cache.json`
+at one request per second. The catchment is a map layer only: it changes no metric, no decile and no published number.
+
 `zone_stats.py` is the entry point: a 1 km circle around the school point (no per-school
 catchment polygons exist as open data), DAs by centroid, everything else by location; `--point`
 evaluates an address; `--format csv|json`; deciles come from `data/derived/zone_stats_all.parquet`
@@ -103,8 +119,8 @@ and exclude the West Island; `--age-warn` (default 90 days) logs a warning per s
 Metric definitions live in its `METRICS` list as (key, label, unit, format, direction), direction being
 `up` (higher is favourable for a family), `down` (lower is favourable: safety, deprivation, cost) or `""`
 (descriptive); add a metric there and in `zone_stats()`, then re-run `--all`. The STM GTFS link serves a
-bot-check page to non-browsers; métro and REM stations come from OpenStreetMap via Overpass (`metro_osm`). `school_info.py`, `area_info.py`, `report_tables.py`, `zone_map.py` and `listings_assign.py` import from
-`zone_stats.py` (and `area_info.py` from `school_info.py`, `listings_assign.py` from `geocode.py`), so keep
+bot-check page to non-browsers; métro and REM stations come from OpenStreetMap via Overpass (`metro_osm`). `school_info.py`, `area_info.py`, `report_tables.py`, `zone_map.py`, `school_zone.py` and `listings_assign.py` import from
+`zone_stats.py` (and `area_info.py` and `school_zone.py` from `school_info.py`, `listings_assign.py` from `geocode.py`), so keep
 their module-level names (`Data`, `METRICS`, `find_schools`, `zone_stats_geom`, `deciles`, `fmt`, `WEST_ISLAND`,
 `programs`, `imse_row`, `all_buildings`, `geocode`, `CACHE`) stable. `program_type` vocabulary in
 `data/schools_programs.csv`: regular, ib, alternative, arts, science, gifted, specialised (excluded from quartier

@@ -26,6 +26,11 @@ the data pipeline and the house style for posts.
 - **No scraping.** Layer 3 quotes a few listings found by web search, each with its link and
   the date seen. Never fetch listing pages in bulk, never store more than what is quoted, never
   automate Centris. The brief records this decision (open question 7).
+- **A modelled catchment is never presented as the official zone.** No service centre publishes
+  per-school boundaries for CSSDM, so `school_zone.py` returns either `official-probe` (CSSPI's
+  own postal-code lookup) or `modelled-nearest` (an estimate). Read `source` from the GeoJSON and
+  use the matching sentence from step 4; never drop the caveat, and never call a modelled zone
+  "the catchment" in prose.
 - **No composite score, no verdicts.** Framing is "report plus cautious reading": tables carry
   the numbers with island deciles, prose says what a decile means and where zones differ, and
   never calls a zone or a school better or worse. The IMSE line always carries the
@@ -105,6 +110,28 @@ uv run scripts/zone_map.py <code> <comparator codes...> [--anchor LON LAT | --ma
 Check the footer of the Markdown view: number of DAs, IEMV coverage (related cities have none)
 and tax-bill match rate, and quote them in the post's sources section.
 
+**Optional: the school's catchment.** Only if the user asks for the zone on the map. It is a map
+layer and changes no number in the tables.
+
+```bash
+uv run scripts/school_zone.py <code> --out data/derived/report_<slug>_zone
+uv run scripts/zone_map.py <code> <comparator codes...> --catchment data/derived/report_<slug>_zone.geojson --out data/derived/report_<slug>_map.html
+```
+
+Read `source` from the GeoJSON and put the matching sentence in the prose beside the map:
+
+- `official-probe` — "The zone comes from the CSS de la Pointe-de-l'Île's own postal-code lookup,
+  read on <date>. Service centres redraw territories, so confirm with the school before acting on it."
+- `modelled-nearest` — "The CSSDM does not publish the *territoires de l'école de quartier*. This
+  outline is a model — the postal codes closest to this school among the service centre's schools
+  that hold a territory — not the official zone. Checked against the one service centre that does
+  publish its zones, the same model puts about three-quarters of homes in the right school, so
+  expect the edges to be wrong. Confirm with the school before acting on it."
+
+The outline is drawn solid for a looked-up zone and dashed for a modelled one, so the map carries
+the distinction too. `<slug>_zone_postal.csv` lists the postal codes if the post wants a count;
+quote the count, not the list.
+
 ### 5. Layer 3: listings snapshot (`references/listings.md`)
 
 Web-search current 3+ bedroom listings near the anchor address, for sale and for rent, on
@@ -160,4 +187,4 @@ Then offer, and wait for a yes: the `/commit-changes` commit of the post and of 
 - `references/interview.md` — pre-filled answers for the quarto-writeup interview.
 
 Scripts live in the repo's `scripts/` folder, not here: `school_info.py`, `imse.py`,
-`zone_stats.py`, `report_tables.py`, `zone_map.py`, `geocode.py`.
+`zone_stats.py`, `report_tables.py`, `zone_map.py`, `school_zone.py`, `geocode.py`.
